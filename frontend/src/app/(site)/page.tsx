@@ -1,36 +1,11 @@
-import { fetchFromStrapi } from '@/lib/strapi';
-
-type StrapiArticle = {
-  id: number;
-  documentId: string;
-  Title: string;
-  slug: string;
-  Excerpt: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-};
-
-type StrapiArticlesResponse = {
-  data: StrapiArticle[];
-  meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
-};
+import { getArticles, type StrapiArticle } from '@/lib/api/queries/articles';
 
 export default async function HomePage() {
   let articles: StrapiArticle[] = [];
   let errorMessage = '';
 
   try {
-    const response = await fetchFromStrapi('/api/articles');
-    const typedResponse = response as StrapiArticlesResponse;
-    articles = typedResponse.data ?? [];
+    articles = await getArticles();
   } catch (error) {
     errorMessage =
       error instanceof Error ? error.message : 'Unknown error while fetching Strapi data';
@@ -46,9 +21,7 @@ export default async function HomePage() {
         </div>
       ) : null}
 
-      {!errorMessage && articles.length === 0 ? (
-        <p>No articles found.</p>
-      ) : null}
+      {!errorMessage && articles.length === 0 ? <p>No articles found.</p> : null}
 
       <div className="space-y-6">
         {articles.map((article) => (
