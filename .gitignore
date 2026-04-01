@@ -1,5 +1,6 @@
 # dependencies
 node_modules/
+**/node_modules/
 
 # logs
 npm-debug.log*
@@ -9,12 +10,10 @@ pnpm-debug.log*
 
 # env files
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
-# macOS / Windows
+# OS
 .DS_Store
 Thumbs.db
 
@@ -22,19 +21,32 @@ Thumbs.db
 .vscode/
 .idea/
 
-# build
+# Next.js
 .next/
+out/
+**/.next/
+**/out/
+
+# build artifacts
 dist/
 build/
-.cache/
+**/dist/
+**/build/
 
-# strapi / uploads / temp
+# caches
+.cache/
 .tmp/
-.cache/
-public/uploads/
+**/.cache/
+**/.tmp/
 
-# coverage
+# test / coverage
 coverage/
+**/coverage/
 
-# misc
+# TypeScript
 *.tsbuildinfo
+**/*.tsbuildinfo
+
+# Strapi uploads
+cms/public/uploads/*
+!cms/public/uploads/.gitkeep
