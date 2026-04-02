@@ -1,14 +1,17 @@
 import { Footer } from '@/components/layout/footer/footer';
 import { Header } from '@/components/layout/header/header';
+import { getGlobalData } from '@/lib/api/queries/global';
 
 type SiteLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function SiteLayout({ children }: SiteLayoutProps) {
+export default async function SiteLayout({ children }: SiteLayoutProps) {
+  const globalData = await getGlobalData();
+
   return (
     <>
-      <Header />
+      <Header globalData={globalData} />
       {children}
       <Footer />
     </>
