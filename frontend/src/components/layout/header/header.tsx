@@ -42,12 +42,12 @@ export function Header({ globalData }: HeaderProps) {
   const cta = globalData?.headerCta;
 
   return (
-    <header className="bg-[#F7F5F4]">
+    <header className="fixed top-0 right-0 left-0 z-50 bg-[#F7F5F4]/95 backdrop-blur-md">
       <div className="mx-auto max-w-[1360px] px-4 pt-[23px] pb-[23px]">
         <div className="flex items-center justify-between gap-8">
           <Link href="/" className="flex shrink-0 items-center">
             <span className="text-[36px] leading-none text-[#E34039]">●</span>
-            <span className="ml-3 font-manrope text-[26px] font-semibold leading-none text-black">
+            <span className="ml-3 text-[26px] leading-none font-semibold text-black">
               eCurrency
             </span>
           </Link>
@@ -57,7 +57,7 @@ export function Header({ globalData }: HeaderProps) {
               <Link
                 key={item.id}
                 href={item.href || '#'}
-                className="flex items-center gap-2 font-manrope text-[15px] font-normal leading-[56px] text-black"
+                className="flex items-center gap-2 text-[15px] font-normal leading-[56px] text-black"
               >
                 <span>{item.label}</span>
                 {item.hasChildren ? <ChevronDownIcon /> : null}
@@ -68,7 +68,7 @@ export function Header({ globalData }: HeaderProps) {
           {cta ? (
             <Link
               href={cta.href || '#'}
-              className="flex h-[34px] w-[148px] shrink-0 items-center justify-center gap-[10px] rounded-[60px] border border-[rgba(227,64,57,0.07)] bg-[rgba(227,64,57,0.02)] font-manrope text-[14px] font-normal leading-6 text-black backdrop-blur-[12px]"
+              className="flex h-[34px] w-[148px] shrink-0 items-center justify-center gap-[10px] rounded-[60px] border border-[rgba(227,64,57,0.07)] bg-[rgba(227,64,57,0.02)] text-[14px] font-normal leading-6 text-black backdrop-blur-[12px]"
             >
               <span>{cta.label}</span>
               <HeaderArrowIcon />

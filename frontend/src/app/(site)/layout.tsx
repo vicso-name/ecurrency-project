@@ -12,7 +12,7 @@ export default async function SiteLayout({ children }: SiteLayoutProps) {
   return (
     <>
       <Header globalData={globalData} />
-      {children}
+      <div className="pt-[110px]">{children}</div>
       <Footer />
     </>
   );
