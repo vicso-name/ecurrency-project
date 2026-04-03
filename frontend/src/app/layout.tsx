@@ -1,10 +1,23 @@
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
+import { Manrope, Roboto, Roboto_Mono } from 'next/font/google';
 import './globals.css';
 
 const manrope = Manrope({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
+  variable: '--font-manrope',
+});
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-roboto',
+});
+
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-roboto-mono',
 });
 
 export const metadata: Metadata = {
@@ -19,7 +32,11 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={manrope.className}>{children}</body>
+      <body
+        className={`${manrope.variable} ${roboto.variable} ${robotoMono.variable} font-sans`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

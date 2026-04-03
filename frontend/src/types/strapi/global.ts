@@ -20,6 +20,33 @@ export type HeaderCta = {
   href: string;
 };
 
+export type FooterContact = {
+  id: number;
+  label: string;
+  href?: string;
+  iconType: 'email' | 'location' | 'officeTime';
+};
+
+export type FooterColumnLink = {
+  id: number;
+  label: string;
+  href?: string;
+  targetBlank?: boolean;
+};
+
+export type FooterColumn = {
+  id: number;
+  title: string;
+  links?: FooterColumnLink[];
+};
+
+export type FooterBottomLink = {
+  id: number;
+  label: string;
+  href?: string;
+  targetBlank?: boolean;
+};
+
 export type GlobalData = {
   id: number;
   documentId: string;
@@ -27,4 +54,10 @@ export type GlobalData = {
   headerLogo?: StrapiImage | null;
   headerNavigation?: NavLink[];
   headerCta?: HeaderCta | null;
+
+  footerLogo?: StrapiImage | null;
+  footerContacts?: FooterContact[];
+  footerColumns?: FooterColumn[];
+  footerBottomLinks?: FooterBottomLink[];
+  footerCopyright?: string;
 };
