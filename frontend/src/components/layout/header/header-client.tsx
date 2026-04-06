@@ -284,7 +284,7 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-md">
-      <div className="mx-auto max-w-[1360px] px-4 pt-[23px]">
+      <div className="mx-auto max-w-[1360px] px-4 pt-[10px]">
         <div className="flex items-center justify-between gap-4">
           <Logo globalData={globalData} />
 
@@ -305,7 +305,7 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
           </div>
         </div>
 
-        <div className="mt-[23px] h-px w-full bg-[rgba(227,64,57,0.14)]" />
+        <div className="mt-[8px] h-px w-full bg-[rgba(227,64,57,0.14)]" />
 
         <MobileMenu
           navigation={navigation}

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { HomePageHero } from '@/types/strapi/home-page';
 import { ParticleLogo } from './ParticleLogo';
+import Image from 'next/image';
 
 type HeroSectionProps = {
   hero: HomePageHero | null | undefined;
@@ -11,6 +12,28 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
   return (
     <section className="relative overflow-hidden bg-[#FFD8D8]">
+
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero-bg.svg"
+          alt=""
+          aria-hidden="true"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-35 bg-gradient-to-b from-[#FAFAFA] to-transparent"
+      />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-50 bg-gradient-to-b from-transparent to-[#f7f5f4]"
+      />
+
       <div className="absolute inset-0 z-0">
         <ParticleLogo className="h-full w-full" />
       </div>
