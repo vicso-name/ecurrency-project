@@ -1,34 +1,37 @@
 import Link from 'next/link';
 import type { HomePageHero } from '@/types/strapi/home-page';
+import { ParticleLogo } from './ParticleLogo';
 
 type HeroSectionProps = {
   hero: HomePageHero | null | undefined;
 };
 
 export function HeroSection({ hero }: HeroSectionProps) {
-  if (!hero) {
-    return null;
-  }
+  if (!hero) return null;
 
   return (
-    <section className="relative overflow-hidden px-4 pt-10 pb-20 md:pt-16 md:pb-24">
-      <div className="mx-auto flex min-h-[760px] max-w-[1360px] flex-col items-center rounded-[20px] bg-[linear-gradient(180deg,#FFF6F5_0%,#FFFFFF_100%)] px-6 pt-24 text-center md:px-10 md:pt-28">
-        <div className="w-full max-w-[917px]">
+    <section className="relative overflow-hidden bg-[#FFD8D8]">
+      <div className="absolute inset-0 z-0">
+        <ParticleLogo className="h-full w-full" />
+      </div>
+
+      <div className="relative z-10 mx-auto flex min-h-[840px] max-w-[1360px] flex-col px-6 pt-24 pb-6 text-center md:min-h-[880px] md:px-10 md:pt-28 md:pb-8">
+        <div className="relative z-10 mt-auto mx-auto w-full max-w-[917px]">
           <h1 className="text-[#202020] text-center text-[48px] leading-[1.04] font-semibold tracking-[-2px] md:text-[64px] md:tracking-[-3px] xl:text-[80px] xl:tracking-[-4px]">
             {hero.title}
           </h1>
 
           {hero.subtitle ? (
-            <p className="mx-auto mt-8 max-w-[560px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(32,32,32,0.56)]">
+            <p className="mx-auto mt-8 mb-[165px] max-w-[560px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(32,32,32,0.56)] md:mb-0">
               {hero.subtitle}
             </p>
           ) : null}
 
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row">
             {hero.primaryButtonLabel ? (
               <Link
                 href={hero.primaryButtonHref || '#'}
-                className="flex h-[53px] w-full max-w-[230px] items-center justify-center rounded-[100px] bg-[linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)] px-6 text-center text-[15px] leading-9 font-normal text-white capitalize shadow-[0_2px_2px_0_rgba(214,214,214,0.74)] transition-transform duration-200 hover:-translate-y-[1px]"
+                className="flex h-[53px] w-full items-center justify-center rounded-[100px] bg-[linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)] px-6 text-center text-[15px] font-normal text-white capitalize shadow-[0_2px_2px_0_rgba(214,214,214,0.74)] transition-transform duration-200 hover:-translate-y-[1px] sm:max-w-[230px]"
               >
                 {hero.primaryButtonLabel}
               </Link>
@@ -37,7 +40,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             {hero.secondaryButtonLabel ? (
               <Link
                 href={hero.secondaryButtonHref || '#'}
-                className="flex h-[53px] w-full max-w-[213px] items-center justify-center gap-[10px] rounded-[60px] border border-[rgba(32,32,32,0.07)] bg-[rgba(32,32,32,0.02)] px-6 text-center text-[15px] leading-9 font-normal text-[#202020] capitalize backdrop-blur-[12px] transition-all duration-200 hover:-translate-y-[1px] hover:border-[rgba(32,32,32,0.14)] hover:bg-[rgba(32,32,32,0.04)]"
+                className="flex h-[53px] w-full items-center justify-center rounded-[60px] border border-[rgba(32,32,32,0.07)] bg-[rgba(32,32,32,0.02)] px-6 text-center text-[15px] font-normal text-[#202020] whitespace-nowrap backdrop-blur-[12px] transition-all duration-200 hover:-translate-y-[1px] hover:border-[rgba(32,32,32,0.14)] hover:bg-[rgba(32,32,32,0.04)] sm:max-w-[230px]"
               >
                 {hero.secondaryButtonLabel}
               </Link>

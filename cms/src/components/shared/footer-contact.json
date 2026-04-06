@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_footer_contacts",
+  "info": {
+    "displayName": "Footer Contact"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string"
+    },
+    "iconType": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "email",
+        "location",
+        "officeTime"
+      ]
+    }
+  },
+  "config": {}
+}

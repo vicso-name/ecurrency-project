@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import type { GlobalData } from '@/types/strapi/global';
+import Image from 'next/image';
+import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
 
 type FooterProps = {
   globalData: GlobalData | null;
@@ -101,6 +103,9 @@ export function Footer({ globalData }: FooterProps) {
   const columns = globalData?.footerColumns ?? [];
   const bottomLinks = globalData?.footerBottomLinks ?? [];
   const copyright = globalData?.footerCopyright ?? '';
+  const footerLogo = globalData?.footerLogo;
+  const footerLogoUrl = getStrapiMediaUrl(footerLogo?.url);
+  const siteName = globalData?.siteName || 'eCurrency';
 
   return (
     <footer className="px-4 pb-4">
@@ -108,11 +113,24 @@ export function Footer({ globalData }: FooterProps) {
         <div className="mx-auto flex max-w-[1360px] flex-col">
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:gap-16">
             <div className="w-full sm:max-w-[290px]">
+              
               <Link href="/" className="flex items-center">
-                <span className="text-[36px] leading-none text-[#E34039]">●</span>
-                <span className="ml-3 text-[26px] leading-none font-semibold text-black">
-                  eCurrency
-                </span>
+                {footerLogoUrl ? (
+                  <Image
+                    src={footerLogoUrl}
+                    alt={footerLogo?.alternativeText || siteName}
+                    width={133}
+                    height={26}
+                    className="h-auto w-auto max-w-[133px]"
+                  />
+                ) : (
+                  <>
+                    <span className="text-[36px] leading-none text-[#E34039]">●</span>
+                    <span className="ml-3 text-[26px] leading-none font-semibold text-black">
+                      {siteName}
+                    </span>
+                  </>
+                )}
               </Link>
 
               <div className="mt-10 flex flex-col gap-5">

@@ -30,6 +30,32 @@
       "type": "component",
       "component": "shared.header-cta",
       "repeatable": false
+    },
+    "footerLogo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "footerContacts": {
+      "type": "component",
+      "component": "shared.footer-contact",
+      "repeatable": true
+    },
+    "footerColumns": {
+      "type": "component",
+      "component": "shared.footer-column",
+      "repeatable": true
+    },
+    "footerBottomLinks": {
+      "type": "component",
+      "component": "shared.footer-bottom-link",
+      "repeatable": true
+    },
+    "footerCopyright": {
+      "type": "string"
     }
   }
 }

@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import type { GlobalData, NavLink } from '@/types/strapi/global';
+import Image from 'next/image';
+import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
 
 type HeaderClientProps = {
   globalData: GlobalData | null;
@@ -63,11 +65,27 @@ function CloseIcon() {
   );
 }
 
-function Logo() {
+function Logo({ globalData }: { globalData: GlobalData | null }) {
+  const logo = globalData?.headerLogo;
+  const logoUrl = getStrapiMediaUrl(logo?.url);
+  const siteName = globalData?.siteName || 'eCurrency';
+
   return (
     <Link href="/" className="flex shrink-0 items-center">
-      <span className="text-[36px] leading-none text-[#E34039]">●</span>
-      <span className="ml-3 text-[26px] leading-none font-semibold text-black">eCurrency</span>
+      {logoUrl ? (
+        <Image
+          src={logoUrl}
+          alt={logo?.alternativeText || siteName}
+          width={133}
+          height={26}
+          className="h-auto w-auto max-w-[133px]"
+        />
+      ) : (
+        <>
+          <span className="text-[36px] leading-none text-[#E34039]">●</span>
+          <span className="ml-3 text-[26px] leading-none font-semibold text-black">{siteName}</span>
+        </>
+      )}
     </Link>
   );
 }
@@ -265,10 +283,10 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
   const cta = globalData?.headerCta;
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 bg-[#F7F5F4]/95 backdrop-blur-md">
-      <div className="mx-auto max-w-[1360px] px-4 pt-[23px] pb-[23px]">
+    <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-md">
+      <div className="mx-auto max-w-[1360px] px-4 pt-[23px]">
         <div className="flex items-center justify-between gap-4">
-          <Logo />
+          <Logo globalData={globalData} />
 
           <DesktopNavigation navigation={navigation} />
 

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_footer_column_links",
+  "info": {
+    "displayName": "Footer Column Link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string"
+    },
+    "targetBlank": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}
