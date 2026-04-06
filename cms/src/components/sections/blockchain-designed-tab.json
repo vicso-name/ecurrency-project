@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_sections_blockchain_designed_tabs",
+  "info": {
+    "displayName": "Blockchain Designed Tab"
+  },
+  "options": {},
+  "attributes": {
+    "tabNumber": {
+      "type": "integer",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "learnMoreLabel": {
+      "type": "string"
+    },
+    "learnMoreHref": {
+      "type": "string"
+    },
+    "previewImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "featureCards": {
+      "type": "component",
+      "component": "sections.blockchain-designed-feature-card",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_blockchain_designed_sections",
+  "info": {
+    "displayName": "Blockchain Designed Section"
+  },
+  "options": {},
+  "attributes": {
+    "tabs": {
+      "type": "component",
+      "component": "sections.blockchain-designed-tab",
+      "repeatable": true,
+      "required": true
+    },
+    "bottomCtaLabel": {
+      "type": "string"
+    },
+    "bottomCtaHref": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

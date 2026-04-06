@@ -20,6 +20,11 @@
       "type": "component",
       "component": "sections.block-quote",
       "repeatable": false
+    },
+    "blockchainDesigned": {
+      "type": "component",
+      "component": "sections.blockchain-designed-section",
+      "repeatable": false
     }
   }
 }

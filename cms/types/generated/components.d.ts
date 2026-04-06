@@ -10,6 +10,51 @@ export interface SectionsBlockQuote extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsBlockchainDesignedFeatureCard
+  extends Struct.ComponentSchema {
+  collectionName: 'components_sections_blockchain_designed_feature_cards';
+  info: {
+    displayName: 'Blockchain Designed Feature Card';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'>;
+    text: Schema.Attribute.Text;
+  };
+}
+
+export interface SectionsBlockchainDesignedSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_sections_blockchain_designed_sections';
+  info: {
+    displayName: 'Blockchain Designed Section';
+  };
+  attributes: {
+    bottomCtaHref: Schema.Attribute.String;
+    bottomCtaLabel: Schema.Attribute.String;
+    tabs: Schema.Attribute.Component<'sections.blockchain-designed-tab', true> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsBlockchainDesignedTab extends Struct.ComponentSchema {
+  collectionName: 'components_sections_blockchain_designed_tabs';
+  info: {
+    displayName: 'Blockchain Designed Tab';
+  };
+  attributes: {
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    featureCards: Schema.Attribute.Component<
+      'sections.blockchain-designed-feature-card',
+      true
+    >;
+    learnMoreHref: Schema.Attribute.String;
+    learnMoreLabel: Schema.Attribute.String;
+    previewImage: Schema.Attribute.Media<'images'>;
+    tabNumber: Schema.Attribute.Integer & Schema.Attribute.Required;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SectionsHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_sections_hero_sections';
   info: {
@@ -114,6 +159,9 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'sections.block-quote': SectionsBlockQuote;
+      'sections.blockchain-designed-feature-card': SectionsBlockchainDesignedFeatureCard;
+      'sections.blockchain-designed-section': SectionsBlockchainDesignedSection;
+      'sections.blockchain-designed-tab': SectionsBlockchainDesignedTab;
       'sections.hero-section': SectionsHeroSection;
       'shared.footer-bottom-link': SharedFooterBottomLink;
       'shared.footer-column': SharedFooterColumn;
