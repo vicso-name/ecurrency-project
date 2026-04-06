@@ -1,5 +1,15 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SectionsBlockQuote extends Struct.ComponentSchema {
+  collectionName: 'components_sections_block_quotes';
+  info: {
+    displayName: 'Block Quote';
+  };
+  attributes: {
+    text: Schema.Attribute.Text;
+  };
+}
+
 export interface SectionsHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_sections_hero_sections';
   info: {
@@ -103,6 +113,7 @@ export interface SharedNavLinkChild extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'sections.block-quote': SectionsBlockQuote;
       'sections.hero-section': SectionsHeroSection;
       'shared.footer-bottom-link': SharedFooterBottomLink;
       'shared.footer-column': SharedFooterColumn;

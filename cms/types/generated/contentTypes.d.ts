@@ -510,6 +510,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    blockQuote: Schema.Attribute.Component<'sections.block-quote', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
