@@ -8,8 +8,14 @@ export type HomePageHero = {
   secondaryButtonHref?: string;
 };
 
+export type HomePageBlockQuote = {
+  id: number;
+  text: string;
+};
+
 export type HomePageData = {
   id: number;
   documentId: string;
   hero?: HomePageHero | null;
+  blockQuote?: HomePageBlockQuote | null;
 };
