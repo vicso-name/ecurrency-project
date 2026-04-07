@@ -41,7 +41,7 @@ export function BlockchainDesignedSection({ data }: Props) {
   const isFirstTabActive = activeTabIndex === 0;
 
   return (
-    <section className="px-4 py-20 md:py-24">
+    <section className="px-4 py-12 md:py-20">
       <div className="mx-auto max-w-[1200px]">
         <div className="grid items-start gap-y-14 gap-x-16 lg:grid-cols-[1fr_492px]">
           {/* LEFT COLUMN */}
@@ -51,38 +51,52 @@ export function BlockchainDesignedSection({ data }: Props) {
               <button
                 type="button"
                 onClick={() => setActiveTabIndex(0)}
-                className={`relative z-10 flex h-[45px] w-[45px] items-center justify-center rounded-full border text-[15px] font-semibold transition-all duration-200 ${
-                  isFirstTabActive
-                    ? 'border-[rgba(227,64,57,0.12)] bg-white text-[#EC0000] shadow-[0_4px_18px_rgba(227,64,57,0.18)]'
-                    : 'border-[rgba(227,64,57,0.08)] bg-white text-[#F6AFAF]'
-                }`}
+                className="relative z-10 flex h-[45px] w-[45px] items-center justify-center rounded-full"
+                aria-label="Show first tab"
+                aria-pressed={isFirstTabActive}
               >
-                1
+                <span
+                  className={`flex h-[45px] w-[45px] items-center justify-center rounded-full border text-[15px] font-semibold transition-all duration-200 ${
+                    isFirstTabActive
+                      ? 'border-[rgba(227,64,57,0.12)] bg-white text-[#EC0000] shadow-[0_4px_18px_rgba(227,64,57,0.18)]'
+                      : 'border-[rgba(227,64,57,0.08)] bg-white text-[#F6AFAF]'
+                  }`}
+                >
+                  1
+                </span>
               </button>
 
-              <div className="relative mx-9 h-[1px] w-[215px] overflow-hidden">
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,#EC0000_0%,#F6AFAF_100%)]" />
-                <div
-                  className={`absolute top-0 bottom-0 w-1/2 bg-[#EC0000] transition-all duration-300 ${
-                    isFirstTabActive ? 'left-0' : 'left-1/2'
-                  }`}
+              <div className="mx-[-6px] flex w-[215px] shrink-0 justify-center">
+                <Image
+                  src={isFirstTabActive ? '/images/home/1_active.svg' : '/images/home/2_active.svg'}
+                  alt=""
+                  aria-hidden="true"
+                  width={185}
+                  height={21}
+                  className="block h-[21px] w-[185px]"
                 />
               </div>
 
               <button
                 type="button"
                 onClick={() => setActiveTabIndex(1)}
-                className={`relative z-10 flex h-[45px] w-[45px] items-center justify-center rounded-full border text-[15px] font-semibold transition-all duration-200 ${
-                  !isFirstTabActive
-                    ? 'border-[rgba(227,64,57,0.12)] bg-white text-[#EC0000] shadow-[0_4px_18px_rgba(227,64,57,0.18)]'
-                    : 'border-[rgba(227,64,57,0.08)] bg-white text-[#F6AFAF]'
-                }`}
+                className="relative z-10 flex h-[45px] w-[45px] items-center justify-center rounded-full"
+                aria-label="Show second tab"
+                aria-pressed={!isFirstTabActive}
               >
-                2
+                <span
+                  className={`flex h-[45px] w-[45px] items-center justify-center rounded-full border text-[15px] font-semibold transition-all duration-200 ${
+                    !isFirstTabActive
+                      ? 'border-[rgba(227,64,57,0.12)] bg-white text-[#EC0000] shadow-[0_4px_18px_rgba(227,64,57,0.18)]'
+                      : 'border-[rgba(227,64,57,0.08)] bg-white text-[#F6AFAF]'
+                  }`}
+                >
+                  2
+                </span>
               </button>
             </div>
 
-            <div className="mx-auto max-w-[500px]">
+            <div className="mx-auto max-w-[400px]">
               <h3 className="text-[32px] leading-[36px] font-medium tracking-[-1.5px] text-black">
                 {currentTab.title}
               </h3>
@@ -122,20 +136,23 @@ export function BlockchainDesignedSection({ data }: Props) {
               </div>
             ) : null}
 
-            {currentTab.featureCards && currentTab.featureCards.length > 0 ? (
-              <div className="relative h-[562px] w-full max-w-[492px] rounded-[16px] border border-[rgba(227,64,57,0.30)] bg-[radial-gradient(80.05%_147.57%_at_50%_-11.11%,rgba(0,0,0,0)_60%,rgba(255,80,80,0.05)_89.8%)]">
+           {currentTab.featureCards && currentTab.featureCards.length > 0 ? (
+              <div className="flex w-full max-w-[492px] flex-col gap-4 rounded-[16px] border border-[rgba(227,64,57,0.30)] bg-[radial-gradient(80.05%_147.57%_at_50%_-11.11%,rgba(0,0,0,0)_60%,rgba(255,80,80,0.05)_89.8%)] p-5 lg:relative lg:h-[620px] lg:max-w-[520px] lg:block lg:p-0">
                 {currentTab.featureCards.map((card, index) => {
-                  const positions = [
-                    'top-[18px] left-[22px]',
-                    'top-[86px] right-[18px]',
-                    'top-[224px] left-[44px]',
-                    'bottom-[20px] right-[0px]',
+                  const mobileOffset =
+                    index % 2 === 0 ? 'mr-auto w-[92%]' : 'ml-auto w-[92%]';
+
+                  const desktopCardClasses = [
+                    'lg:top-[30px] lg:left-[30px] lg:w-[285px]',
+                    'lg:top-[160px] lg:right-[60px] lg:w-[280px]',
+                    'lg:top-[288px] lg:left-[58px] lg:w-[283px]',
+                    'lg:bottom-[55px] lg:right-[37px] lg:w-[260px]',
                   ];
 
                   return (
                     <div
                       key={card.id}
-                      className={`absolute flex w-[283px] flex-col items-start rounded-[8px] bg-[#FAFAFA] px-[24px] py-[18px] shadow-[0_3px_16.4px_rgba(227,64,57,0.20)] ${positions[index] ?? ''}`}
+                      className={`relative flex flex-col items-start rounded-[8px] bg-[#FAFAFA] px-6 py-[18px] shadow-[0_3px_16.4px_rgba(227,64,57,0.20)] ${mobileOffset} lg:absolute ${desktopCardClasses[index] ?? 'lg:w-[283px]'}`}
                     >
                       {card.icon ? (
                         <Image
@@ -148,7 +165,7 @@ export function BlockchainDesignedSection({ data }: Props) {
                         />
                       ) : null}
 
-                      <p className="text-[18px] leading-[150%] font-semibold tracking-[-0.4px] text-black">
+                      <p className="text-[17px] leading-[145%] font-semibold tracking-[-0.3px] text-black lg:text-[18px] lg:leading-[150%] lg:tracking-[-0.4px]">
                         {card.text}
                       </p>
                     </div>
