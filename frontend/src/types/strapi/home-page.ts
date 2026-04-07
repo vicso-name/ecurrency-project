@@ -49,10 +49,35 @@ export type HomePageBlockchainDesigned = {
   bottomCtaHref?: string;
 };
 
+export type BlockchainArchitectureCard = {
+  id: number;
+  title: string;
+  subtitle: string;
+  sizeVariant: 'large' | 'small';
+  icon?: {
+    id?: number;
+    url: string;
+    alternativeText?: string | null;
+    width?: number;
+    height?: number;
+  } | null;
+};
+
+export type HomePageBlockchainArchitecture = {
+  id: number;
+  preTitle?: string;
+  title: string;
+  subTitle?: string;
+  cards?: BlockchainArchitectureCard[];
+  bottomCtaLabel?: string;
+  bottomCtaHref?: string;
+};
+
 export type HomePageData = {
   id: number;
   documentId: string;
   hero?: HomePageHero | null;
   blockQuote?: HomePageBlockQuote | null;
   blockchainDesigned?: HomePageBlockchainDesigned | null;
+  blockchainArchitecture?: HomePageBlockchainArchitecture | null;
 };

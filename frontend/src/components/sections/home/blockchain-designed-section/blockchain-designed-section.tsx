@@ -97,7 +97,7 @@ export function BlockchainDesignedSection({ data }: Props) {
             </div>
 
             <div className="mx-auto max-w-[400px]">
-              <h3 className="text-[32px] leading-[36px] font-medium tracking-[-1.5px] text-black">
+              <h3 className="text-center text-[28px] leading-[32px] font-medium tracking-[-1.5px] text-black md:text-[32px] md:leading-[36px]">
                 {currentTab.title}
               </h3>
 
