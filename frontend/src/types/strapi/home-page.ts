@@ -80,4 +80,24 @@ export type HomePageData = {
   blockQuote?: HomePageBlockQuote | null;
   blockchainDesigned?: HomePageBlockchainDesigned | null;
   blockchainArchitecture?: HomePageBlockchainArchitecture | null;
+  usedFor?: HomePageUsedFor | null;
+};
+
+export type UsedForCard = {
+  id: number;
+  title: string;
+  orderNumber: string;
+  icon?: {
+    id?: number;
+    url: string;
+    alternativeText?: string | null;
+    width?: number;
+    height?: number;
+  } | null;
+};
+
+export type HomePageUsedFor = {
+  id: number;
+  preTitle?: string;
+  cards?: UsedForCard[];
 };
