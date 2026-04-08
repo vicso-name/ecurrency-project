@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_sections_blockchain_architecture_sections",
+  "info": {
+    "displayName": "Blockchain Architecture Section"
+  },
+  "options": {},
+  "attributes": {
+    "preTitle": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subTitle": {
+      "type": "text"
+    },
+    "cards": {
+      "type": "component",
+      "component": "sections.blockchain-architecture-card",
+      "repeatable": true,
+      "required": true
+    },
+    "bottomCtaLabel": {
+      "type": "string"
+    },
+    "bottomCtaHref": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

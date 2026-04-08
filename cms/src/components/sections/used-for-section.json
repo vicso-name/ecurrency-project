@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_sections_used_for_sections",
+  "info": {
+    "displayName": "Used For Section"
+  },
+  "options": {},
+  "attributes": {
+    "preTitle": {
+      "type": "string"
+    },
+    "cards": {
+      "type": "component",
+      "component": "sections.used-for-card",
+      "repeatable": true,
+      "required": true
+    }
+  },
+  "config": {}
+}

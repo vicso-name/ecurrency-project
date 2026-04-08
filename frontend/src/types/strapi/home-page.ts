@@ -81,6 +81,9 @@ export type HomePageData = {
   blockchainDesigned?: HomePageBlockchainDesigned | null;
   blockchainArchitecture?: HomePageBlockchainArchitecture | null;
   usedFor?: HomePageUsedFor | null;
+  economicLayer?: HomePageEconomicLayer | null;
+  projectOverview?: HomePageProjectOverview | null;
+  startExploring?: HomePageStartExploring | null;
 };
 
 export type UsedForCard = {
@@ -100,4 +103,54 @@ export type HomePageUsedFor = {
   id: number;
   preTitle?: string;
   cards?: UsedForCard[];
+};
+
+export type HomePageEconomicLayer = {
+  id: number;
+  title: string;
+  subtitle?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
+  coinImage?: {
+    id?: number;
+    url: string;
+    alternativeText?: string | null;
+    width?: number;
+    height?: number;
+  } | null;
+};
+
+export type HomePageProjectOverview = {
+  id: number;
+  title: string;
+  subtitle?: string;
+  icon?: {
+    id?: number;
+    url: string;
+    alternativeText?: string | null;
+    width?: number;
+    height?: number;
+  } | null;
+};
+
+export type StartExploringCard = {
+  id: number;
+  title: string;
+  subtitle?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
+  backgroundImage?: {
+    id?: number;
+    url: string;
+    alternativeText?: string | null;
+    width?: number;
+    height?: number;
+  } | null;
+};
+
+export type HomePageStartExploring = {
+  id: number;
+  title: string;
+  subtitle?: string;
+  cards?: StartExploringCard[];
 };

@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_sections_start_exploring_cards",
+  "info": {
+    "displayName": "Start Exploring Card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "buttonLabel": {
+      "type": "string"
+    },
+    "buttonHref": {
+      "type": "string"
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

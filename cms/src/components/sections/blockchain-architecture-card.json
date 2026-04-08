@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_sections_blockchain_architecture_cards",
+  "info": {
+    "displayName": "Blockchain Architecture Card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text",
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "sizeVariant": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "large",
+        "small"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -1,5 +1,8 @@
 import { BlockchainDesignedSection } from '@/components/sections/home/blockchain-designed-section/blockchain-designed-section';
 import { BlockchainArchitectureSection } from '@/components/sections/home/blockchain-architecture-section/blockchain-architecture-section';
+import { ProjectOverviewSection } from '@/components/sections/home/project-overview-section/project-overview-section';
+import { StartExploringSection } from '@/components/sections/home/start-exploring-section/start-exploring-section';
+import { EconomicLayerSection } from '@/components/sections/home/economic-layer-section/economic-layer-section';
 import { UsedForSection } from '@/components/sections/home/used-for-section/used-for-section';
 import { BlockQuoteSection } from '@/components/sections/home/block-quote-section/block-quote-section';
 import { HeroSection } from '@/components/sections/home/hero-section/hero-section';
@@ -15,6 +18,9 @@ export default async function HomePage() {
       <BlockchainDesignedSection data={homePage?.blockchainDesigned} />
       <BlockchainArchitectureSection data={homePage?.blockchainArchitecture} />
       <UsedForSection data={homePage?.usedFor} />
+      <EconomicLayerSection data={homePage?.economicLayer} />
+      <StartExploringSection data={homePage?.startExploring} />
+      <ProjectOverviewSection data={homePage?.projectOverview} />
     </main>
   );
 }

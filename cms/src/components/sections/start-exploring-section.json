@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_start_exploring_sections",
+  "info": {
+    "displayName": "Start Exploring Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "cards": {
+      "type": "component",
+      "component": "sections.start-exploring-card",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

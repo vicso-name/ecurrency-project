@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_sections_economic_layer_sections",
+  "info": {
+    "displayName": "Economic Layer Section"
+  },
+  "options": {},
+  "attributes": {
+    "coinImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "buttonLabel": {
+      "type": "string"
+    },
+    "buttonHref": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

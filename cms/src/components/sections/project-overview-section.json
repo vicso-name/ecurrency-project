@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_sections_project_overview_sections",
+  "info": {
+    "displayName": "Project Overview Section"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

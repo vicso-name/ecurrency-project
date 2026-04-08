@@ -25,6 +25,31 @@
       "type": "component",
       "component": "sections.blockchain-designed-section",
       "repeatable": false
+    },
+    "blockchainArchitecture": {
+      "type": "component",
+      "component": "sections.blockchain-architecture-section",
+      "repeatable": false
+    },
+    "usedFor": {
+      "type": "component",
+      "component": "sections.used-for-section",
+      "repeatable": false
+    },
+    "economicLayer": {
+      "type": "component",
+      "component": "sections.economic-layer-section",
+      "repeatable": false
+    },
+    "projectOverview": {
+      "type": "component",
+      "component": "sections.project-overview-section",
+      "repeatable": false
+    },
+    "startExploring": {
+      "type": "component",
+      "component": "sections.start-exploring-section",
+      "repeatable": false
     }
   }
 }

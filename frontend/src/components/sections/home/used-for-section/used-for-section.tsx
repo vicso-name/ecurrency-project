@@ -12,7 +12,7 @@ export function UsedForSection({ data }: UsedForSectionProps) {
   }
 
   return (
-    <section className="px-4 py-[80px] md:py-20">
+    <section className="px-4 pt-[80px] pb-[5px]">
       <div className="mx-auto max-w-[1200px]">
         {data.preTitle ? (
           <p className="mb-[40px] text-center [font-family:var(--font-roboto-mono)] text-[16px] leading-5 font-normal uppercase text-[rgba(13,0,0,0.48)] md:mb-[70px]">

@@ -10,6 +10,41 @@ export interface SectionsBlockQuote extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsBlockchainArchitectureCard
+  extends Struct.ComponentSchema {
+  collectionName: 'components_sections_blockchain_architecture_cards';
+  info: {
+    displayName: 'Blockchain Architecture Card';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files'>;
+    sizeVariant: Schema.Attribute.Enumeration<['large', 'small']> &
+      Schema.Attribute.Required;
+    subtitle: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsBlockchainArchitectureSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_sections_blockchain_architecture_sections';
+  info: {
+    displayName: 'Blockchain Architecture Section';
+  };
+  attributes: {
+    bottomCtaHref: Schema.Attribute.String;
+    bottomCtaLabel: Schema.Attribute.String;
+    cards: Schema.Attribute.Component<
+      'sections.blockchain-architecture-card',
+      true
+    > &
+      Schema.Attribute.Required;
+    preTitle: Schema.Attribute.String;
+    subTitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionsBlockchainDesignedFeatureCard
   extends Struct.ComponentSchema {
   collectionName: 'components_sections_blockchain_designed_feature_cards';
@@ -55,6 +90,21 @@ export interface SectionsBlockchainDesignedTab extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsEconomicLayerSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_economic_layer_sections';
+  info: {
+    displayName: 'Economic Layer Section';
+  };
+  attributes: {
+    buttonHref: Schema.Attribute.String;
+    buttonLabel: Schema.Attribute.String;
+    coinImage: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionsHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_sections_hero_sections';
   info: {
@@ -67,6 +117,69 @@ export interface SectionsHeroSection extends Struct.ComponentSchema {
     secondaryButtonLabel: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsProjectOverviewSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_project_overview_sections';
+  info: {
+    displayName: 'Project Overview Section';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsStartExploringCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_start_exploring_cards';
+  info: {
+    displayName: 'Start Exploring Card';
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<'files' | 'images'>;
+    buttonHref: Schema.Attribute.String;
+    buttonLabel: Schema.Attribute.String;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsStartExploringSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_start_exploring_sections';
+  info: {
+    displayName: 'Start Exploring Section';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'sections.start-exploring-card', true>;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsUsedForCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_used_for_cards';
+  info: {
+    displayName: 'Used For Card';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    orderNumber: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsUsedForSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_used_for_sections';
+  info: {
+    displayName: 'Used For Section';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'sections.used-for-card', true> &
+      Schema.Attribute.Required;
+    preTitle: Schema.Attribute.String;
   };
 }
 
@@ -159,10 +272,18 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'sections.block-quote': SectionsBlockQuote;
+      'sections.blockchain-architecture-card': SectionsBlockchainArchitectureCard;
+      'sections.blockchain-architecture-section': SectionsBlockchainArchitectureSection;
       'sections.blockchain-designed-feature-card': SectionsBlockchainDesignedFeatureCard;
       'sections.blockchain-designed-section': SectionsBlockchainDesignedSection;
       'sections.blockchain-designed-tab': SectionsBlockchainDesignedTab;
+      'sections.economic-layer-section': SectionsEconomicLayerSection;
       'sections.hero-section': SectionsHeroSection;
+      'sections.project-overview-section': SectionsProjectOverviewSection;
+      'sections.start-exploring-card': SectionsStartExploringCard;
+      'sections.start-exploring-section': SectionsStartExploringSection;
+      'sections.used-for-card': SectionsUsedForCard;
+      'sections.used-for-section': SectionsUsedForSection;
       'shared.footer-bottom-link': SharedFooterBottomLink;
       'shared.footer-column': SharedFooterColumn;
       'shared.footer-column-link': SharedFooterColumnLink;

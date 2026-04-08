@@ -109,7 +109,7 @@ export function Footer({ globalData }: FooterProps) {
 
   return (
     <footer className="px-4 pb-4">
-      <div className="mx-auto mt-10 max-w-[1422px] rounded-[20px] bg-white px-[30px] pt-[40px] pr-8 pb-4">
+      <div className="mx-auto max-w-[1422px] rounded-[20px] bg-white px-[30px] pt-[40px] pr-8 pb-4">
         <div className="mx-auto flex max-w-[1360px] flex-col">
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:gap-16">
             <div className="w-full sm:max-w-[290px]">

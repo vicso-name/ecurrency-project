@@ -510,6 +510,10 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    blockchainArchitecture: Schema.Attribute.Component<
+      'sections.blockchain-architecture-section',
+      false
+    >;
     blockchainDesigned: Schema.Attribute.Component<
       'sections.blockchain-designed-section',
       false
@@ -518,6 +522,10 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    economicLayer: Schema.Attribute.Component<
+      'sections.economic-layer-section',
+      false
+    >;
     hero: Schema.Attribute.Component<'sections.hero-section', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -525,10 +533,19 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
       'api::home-page.home-page'
     > &
       Schema.Attribute.Private;
+    projectOverview: Schema.Attribute.Component<
+      'sections.project-overview-section',
+      false
+    >;
     publishedAt: Schema.Attribute.DateTime;
+    startExploring: Schema.Attribute.Component<
+      'sections.start-exploring-section',
+      false
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    usedFor: Schema.Attribute.Component<'sections.used-for-section', false>;
   };
 }
 
