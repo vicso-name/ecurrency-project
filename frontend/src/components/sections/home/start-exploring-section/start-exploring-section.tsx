@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { HomePageStartExploring } from '@/types/strapi/home-page';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
+import { FadeUp } from '@/components/ui/fade-up';
+import { RevealCard } from '@/components/ui/reveal-card';
 
 type StartExploringSectionProps = {
   data: HomePageStartExploring | null | undefined;
@@ -69,21 +71,9 @@ function ExploreButton({
 
 function PrevArrowIcon({ disabled }: { disabled: boolean }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
       <g opacity={disabled ? 0.3 : 1}>
-        <circle
-          cx="9"
-          cy="9"
-          r="8.5"
-          transform="rotate(-180 9 9)"
-          stroke="#EC0000"
-        />
+        <circle cx="9" cy="9" r="8.5" transform="rotate(-180 9 9)" stroke="#EC0000" />
         <path
           d="M6.30589 9.2766C7.53153 8.02725 8.77384 6.76124 10.0495 5.46192C10.283 5.70346 10.4997 5.92834 10.7082 6.14489C10.7582 6.19487 10.8082 6.25317 10.8749 6.28649C11.0167 6.36978 10.9833 6.45307 10.8833 6.54468C10.5414 6.87784 10.2079 7.21933 9.86608 7.55249C9.80771 7.6108 9.73267 7.66077 9.67431 7.71907C9.19072 8.20215 8.70714 8.68524 8.21522 9.16832C8.1902 9.19331 8.16519 9.22662 8.10683 9.28492C9.074 10.2261 10.0412 11.1589 11 12.0835C10.6498 12.4166 10.333 12.7165 10.0412 12.9997C8.81553 11.7836 7.55654 10.5176 6.30589 9.2766Z"
           fill="#EC0000"
@@ -95,13 +85,7 @@ function PrevArrowIcon({ disabled }: { disabled: boolean }) {
 
 function NextArrowIcon({ disabled }: { disabled: boolean }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
       <g opacity={disabled ? 0.3 : 1}>
         <circle cx="9" cy="9" r="8.5" stroke="#EC0000" />
         <path
@@ -160,26 +144,36 @@ export function StartExploringSection({ data }: StartExploringSectionProps) {
   return (
     <section className="px-4 py-[80px] md:py-[120px]">
       <div className="mx-auto max-w-[1200px]">
-        {/* Header */}
         <div className="mx-auto mb-[40px] max-w-[462px] text-center md:mb-[60px]">
-          <h2 className="text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-black md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
-            {data.title}
-          </h2>
+          <FadeUp delay={80} duration={1200} y={20}>
+            <h2 className="text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-black md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
+              {data.title}
+            </h2>
+          </FadeUp>
+
           {data.subtitle && (
-            <p className="mx-auto mt-4 max-w-[438px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.64)]">
-              {data.subtitle}
-            </p>
+            <FadeUp delay={220} duration={1250} y={14}>
+              <p className="mx-auto mt-4 max-w-[438px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.64)]">
+                {data.subtitle}
+              </p>
+            </FadeUp>
           )}
         </div>
 
-        {/* Desktop grid */}
         <div className="hidden gap-4 lg:grid lg:grid-cols-4">
           {cards.map((card, index) => (
-            <DesktopCard key={card.id} card={card} index={index} />
+            <RevealCard
+              key={card.id}
+              delay={120 + index * 120}
+              duration={1000}
+              y={28}
+              scale={0.985}
+            >
+              <DesktopCard card={card} index={index} />
+            </RevealCard>
           ))}
         </div>
 
-        {/* Mobile carousel */}
         <div className="lg:hidden">
           <div className="overflow-hidden" {...swipeHandlers}>
             <div
@@ -194,7 +188,6 @@ export function StartExploringSection({ data }: StartExploringSectionProps) {
             </div>
           </div>
 
-          {/* Pagination */}
           <div className="mt-[26px] flex items-center justify-center gap-[30px]">
             <button
               type="button"
@@ -232,7 +225,6 @@ export function StartExploringSection({ data }: StartExploringSectionProps) {
             </button>
           </div>
 
-          {/* Mobile buttons */}
           <div className="mt-[52px] flex flex-col items-center gap-[18px]">
             {cards.map((card) =>
               card.buttonLabel ? (
@@ -285,6 +277,7 @@ function CardContent({ card, index }: CardProps) {
           </p>
         )}
       </div>
+
       <div className="mt-auto flex justify-center pb-15">
         {icon && (
           <Image
@@ -307,11 +300,12 @@ function DesktopCard({ card, index }: CardProps) {
   return (
     <div className="flex flex-col gap-6">
       <div
-        className="flex h-[400px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6"
+        className="flex h-[400px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 transition-transform duration-300 hover:-translate-y-[2px]"
         style={CardBackground({ backgroundUrl })}
       >
         <CardContent card={card} index={index} />
       </div>
+
       {card.buttonLabel && (
         <ExploreButton
           href={card.buttonHref || '#'}

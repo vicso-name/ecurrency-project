@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_sections_payment_systems_sections",
+  "info": {
+    "displayName": "Payment Systems Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "cards": {
+      "type": "component",
+      "component": "sections.payment-systems-card",
+      "repeatable": true,
+      "required": true
+    },
+    "bottomCtaLabel": {
+      "type": "string"
+    },
+    "bottomCtaHref": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

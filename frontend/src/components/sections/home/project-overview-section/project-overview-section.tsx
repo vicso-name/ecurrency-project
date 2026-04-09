@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { HomePageProjectOverview } from '@/types/strapi/home-page';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
+import { FadeUp } from '@/components/ui/fade-up';
 
 type ProjectOverviewSectionProps = {
   data: HomePageProjectOverview | null | undefined;
@@ -49,24 +50,30 @@ export function ProjectOverviewSection({
           <div className="relative z-10 mx-auto max-w-[1360px] px-6 py-[80px] md:px-[30px] md:py-[120px]">
             <div className="mx-auto flex max-w-[1200px] flex-col items-center text-center">
               {iconUrl ? (
-                <Image
-                  src={iconUrl}
-                  alt={data.icon?.alternativeText || data.title}
-                  width={213}
-                  height={213}
-                  unoptimized
-                  className="mb-8 h-[160px] w-[160px] md:h-[213px] md:w-[213px]"
-                />
+                <FadeUp delay={60} duration={1200} y={18}>
+                  <Image
+                    src={iconUrl}
+                    alt={data.icon?.alternativeText || data.title}
+                    width={213}
+                    height={213}
+                    unoptimized
+                    className="mb-8 h-[160px] w-[160px] md:h-[213px] md:w-[213px]"
+                  />
+                </FadeUp>
               ) : null}
 
-              <h2 className="max-w-[890px] text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-black md:text-[48px] md:leading-[54px] md:tracking-[-1px]">
-                {data.title}
-              </h2>
+              <FadeUp delay={180} duration={1250} y={20}>
+                <h2 className="max-w-[890px] text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-black md:text-[48px] md:leading-[54px] md:tracking-[-1px]">
+                  {data.title}
+                </h2>
+              </FadeUp>
 
               {data.subtitle ? (
-                <p className="mt-[28px] max-w-[678px] text-[16px] leading-[22px] font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.64)]">
-                  {data.subtitle}
-                </p>
+                <FadeUp delay={320} duration={1250} y={14}>
+                  <p className="mt-[28px] max-w-[678px] text-[16px] leading-[22px] font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.64)]">
+                    {data.subtitle}
+                  </p>
+                </FadeUp>
               ) : null}
             </div>
           </div>

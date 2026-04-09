@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { HomePageEconomicLayer } from '@/types/strapi/home-page';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
+import { FadeUp } from '@/components/ui/fade-up';
+import { RevealCard } from '@/components/ui/reveal-card';
 
 type EconomicLayerSectionProps = {
   data: HomePageEconomicLayer | null | undefined;
@@ -43,40 +45,55 @@ export function EconomicLayerSection({ data }: EconomicLayerSectionProps) {
 
       <div className="relative z-20 mx-auto max-w-[1200px] px-4">
         <div className="relative mx-auto w-full max-w-[1012px] pt-[90px] md:pt-[100px]">
-          <div className="relative mx-auto flex min-h-[500px] w-full flex-col items-center rounded-[16px] border border-white bg-white px-6 pt-[120px] pb-12 text-center md:min-h-[562px] md:px-10 md:pt-[150px]">
-            {coinImageUrl ? (
-              <Image
-                src={coinImageUrl}
-                alt={data.coinImage?.alternativeText || data.title}
-                width={200}
-                height={200}
-                unoptimized
-                className="absolute left-1/2 top-0 z-20 h-[140px] w-[140px] -translate-x-1/2 -translate-y-[42%] md:h-[200px] md:w-[200px] md:-translate-y-[46%]"
-              />
-            ) : null}
+          <RevealCard duration={1200} y={36} scale={0.985}>
+            <div className="relative mx-auto flex min-h-[500px] w-full flex-col items-center rounded-[16px] border border-white bg-white px-6 pt-[120px] pb-12 text-center md:min-h-[562px] md:px-10 md:pt-[150px]">
+              {coinImageUrl ? (
+                  <FadeUp
+                    delay={80}
+                    duration={1200}
+                    y={16}
+                    className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-[42%] md:-translate-y-[46%]"
+                  >
+                    <Image
+                      src={coinImageUrl}
+                      alt={data.coinImage?.alternativeText || data.title}
+                      width={200}
+                      height={200}
+                      unoptimized
+                      className="h-[140px] w-[140px] md:h-[200px] md:w-[200px]"
+                    />
+                  </FadeUp>
+                ) : null}
 
-            <h2 className="max-w-[480px] text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
-              {data.title}
-            </h2>
+              <FadeUp delay={180} duration={1200} y={20}>
+                <h2 className="max-w-[480px] text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
+                  {data.title}
+                </h2>
+              </FadeUp>
 
-            {data.subtitle ? (
-              <p className="mt-4 max-w-[439px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(13,0,0,0.60)]">
-                {data.subtitle}
-              </p>
-            ) : null}
+              {data.subtitle ? (
+                <FadeUp delay={320} duration={1250} y={16}>
+                  <p className="mt-4 max-w-[439px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(13,0,0,0.60)]">
+                    {data.subtitle}
+                  </p>
+                </FadeUp>
+              ) : null}
 
-            {data.buttonLabel ? (
-              <div className="mt-[40px] md:mt-[50px]">
-                <Link
-                  href={data.buttonHref || '#'}
-                  className="inline-flex items-center justify-center gap-1 rounded-[100px] bg-[linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)] px-[30px] pt-[6px] pb-[8px] text-center text-[16px] leading-9 font-normal capitalize text-white shadow-[0_2px_2px_rgba(214,214,214,0.74)] transition duration-200 hover:bg-[linear-gradient(0deg,rgba(0,0,0,0.10)_0%,rgba(0,0,0,0.10)_100%),linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)]"
-                >
-                  <span>{data.buttonLabel}</span>
-                  <ButtonIcon />
-                </Link>
-              </div>
-            ) : null}
-          </div>
+              {data.buttonLabel ? (
+                <FadeUp delay={460} duration={1200} y={14}>
+                  <div className="mt-[40px] md:mt-[50px]">
+                    <Link
+                      href={data.buttonHref || '#'}
+                      className="inline-flex items-center justify-center gap-1 rounded-[100px] bg-[linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)] px-[30px] pt-[6px] pb-[8px] text-center text-[16px] leading-9 font-normal capitalize text-white shadow-[0_2px_2px_rgba(214,214,214,0.74)] transition duration-200 hover:bg-[linear-gradient(0deg,rgba(0,0,0,0.10)_0%,rgba(0,0,0,0.10)_100%),linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)]"
+                    >
+                      <span>{data.buttonLabel}</span>
+                      <ButtonIcon />
+                    </Link>
+                  </div>
+                </FadeUp>
+              ) : null}
+            </div>
+          </RevealCard>
         </div>
       </div>
     </section>

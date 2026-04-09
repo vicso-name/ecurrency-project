@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_sections_payment_systems_cards",
+  "info": {
+    "displayName": "Payment Systems Card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "orderNumber": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

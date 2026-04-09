@@ -50,6 +50,11 @@
       "type": "component",
       "component": "sections.start-exploring-section",
       "repeatable": false
+    },
+    "paymentSystems": {
+      "type": "component",
+      "component": "sections.payment-systems-section",
+      "repeatable": false
     }
   }
 }

@@ -533,6 +533,10 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
       'api::home-page.home-page'
     > &
       Schema.Attribute.Private;
+    paymentSystems: Schema.Attribute.Component<
+      'sections.payment-systems-section',
+      false
+    >;
     projectOverview: Schema.Attribute.Component<
       'sections.project-overview-section',
       false

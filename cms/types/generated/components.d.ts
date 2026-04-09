@@ -120,6 +120,32 @@ export interface SectionsHeroSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsPaymentSystemsCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_payment_systems_cards';
+  info: {
+    displayName: 'Payment Systems Card';
+  };
+  attributes: {
+    orderNumber: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsPaymentSystemsSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_payment_systems_sections';
+  info: {
+    displayName: 'Payment Systems Section';
+  };
+  attributes: {
+    bottomCtaHref: Schema.Attribute.String;
+    bottomCtaLabel: Schema.Attribute.String;
+    cards: Schema.Attribute.Component<'sections.payment-systems-card', true> &
+      Schema.Attribute.Required;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionsProjectOverviewSection extends Struct.ComponentSchema {
   collectionName: 'components_sections_project_overview_sections';
   info: {
@@ -279,6 +305,8 @@ declare module '@strapi/strapi' {
       'sections.blockchain-designed-tab': SectionsBlockchainDesignedTab;
       'sections.economic-layer-section': SectionsEconomicLayerSection;
       'sections.hero-section': SectionsHeroSection;
+      'sections.payment-systems-card': SectionsPaymentSystemsCard;
+      'sections.payment-systems-section': SectionsPaymentSystemsSection;
       'sections.project-overview-section': SectionsProjectOverviewSection;
       'sections.start-exploring-card': SectionsStartExploringCard;
       'sections.start-exploring-section': SectionsStartExploringSection;

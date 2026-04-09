@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { HomePageHero } from '@/types/strapi/home-page';
 import { ParticleLogo } from './ParticleLogo';
 import Image from 'next/image';
+import { FadeUp } from '@/components/ui/fade-up';
 
 type HeroSectionProps = {
   hero: HomePageHero | null | undefined;
@@ -12,7 +13,6 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
   return (
     <section className="relative overflow-hidden bg-[#FFD8D8]">
-
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-bg.svg"
@@ -40,14 +40,18 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
       <div className="relative z-10 mx-auto flex min-h-[840px] max-w-[1360px] flex-col px-6 pt-24 pb-6 text-center md:min-h-[880px] md:px-10 md:pt-28 md:pb-8">
         <div className="relative z-10 mt-auto mx-auto w-full max-w-[917px]">
-          <h1 className="text-[#202020] text-center text-[48px] leading-[1.04] font-semibold tracking-[-2px] md:text-[64px] md:tracking-[-3px] xl:text-[80px] xl:tracking-[-4px]">
-            {hero.title}
-          </h1>
+          <FadeUp delay={120} duration={1400} y={20}>
+            <h1 className="text-[#202020] text-center text-[48px] leading-[1.04] font-semibold tracking-[-2px] md:text-[64px] md:tracking-[-3px] xl:text-[80px] xl:tracking-[-4px]">
+              {hero.title}
+            </h1>
+          </FadeUp>
 
           {hero.subtitle ? (
-            <p className="mx-auto mt-8 mb-[165px] max-w-[560px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(32,32,32,0.56)] md:mb-0">
-              {hero.subtitle}
-            </p>
+            <FadeUp delay={360} duration={1500} y={14}>
+              <p className="mx-auto mt-8 mb-[165px] max-w-[560px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(32,32,32,0.56)] md:mb-0">
+                {hero.subtitle}
+              </p>
+            </FadeUp>
           ) : null}
 
           <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row">

@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { HomePageBlockchainArchitecture } from '@/types/strapi/home-page';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
+import { FadeUp } from '@/components/ui/fade-up';
+import { RevealCard } from '@/components/ui/reveal-card';
 
 const BUTTON_GRADIENT =
   'radial-gradient(60.21% 66.41% at 47.91% -7.5%, rgba(240, 88, 88, 0.40) 0%, rgba(255, 255, 255, 0.05) 79.27%, rgba(255, 255, 255, 0) 100%)';
@@ -29,47 +31,67 @@ export function BlockchainArchitectureSection({
       <div className="mx-auto max-w-[1360px]">
         <div className="mx-auto max-w-[540px] text-center">
           {data.preTitle && (
-            <p className="mb-[30px] text-[16px] leading-5 font-normal uppercase text-[rgba(13,0,0,0.48)] [font-family:var(--font-roboto-mono)]">
-              {data.preTitle}
-            </p>
+            <FadeUp delay={0} duration={1100} y={18}>
+              <p className="mb-[30px] text-[16px] leading-5 font-normal uppercase text-[rgba(13,0,0,0.48)] [font-family:var(--font-roboto-mono)]">
+                {data.preTitle}
+              </p>
+            </FadeUp>
           )}
 
-          <h2 className="mx-auto text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
-            {data.title}
-          </h2>
+          <FadeUp delay={120} duration={1200} y={22}>
+            <h2 className="mx-auto text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
+              {data.title}
+            </h2>
+          </FadeUp>
 
           {data.subTitle && (
-            <p className="mx-auto mt-4 max-w-[760px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(79,79,79,0.64)]">
-              {data.subTitle}
-            </p>
+            <FadeUp delay={260} duration={1250} y={16}>
+              <p className="mx-auto mt-4 max-w-[760px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(79,79,79,0.64)]">
+                {data.subTitle}
+              </p>
+            </FadeUp>
           )}
         </div>
 
         {data.cards?.length ? (
           <div className="mt-[30px] grid gap-6 md:mt-[60px]">
-            {GRID_ROWS.map((row) => (
+            {GRID_ROWS.map((row, rowIndex) => (
               <div
                 key={row.indices.join('-')}
                 className={`grid gap-6 ${row.cols} lg:justify-center`}
               >
-                {row.indices.map(
-                  (i) =>
-                    data.cards?.[i] && (
-                      <ArchitectureCard key={data.cards[i].id ?? i} card={data.cards[i]} />
-                    ),
-                )}
+                {row.indices.map((i, colIndex) => {
+                  const card = data.cards?.[i];
+                  if (!card) return null;
+
+                  const delay = 120 + rowIndex * 180 + colIndex * 120;
+
+                  return (
+                    <RevealCard
+                      key={card.id ?? i}
+                      delay={delay}
+                      duration={1000}
+                      y={30}
+                      scale={0.985}
+                    >
+                      <ArchitectureCard card={card} />
+                    </RevealCard>
+                  );
+                })}
               </div>
             ))}
           </div>
         ) : null}
 
         {data.bottomCtaLabel && (
-          <div className="mt-[60px] flex justify-center">
-          <CtaButton
-              href={data.bottomCtaHref || '#'}
-              label={data.bottomCtaLabel}
-            />
-          </div>
+          <FadeUp delay={220} duration={1200} y={20}>
+            <div className="mt-[60px] flex justify-center">
+              <CtaButton
+                href={data.bottomCtaHref || '#'}
+                label={data.bottomCtaLabel}
+              />
+            </div>
+          </FadeUp>
         )}
       </div>
     </section>
@@ -86,7 +108,7 @@ function ArchitectureCard({ card }: ArchitectureCardProps) {
 
   return (
     <div
-      className={`relative flex h-[354px] w-full justify-center rounded-[17.473px] border border-[#ECECEC] p-[11px] ${
+      className={`relative flex h-[354px] w-full justify-center rounded-[17.473px] border border-[#ECECEC] p-[11px] transition-transform duration-300 hover:-translate-y-[2px] ${
         isLarge ? 'lg:max-w-[569px]' : 'lg:max-w-[395px]'
       }`}
     >
@@ -139,9 +161,8 @@ function IconBlock({ iconUrl, alt }: { iconUrl: string | undefined; alt: string 
         className="pointer-events-none absolute bottom-0 left-1/2 h-auto w-[126px] -translate-x-1/2"
       />
 
-      {/* Red glow behind icon */}
       <span
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[27px] h-[36px] z-0"
+        className="absolute top-1/2 left-1/2 z-0 h-[36px] w-[27px] -translate-x-1/2 -translate-y-1/2"
         style={{
           aspectRatio: '3/4',
           borderRadius: '50%',

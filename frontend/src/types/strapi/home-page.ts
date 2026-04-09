@@ -84,6 +84,7 @@ export type HomePageData = {
   economicLayer?: HomePageEconomicLayer | null;
   projectOverview?: HomePageProjectOverview | null;
   startExploring?: HomePageStartExploring | null;
+  paymentSystems?: HomePagePaymentSystems | null;
 };
 
 export type UsedForCard = {
@@ -153,4 +154,19 @@ export type HomePageStartExploring = {
   title: string;
   subtitle?: string;
   cards?: StartExploringCard[];
+};
+
+export type PaymentSystemsCard = {
+  id: number;
+  title: string;
+  orderNumber: string;
+};
+
+export type HomePagePaymentSystems = {
+  id: number;
+  title: string;
+  subtitle?: string;
+  cards?: PaymentSystemsCard[];
+  bottomCtaLabel?: string;
+  bottomCtaHref?: string;
 };
