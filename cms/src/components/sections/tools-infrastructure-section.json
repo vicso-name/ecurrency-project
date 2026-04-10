@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_sections_tools_infrastructure_sections",
+  "info": {
+    "displayName": "Tools Infrastructure Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "tabs": {
+      "type": "component",
+      "component": "sections.tools-infrastructure-tab",
+      "repeatable": true
+    },
+    "socialLinks": {
+      "type": "component",
+      "component": "sections.tools-infrastructure-social-link",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

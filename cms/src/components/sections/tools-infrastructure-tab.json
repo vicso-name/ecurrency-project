@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_tools_infrastructure_tabs",
+  "info": {
+    "displayName": "Tools Infrastructure Tab"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "previewImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

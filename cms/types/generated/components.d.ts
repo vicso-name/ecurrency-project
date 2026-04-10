@@ -185,6 +185,46 @@ export interface SectionsStartExploringSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsToolsInfrastructureSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_sections_tools_infrastructure_sections';
+  info: {
+    displayName: 'Tools Infrastructure Section';
+  };
+  attributes: {
+    socialLinks: Schema.Attribute.Component<
+      'sections.tools-infrastructure-social-link',
+      true
+    >;
+    subtitle: Schema.Attribute.Text;
+    tabs: Schema.Attribute.Component<'sections.tools-infrastructure-tab', true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsToolsInfrastructureSocialLink
+  extends Struct.ComponentSchema {
+  collectionName: 'components_sections_tools_infrastructure_social_links';
+  info: {
+    displayName: 'Tools Infrastructure Social Link';
+  };
+  attributes: {
+    href: Schema.Attribute.String & Schema.Attribute.Required;
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsToolsInfrastructureTab extends Struct.ComponentSchema {
+  collectionName: 'components_sections_tools_infrastructure_tabs';
+  info: {
+    displayName: 'Tools Infrastructure Tab';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    previewImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionsUsedForCard extends Struct.ComponentSchema {
   collectionName: 'components_sections_used_for_cards';
   info: {
@@ -310,6 +350,9 @@ declare module '@strapi/strapi' {
       'sections.project-overview-section': SectionsProjectOverviewSection;
       'sections.start-exploring-card': SectionsStartExploringCard;
       'sections.start-exploring-section': SectionsStartExploringSection;
+      'sections.tools-infrastructure-section': SectionsToolsInfrastructureSection;
+      'sections.tools-infrastructure-social-link': SectionsToolsInfrastructureSocialLink;
+      'sections.tools-infrastructure-tab': SectionsToolsInfrastructureTab;
       'sections.used-for-card': SectionsUsedForCard;
       'sections.used-for-section': SectionsUsedForSection;
       'shared.footer-bottom-link': SharedFooterBottomLink;

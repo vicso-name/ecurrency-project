@@ -46,6 +46,11 @@
       "component": "sections.project-overview-section",
       "repeatable": false
     },
+    "toolsInfrastructure": {
+      "type": "component",
+      "component": "sections.tools-infrastructure-section",
+      "repeatable": false
+    },
     "startExploring": {
       "type": "component",
       "component": "sections.start-exploring-section",

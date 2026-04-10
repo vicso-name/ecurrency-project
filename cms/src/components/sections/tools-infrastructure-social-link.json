@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_tools_infrastructure_social_links",
+  "info": {
+    "displayName": "Tools Infrastructure Social Link"
+  },
+  "options": {},
+  "attributes": {
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}
