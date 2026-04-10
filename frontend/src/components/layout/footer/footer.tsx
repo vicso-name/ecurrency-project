@@ -106,6 +106,7 @@ export function Footer({ globalData }: FooterProps) {
   const footerLogo = globalData?.footerLogo;
   const footerLogoUrl = getStrapiMediaUrl(footerLogo?.url);
   const siteName = globalData?.siteName || 'eCurrency';
+  const disclaimer = globalData?.footerDisclaimer ?? '';
 
   return (
     <footer className="px-4 pb-4">
@@ -182,13 +183,13 @@ export function Footer({ globalData }: FooterProps) {
             </div>
           </div>
 
-          <div className="mt-[50px] border-t border-[rgba(0,0,0,0.08)] pt-[30px] pb-[30px]">
+          <div className="mt-[50px] border-t border-b border-[rgba(0,0,0,0.08)] pt-[30px] pb-[30px]">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <p className="text-[14px] font-normal leading-5 tracking-[-0.14px] text-[rgba(0,0,0,0.40)]">
                 {copyright}
               </p>
 
-              <div className="flex flex-wrap items-center  gap-6">
+              <div className="flex flex-wrap items-center gap-6">
                 {bottomLinks.map((link) => (
                   <Link
                     key={link.id}
@@ -203,6 +204,14 @@ export function Footer({ globalData }: FooterProps) {
               </div>
             </div>
           </div>
+          {disclaimer ? (
+            <div className="pb-[12px] mt-5">
+              <p className="whitespace-pre-line text-[12px] font-normal leading-4 tracking-[-0.4px] text-[rgba(0,0,0,0.40)]">
+                {disclaimer}
+              </p>
+            </div>
+          ) : null}
+
         </div>
       </div>
     </footer>

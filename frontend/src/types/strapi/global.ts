@@ -60,4 +60,5 @@ export type GlobalData = {
   footerColumns?: FooterColumn[];
   footerBottomLinks?: FooterBottomLink[];
   footerCopyright?: string;
+  footerDisclaimer?: string;
 };
