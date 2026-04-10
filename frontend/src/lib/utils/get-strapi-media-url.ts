@@ -7,7 +7,15 @@ export function getStrapiMediaUrl(url?: string | null) {
     return url;
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || process.env.STRAPI_URL || '';
+  const baseUrl =
+    process.env.NEXT_PUBLIC_STRAPI_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    process.env.STRAPI_URL ||
+    '';
 
-  return `${baseUrl}${url}`;
+  if (!baseUrl) {
+    return url;
+  }
+
+  return `${baseUrl.replace(/\/$/, '')}/${url.replace(/^\//, '')}`;
 }
