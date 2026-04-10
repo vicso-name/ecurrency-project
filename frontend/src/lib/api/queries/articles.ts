@@ -1,31 +1,45 @@
 import { fetchFromStrapi } from '@/lib/strapi';
+import type { ArticleData } from '@/types/strapi/article';
 
-export type StrapiArticle = {
-  id: number;
-  documentId: string;
-  Title: string;
-  slug: string;
-  Excerpt: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
+type ArticlesResponse = {
+  data: ArticleData[];
 };
 
-type StrapiArticlesResponse = {
-  data: StrapiArticle[];
-  meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
+type GetArticlesParams = {
+  search?: string;
+  categories?: string[];
 };
 
-export async function getArticles(): Promise<StrapiArticle[]> {
-  const response = await fetchFromStrapi('/api/articles');
-  const typedResponse = response as StrapiArticlesResponse;
+export async function getArticles(params: GetArticlesParams = {}): Promise<ArticleData[]> {
+  const search = params.search?.trim() || '';
+  const categories = (params.categories || []).map((item) => item.trim()).filter(Boolean);
 
-  return typedResponse.data ?? [];
+  const queryParts: string[] = [
+    'populate[featuredImage]=true',
+    'populate[category]=true',
+    'sort[0]=publishedDate:desc',
+    'sort[1]=publishedAt:desc',
+    'pagination[pageSize]=100',
+  ];
+
+  if (search) {
+    queryParts.push(`filters[Title][$containsi]=${encodeURIComponent(search)}`);
+  }
+
+  if (categories.length === 1) {
+    queryParts.push(`filters[category][slug][$eq]=${encodeURIComponent(categories[0])}`);
+  }
+
+  if (categories.length > 1) {
+    categories.forEach((category, index) => {
+      queryParts.push(
+        `filters[$or][${index}][category][slug][$eq]=${encodeURIComponent(category)}`
+      );
+    });
+  }
+
+  const path = `/api/articles?${queryParts.join('&')}`;
+  const response = (await fetchFromStrapi(path)) as ArticlesResponse;
+
+  return response.data ?? [];
 }
