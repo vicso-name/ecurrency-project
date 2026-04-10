@@ -22,7 +22,7 @@ export default async function HomePage() {
       <UsedForSection data={homePage?.usedFor} />
       <EconomicLayerSection data={homePage?.economicLayer} />
       <ToolsInfrastructureSection data={homePage?.toolsInfrastructure} />
-      <div className="relative md:px-4 -mt-[80px] md:-mt-[120px]">
+      <div className="relative md:px-4 -mt-[80px] md:-mt-[130px]">
         <div className="mx-auto max-w-[1422px]">
           <div className="relative z-10 w-full">
             <svg
