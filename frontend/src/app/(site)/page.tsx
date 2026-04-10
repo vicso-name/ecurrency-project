@@ -8,6 +8,7 @@ import { UsedForSection } from '@/components/sections/home/used-for-section/used
 import { BlockQuoteSection } from '@/components/sections/home/block-quote-section/block-quote-section';
 import { HeroSection } from '@/components/sections/home/hero-section/hero-section';
 import { getHomePage } from '@/lib/api/queries/home-page';
+import { ToolsInfrastructureSection } from '@/components/sections/home/tools-and-infrastructure-section/tools-infrastructure-section';
 
 export default async function HomePage() {
   const homePage = await getHomePage();
@@ -20,15 +21,15 @@ export default async function HomePage() {
       <BlockchainArchitectureSection data={homePage?.blockchainArchitecture} />
       <UsedForSection data={homePage?.usedFor} />
       <EconomicLayerSection data={homePage?.economicLayer} />
-
-      <div className="md:px-4">
+      <ToolsInfrastructureSection data={homePage?.toolsInfrastructure} />
+      <div className="relative md:px-4 -mt-[80px] md:-mt-[120px]">
         <div className="mx-auto max-w-[1422px]">
           <div className="relative z-10 w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1422 158"
               fill="none"
-              className="block h-auto w-full"
+              className="block h-auto w-full -mb-px"
               preserveAspectRatio="none"
             >
               <path

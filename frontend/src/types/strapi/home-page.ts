@@ -85,6 +85,7 @@ export type HomePageData = {
   projectOverview?: HomePageProjectOverview | null;
   startExploring?: HomePageStartExploring | null;
   paymentSystems?: HomePagePaymentSystems | null;
+  toolsInfrastructure?: HomePageToolsInfrastructure | null;
 };
 
 export type UsedForCard = {
@@ -169,4 +170,30 @@ export type HomePagePaymentSystems = {
   cards?: PaymentSystemsCard[];
   bottomCtaLabel?: string;
   bottomCtaHref?: string;
+};
+
+export type ToolsInfrastructureTab = {
+  id: number;
+  label: string;
+  previewImage: {
+    url: string;
+    alternativeText?: string | null;
+  };
+};
+
+export type ToolsInfrastructureSocialLink = {
+  id: number;
+  href?: string;
+  icon: {
+    url: string;
+    alternativeText?: string | null;
+  };
+};
+
+export type HomePageToolsInfrastructure = {
+  id: number;
+  title: string;
+  subtitle?: string;
+  tabs: ToolsInfrastructureTab[];
+  socialLinks?: ToolsInfrastructureSocialLink[];
 };
