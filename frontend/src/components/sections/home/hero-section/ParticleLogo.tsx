@@ -50,7 +50,11 @@ type SampledLogo = {
   };
 };
 
-export function ParticleLogo({ className }: { className?: string }) {
+type ParticleLogoProps = {
+  className?: string;
+};
+
+export function ParticleLogo({ className }: ParticleLogoProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -76,7 +80,7 @@ export function ParticleLogo({ className }: { className?: string }) {
       radius: 150,
     };
 
-   function getAnchor() {
+    function getAnchor() {
       const isMobile = W < 768;
       const baseY = isMobile ? H * 0.24 : H * 0.34;
 
@@ -106,8 +110,7 @@ export function ParticleLogo({ className }: { className?: string }) {
       return (
         1 -
         easeInOutCubic(
-          (elapsed - HOLD_SPHERE - MORPH_TO_LOGO - HOLD_LOGO) /
-            MORPH_TO_SPHERE
+          (elapsed - HOLD_SPHERE - MORPH_TO_LOGO - HOLD_LOGO) / MORPH_TO_SPHERE
         )
       );
     }
@@ -117,12 +120,11 @@ export function ParticleLogo({ className }: { className?: string }) {
       const svgH = 1086;
 
       const isMobile = W < 768;
-const scaleFactor = isMobile ? 0.6 : 0.52;
-const scale = Math.min((W * scaleFactor) / svgW, (H * scaleFactor) / svgH);
+      const scaleFactor = isMobile ? 0.6 : 0.52;
+      const scale = Math.min((W * scaleFactor) / svgW, (H * scaleFactor) / svgH);
 
-const renderW = Math.max(Math.floor(svgW * scale), 2);
-const renderH = Math.max(Math.floor(svgH * scale), 2);
-
+      const renderW = Math.max(Math.floor(svgW * scale), 2);
+      const renderH = Math.max(Math.floor(svgH * scale), 2);
 
       const offscreen = document.createElement('canvas');
       offscreen.width = renderW;
@@ -389,10 +391,14 @@ const renderH = Math.max(Math.floor(svgH * scale), 2);
       }
     }
 
-    const onMouseMove = (e: MouseEvent) => {
+    const updatePointerFromClientPoint = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      mouse.x = clientX - rect.left;
+      mouse.y = clientY - rect.top;
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      updatePointerFromClientPoint(e.clientX, e.clientY);
     };
 
     const onMouseLeave = () => {
@@ -401,10 +407,17 @@ const renderH = Math.max(Math.floor(svgH * scale), 2);
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.touches[0].clientX - rect.left;
-      mouse.y = e.touches[0].clientY - rect.top;
+      const touch = e.touches[0];
+      if (!touch) return;
+
+      updatePointerFromClientPoint(touch.clientX, touch.clientY);
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+
+      updatePointerFromClientPoint(touch.clientX, touch.clientY);
     };
 
     const onTouchEnd = () => {
@@ -414,20 +427,27 @@ const renderH = Math.max(Math.floor(svgH * scale), 2);
 
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseleave', onMouseLeave);
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
-    window.addEventListener('touchend', onTouchEnd);
     window.addEventListener('resize', resize);
+
+    canvas.addEventListener('touchstart', onTouchStart, { passive: true });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: true });
+    canvas.addEventListener('touchend', onTouchEnd);
+    canvas.addEventListener('touchcancel', onTouchEnd);
 
     resize();
     animId = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animId);
+
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseleave', onMouseLeave);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('touchend', onTouchEnd);
       window.removeEventListener('resize', resize);
+
+      canvas.removeEventListener('touchstart', onTouchStart);
+      canvas.removeEventListener('touchmove', onTouchMove);
+      canvas.removeEventListener('touchend', onTouchEnd);
+      canvas.removeEventListener('touchcancel', onTouchEnd);
     };
   }, []);
 

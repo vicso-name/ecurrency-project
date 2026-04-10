@@ -28,11 +28,12 @@ export function EconomicLayerSection({ data }: EconomicLayerSectionProps) {
   const coinImageUrl = getStrapiMediaUrl(data.coinImage?.url);
 
   return (
-    <section className="relative overflow-hidden pt-[190px] pb-[300px]">
+    <section className="relative overflow-hidden pt-[50px] pb-[300px] md:pt-[190px]">
+
       <div
         className="pointer-events-none absolute inset-0 z-0 bg-no-repeat"
         style={{
-          backgroundImage: 'url(/images/home/economic_layer_bg.png)',
+          backgroundImage: 'url(/images/home/BG.png)',
           backgroundPosition: 'top center',
           backgroundSize: 'cover',
         }}

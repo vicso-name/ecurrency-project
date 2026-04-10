@@ -17,8 +17,7 @@ export function ProjectOverviewSection({
   const iconUrl = getStrapiMediaUrl(data.icon?.url);
 
   return (
-    <section className="px-4">
-      <div className="mx-auto max-w-[1422px] overflow-hidden rounded-bl-[20px] rounded-br-[20px] bg-white">
+    <section>
         <div className="relative">
           <div
             className="pointer-events-none absolute inset-0 z-0 bg-no-repeat"
@@ -35,7 +34,7 @@ export function ProjectOverviewSection({
             aria-hidden="true"
             width={201}
             height={409}
-            className="pointer-events-none absolute left-0 top-1/2 z-0 hidden h-auto w-[201px] -translate-y-1/2 md:block"
+            className="pointer-events-none absolute left-0 top-1/2 z-0 hidden h-auto w-[201px] -translate-y-[25%] md:block"
           />
 
           <Image
@@ -44,7 +43,7 @@ export function ProjectOverviewSection({
             aria-hidden="true"
             width={201}
             height={409}
-            className="pointer-events-none absolute right-0 top-1/2 z-0 hidden h-auto w-[201px] -translate-y-1/2 md:block"
+            className="pointer-events-none absolute right-0 top-1/2 z-0 hidden h-auto w-[201px] -translate-y-[25%] md:block"
           />
 
           <div className="relative z-10 mx-auto max-w-[1360px] px-6 py-[80px] md:px-[30px] md:py-[120px]">
@@ -77,7 +76,6 @@ export function ProjectOverviewSection({
               ) : null}
             </div>
           </div>
-        </div>
       </div>
     </section>
   );

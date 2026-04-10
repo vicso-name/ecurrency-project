@@ -142,7 +142,7 @@ export function StartExploringSection({ data }: StartExploringSectionProps) {
   if (!data || !cards.length) return null;
 
   return (
-    <section className="px-4 py-[80px] md:py-[120px]">
+    <section className="px-4 py-[80px] md:py-[80px]">
       <div className="mx-auto max-w-[1200px]">
         <div className="mx-auto mb-[40px] max-w-[462px] text-center md:mb-[60px]">
           <FadeUp delay={80} duration={1200} y={20}>

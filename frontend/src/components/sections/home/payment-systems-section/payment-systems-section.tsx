@@ -165,7 +165,7 @@ export function PaymentSystemsSection({ data }: PaymentSystemsSectionProps) {
   const cards = data.cards ?? [];
 
   return (
-    <section className="px-4 py-[80px] md:py-[120px]">
+    <section className="px-4 py-[80px] md:py-[80px]">
       <div className="mx-auto max-w-[1130px]">
         {/* Header */}
         <div className="mx-auto mb-[40px] flex max-w-[590px] flex-col items-center justify-center text-center md:mb-[60px]">

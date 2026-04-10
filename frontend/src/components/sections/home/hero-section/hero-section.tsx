@@ -12,7 +12,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
   if (!hero) return null;
 
   return (
-    <section className="relative overflow-hidden bg-[#FFD8D8]">
+    <section className="relative  overflow-hidden bg-[#FFD8D8]">
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-bg.svg"
@@ -34,7 +34,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
         className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-50 bg-gradient-to-b from-transparent to-[#f7f5f4]"
       />
 
-      <div className="absolute inset-0 z-0">
+      <div className="pointer-events-none absolute inset-0 z-0">
         <ParticleLogo className="h-full w-full" />
       </div>
 
@@ -48,7 +48,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
           {hero.subtitle ? (
             <FadeUp delay={360} duration={1500} y={14}>
-              <p className="mx-auto mt-8 mb-[165px] max-w-[560px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(32,32,32,0.56)] md:mb-0">
+              <p className="mx-auto mt-8 mb-[80px] max-w-[560px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(32,32,32,0.56)] md:mb-0">
                 {hero.subtitle}
               </p>
             </FadeUp>
