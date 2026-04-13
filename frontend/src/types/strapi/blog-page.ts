@@ -1,3 +1,10 @@
+export type BlogPageSubscribe = {
+  id: number;
+  title: string;
+  buttonLabel: string;
+  placeholder?: string;
+};
+
 export type BlogPageData = {
   id: number;
   documentId: string;
@@ -7,4 +14,5 @@ export type BlogPageData = {
   categoryPlaceholder?: string;
   clearAllLabel?: string;
   loadMoreLabel?: string;
+  subscribe?: BlogPageSubscribe | null;
 };

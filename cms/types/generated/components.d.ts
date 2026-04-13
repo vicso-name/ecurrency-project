@@ -185,6 +185,21 @@ export interface SectionsStartExploringSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsSubscribeSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_subscribe_sections';
+  info: {
+    displayName: 'Subscribe Section';
+  };
+  attributes: {
+    buttonLabel: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Subscribe'>;
+    placeholder: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Your Email'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Subscribe for Updates'>;
+  };
+}
+
 export interface SectionsToolsInfrastructureSection
   extends Struct.ComponentSchema {
   collectionName: 'components_sections_tools_infrastructure_sections';
@@ -350,6 +365,7 @@ declare module '@strapi/strapi' {
       'sections.project-overview-section': SectionsProjectOverviewSection;
       'sections.start-exploring-card': SectionsStartExploringCard;
       'sections.start-exploring-section': SectionsStartExploringSection;
+      'sections.subscribe-section': SectionsSubscribeSection;
       'sections.tools-infrastructure-section': SectionsToolsInfrastructureSection;
       'sections.tools-infrastructure-social-link': SectionsToolsInfrastructureSocialLink;
       'sections.tools-infrastructure-tab': SectionsToolsInfrastructureTab;

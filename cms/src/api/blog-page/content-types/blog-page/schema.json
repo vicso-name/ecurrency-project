@@ -33,6 +33,11 @@
     "loadMoreLabel": {
       "type": "string",
       "default": "Load More"
+    },
+    "subscribe": {
+      "type": "component",
+      "component": "sections.subscribe-section",
+      "repeatable": false
     }
   }
 }

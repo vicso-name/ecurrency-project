@@ -3,6 +3,8 @@ import { getBlogPage } from '@/lib/api/queries/blog-page';
 import { getCategories } from '@/lib/api/queries/categories';
 import { BlogFilters } from '@/components/sections/blog/blog-filters/blog-filters';
 import { BlogList } from '@/components/sections/blog/blog-list/blog-list';
+import { SubscribeSection } from '@/components/sections/blog/subscribe-section/subscribe-section';
+
 import Image from 'next/image';
 
 type BlogPageProps = {
@@ -54,6 +56,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         <section className="mt-16">
           <BlogList articles={articles} blogPage={blogPage} />
         </section>
+        <SubscribeSection data={blogPage?.subscribe} />       
       </div>
     </main>
   );

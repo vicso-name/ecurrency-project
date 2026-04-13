@@ -495,6 +495,7 @@ export interface ApiBlogPageBlogPage extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     searchPlaceholder: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Search'>;
+    subscribe: Schema.Attribute.Component<'sections.subscribe-section', false>;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;

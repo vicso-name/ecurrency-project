@@ -6,7 +6,9 @@ type BlogPageResponse = {
 };
 
 export async function getBlogPage(): Promise<BlogPageData | null> {
-  const response = (await fetchFromStrapi('/api/blog-page')) as BlogPageResponse;
+  const response = (await fetchFromStrapi(
+    '/api/blog-page?populate[subscribe]=true'
+  )) as BlogPageResponse;
 
   return response.data ?? null;
 }

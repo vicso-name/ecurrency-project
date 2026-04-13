@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_subscribe_sections",
+  "info": {
+    "displayName": "Subscribe Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Subscribe for Updates"
+    },
+    "buttonLabel": {
+      "type": "string",
+      "default": "Subscribe"
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "Your Email"
+    }
+  },
+  "config": {}
+}
