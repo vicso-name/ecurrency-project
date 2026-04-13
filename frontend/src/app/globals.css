@@ -16,3 +16,178 @@ body {
   color: var(--foreground);
   font-family: var(--font-manrope), sans-serif;
 }
+
+/* ── Article Content Styles ── */
+/* Add these to your globals.css */
+
+.article-content h1 {
+  font-family: var(--font-inter);
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: -1.68px;
+  color: #0F1324;
+  margin-top: 48px;
+  margin-bottom: 20px;
+}
+
+.article-content h2 {
+  font-family: var(--font-inter);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: -1.44px;
+  color: #0F1324;
+  margin-top: 48px;
+  margin-bottom: 30px;
+}
+
+.article-content h3 {
+  font-family: var(--font-inter);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: -1.12px;
+  color: #0F1324;
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
+.article-content h4 {
+  font-family: var(--font-inter);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -0.88px;
+  color: #0F1324;
+  margin-top: 32px;
+  margin-bottom: 20px;
+}
+
+.article-content p {
+  font-family: var(--font-manrope);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 23px;
+  color: rgba(15, 19, 36, 0.60);
+  margin-bottom: 16px;
+}
+
+.article-content a {
+  color: #EC0000;
+  font-family: var(--font-manrope);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 23px;
+  text-decoration: none;
+}
+
+.article-content a:hover {
+  text-decoration: underline;
+}
+
+.article-content ul,
+.article-content ol {
+  font-family: var(--font-manrope);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 23px;
+  color: rgba(15, 19, 36, 0.60);
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+.article-content li {
+  margin-bottom: 8px;
+}
+
+.article-content ul li {
+  list-style-type: disc;
+}
+
+.article-content ol li {
+  list-style-type: decimal;
+}
+
+.article-content blockquote {
+  border-left: 3px solid #FF4949;
+  padding: 16px 24px;
+  margin: 32px 0;
+  font-family: var(--font-manrope);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  color: #303339;
+}
+
+.article-content blockquote p {
+  color: #303339;
+  margin-bottom: 0;
+}
+
+.article-content img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 32px 0;
+}
+
+.article-content hr {
+  border: none;
+  border-top: 1px solid rgba(15, 19, 36, 0.10);
+  margin: 40px 0;
+}
+
+.article-content strong {
+  font-weight: 600;
+  color: #0F1324;
+}
+
+.article-content code {
+  background: #F2F2F2;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.article-content pre {
+  background: #F2F2F2;
+  padding: 20px;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 24px 0;
+}
+
+.article-content pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .article-content h1 {
+    font-size: 32px;
+    margin-top: 36px;
+    margin-bottom: 16px;
+  }
+
+  .article-content h2 {
+    font-size: 28px;
+    margin-top: 36px;
+    margin-bottom: 20px;
+  }
+
+  .article-content h3 {
+    font-size: 22px;
+    margin-top: 28px;
+    margin-bottom: 16px;
+  }
+
+  .article-content h4 {
+    font-size: 18px;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+}

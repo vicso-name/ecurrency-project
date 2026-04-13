@@ -43,3 +43,35 @@ export async function getArticles(params: GetArticlesParams = {}): Promise<Artic
 
   return response.data ?? [];
 }
+
+export async function getArticleBySlug(slug: string): Promise<ArticleData | null> {
+  const queryParts = [
+    `filters[slug][$eq]=${encodeURIComponent(slug)}`,
+    'populate[featuredImage]=true',
+    'populate[category]=true',
+  ];
+
+  const path = `/api/articles?${queryParts.join('&')}`;
+  const response = (await fetchFromStrapi(path)) as ArticlesResponse;
+
+  return response.data?.[0] ?? null;
+}
+
+export async function getRelevantArticles(
+  currentSlug: string,
+  limit: number = 3
+): Promise<ArticleData[]> {
+  const queryParts = [
+    `filters[slug][$ne]=${encodeURIComponent(currentSlug)}`,
+    'populate[featuredImage]=true',
+    'populate[category]=true',
+    'sort[0]=publishedDate:desc',
+    'sort[1]=publishedAt:desc',
+    `pagination[pageSize]=${limit}`,
+  ];
+
+  const path = `/api/articles?${queryParts.join('&')}`;
+  const response = (await fetchFromStrapi(path)) as ArticlesResponse;
+
+  return response.data ?? [];
+}
