@@ -70,7 +70,7 @@ export function UsedForSection({ data }: UsedForSectionProps) {
   }
 
   const cards = data.cards ?? [];
-  const hasButtons = data.primaryButtonLabel || data.secondaryButtonLabel;
+  const hasButtons = data.showButtons && (data.primaryButtonLabel || data.secondaryButtonLabel);
   const isFourCards = cards.length === 4;
 
   return (

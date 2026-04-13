@@ -327,6 +327,9 @@ export interface SectionsUsedForSection extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<'#'>;
     secondaryButtonLabel: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Learn More About ECR'>;
+    showButtons: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
   };
 }
 

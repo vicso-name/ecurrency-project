@@ -109,6 +109,7 @@ export type HomePageUsedFor = {
   primaryButtonHref?: string;
   secondaryButtonLabel?: string;
   secondaryButtonHref?: string;
+  showButtons?: boolean;
 };
 
 export type HomePageEconomicLayer = {

@@ -29,6 +29,11 @@
     "secondaryButtonHref": {
       "type": "string",
       "default": "#"
+    },
+    "showButtons": {
+      "type": "boolean",
+      "required": true,
+      "default": false
     }
   },
   "config": {}
