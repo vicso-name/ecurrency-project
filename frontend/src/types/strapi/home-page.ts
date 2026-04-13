@@ -105,6 +105,10 @@ export type HomePageUsedFor = {
   id: number;
   preTitle?: string;
   cards?: UsedForCard[];
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
 };
 
 export type HomePageEconomicLayer = {

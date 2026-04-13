@@ -618,6 +618,7 @@ export interface ApiEcrPageEcrPage extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    usedFor: Schema.Attribute.Component<'sections.used-for-section', false>;
   };
 }
 

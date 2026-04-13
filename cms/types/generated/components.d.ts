@@ -319,6 +319,14 @@ export interface SectionsUsedForSection extends Struct.ComponentSchema {
     cards: Schema.Attribute.Component<'sections.used-for-card', true> &
       Schema.Attribute.Required;
     preTitle: Schema.Attribute.String;
+    primaryButtonHref: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#'>;
+    primaryButtonLabel: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Buy ECR'>;
+    secondaryButtonHref: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#'>;
+    secondaryButtonLabel: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Learn More About ECR'>;
   };
 }
 

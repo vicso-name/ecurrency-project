@@ -13,6 +13,22 @@
       "component": "sections.used-for-card",
       "repeatable": true,
       "required": true
+    },
+    "primaryButtonLabel": {
+      "type": "string",
+      "default": "Buy ECR"
+    },
+    "primaryButtonHref": {
+      "type": "string",
+      "default": "#"
+    },
+    "secondaryButtonLabel": {
+      "type": "string",
+      "default": "Learn More About ECR"
+    },
+    "secondaryButtonHref": {
+      "type": "string",
+      "default": "#"
     }
   },
   "config": {}

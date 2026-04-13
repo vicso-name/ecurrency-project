@@ -15,6 +15,11 @@
       "type": "component",
       "component": "sections.page-hero",
       "repeatable": false
+    },
+    "usedFor": {
+      "type": "component",
+      "component": "sections.used-for-section",
+      "repeatable": false
     }
   }
 }
