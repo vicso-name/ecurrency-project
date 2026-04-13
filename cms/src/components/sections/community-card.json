@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_sections_community_cards",
+  "info": {
+    "displayName": "Community Card"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

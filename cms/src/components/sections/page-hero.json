@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_sections_page_heroes",
+  "info": {
+    "displayName": "Page Hero"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "card": {
+      "type": "component",
+      "component": "sections.inner-hero-card",
+      "repeatable": false
+    },
+    "showWalletBadge": {
+      "type": "boolean",
+      "default": false
+    },
+    "showExtensionBadge": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

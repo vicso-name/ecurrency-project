@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "ecosystem_pages",
+  "info": {
+    "singularName": "ecosystem-page",
+    "pluralName": "ecosystem-pages",
+    "displayName": "Ecosystem Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "sections.page-hero",
+      "repeatable": false
+    },
+    "usedFor": {
+      "type": "component",
+      "component": "sections.used-for-section",
+      "repeatable": false
+    },
+    "community": {
+      "type": "component",
+      "component": "sections.community-section",
+      "repeatable": false
+    }
+  }
+}

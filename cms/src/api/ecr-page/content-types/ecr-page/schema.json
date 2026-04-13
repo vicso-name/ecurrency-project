@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "ecr_pages",
+  "info": {
+    "singularName": "ecr-page",
+    "pluralName": "ecr-pages",
+    "displayName": "ECR Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "sections.page-hero",
+      "repeatable": false
+    }
+  }
+}

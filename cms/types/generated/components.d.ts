@@ -90,6 +90,36 @@ export interface SectionsBlockchainDesignedTab extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsCommunityCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_community_cards';
+  info: {
+    displayName: 'Community Card';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'>;
+    text: Schema.Attribute.String;
+  };
+}
+
+export interface SectionsCommunitySection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_community_sections';
+  info: {
+    displayName: 'Community Section';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'sections.community-card', true>;
+    primaryButtonHref: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#'>;
+    primaryButtonLabel: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Open Web Wallet'>;
+    secondaryButtonHref: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#'>;
+    secondaryButtonLabel: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Join the Community'>;
+    title: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Community'>;
+  };
+}
+
 export interface SectionsEconomicLayerSection extends Struct.ComponentSchema {
   collectionName: 'components_sections_economic_layer_sections';
   info: {
@@ -117,6 +147,34 @@ export interface SectionsHeroSection extends Struct.ComponentSchema {
     secondaryButtonLabel: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsInnerHeroCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_inner_hero_cards';
+  info: {
+    displayName: 'Inner Hero Card';
+  };
+  attributes: {
+    buttonHref: Schema.Attribute.String;
+    buttonLabel: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+  };
+}
+
+export interface SectionsPageHero extends Struct.ComponentSchema {
+  collectionName: 'components_sections_page_heroes';
+  info: {
+    displayName: 'Page Hero';
+  };
+  attributes: {
+    card: Schema.Attribute.Component<'sections.inner-hero-card', false>;
+    showExtensionBadge: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    showWalletBadge: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -358,8 +416,12 @@ declare module '@strapi/strapi' {
       'sections.blockchain-designed-feature-card': SectionsBlockchainDesignedFeatureCard;
       'sections.blockchain-designed-section': SectionsBlockchainDesignedSection;
       'sections.blockchain-designed-tab': SectionsBlockchainDesignedTab;
+      'sections.community-card': SectionsCommunityCard;
+      'sections.community-section': SectionsCommunitySection;
       'sections.economic-layer-section': SectionsEconomicLayerSection;
       'sections.hero-section': SectionsHeroSection;
+      'sections.inner-hero-card': SectionsInnerHeroCard;
+      'sections.page-hero': SectionsPageHero;
       'sections.payment-systems-card': SectionsPaymentSystemsCard;
       'sections.payment-systems-section': SectionsPaymentSystemsSection;
       'sections.project-overview-section': SectionsProjectOverviewSection;

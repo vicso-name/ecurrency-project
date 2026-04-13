@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_sections_inner_hero_cards",
+  "info": {
+    "displayName": "Inner Hero Card"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "buttonLabel": {
+      "type": "string"
+    },
+    "buttonHref": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "developers_pages",
+  "info": {
+    "singularName": "developers-page",
+    "pluralName": "developers-pages",
+    "displayName": "Developers Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "sections.page-hero",
+      "repeatable": false
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_sections_community_sections",
+  "info": {
+    "displayName": "Community Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Community"
+    },
+    "cards": {
+      "type": "component",
+      "component": "sections.community-card",
+      "repeatable": true
+    },
+    "primaryButtonLabel": {
+      "type": "string",
+      "default": "Open Web Wallet"
+    },
+    "primaryButtonHref": {
+      "type": "string",
+      "default": "#"
+    },
+    "secondaryButtonLabel": {
+      "type": "string",
+      "default": "Join the Community"
+    },
+    "secondaryButtonHref": {
+      "type": "string",
+      "default": "#"
+    }
+  },
+  "config": {}
+}
