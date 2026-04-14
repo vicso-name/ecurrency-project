@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_sections_smart_contract_steps",
+  "info": {
+    "displayName": "Smart Contract Step"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

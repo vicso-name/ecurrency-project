@@ -243,6 +243,61 @@ export interface SectionsProjectOverviewSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsSmartContractBenefit extends Struct.ComponentSchema {
+  collectionName: 'components_sections_smart_contract_benefits';
+  info: {
+    displayName: 'Smart Contract Benefit';
+  };
+  attributes: {
+    tags: Schema.Attribute.Component<'sections.smart-contract-tag', true>;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsSmartContractStep extends Struct.ComponentSchema {
+  collectionName: 'components_sections_smart_contract_steps';
+  info: {
+    displayName: 'Smart Contract Step';
+  };
+  attributes: {
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsSmartContractTag extends Struct.ComponentSchema {
+  collectionName: 'components_sections_smart_contract_tags';
+  info: {
+    displayName: 'Smart Contract Tag';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsSmartContractsSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_smart_contracts_sections';
+  info: {
+    displayName: 'Smart Contracts Section';
+  };
+  attributes: {
+    benefits: Schema.Attribute.Component<
+      'sections.smart-contract-benefit',
+      true
+    >;
+    benefitsTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Why It Matters'>;
+    ctaHref: Schema.Attribute.String;
+    ctaLabel: Schema.Attribute.String;
+    howItWorksTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'How It Works'>;
+    steps: Schema.Attribute.Component<'sections.smart-contract-step', true>;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionsStartExploringCard extends Struct.ComponentSchema {
   collectionName: 'components_sections_start_exploring_cards';
   info: {
@@ -281,6 +336,34 @@ export interface SectionsSubscribeSection extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<'Your Email'>;
     title: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Subscribe for Updates'>;
+  };
+}
+
+export interface SectionsTechnologyFeatureCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_technology_feature_cards';
+  info: {
+    displayName: 'Technology Feature Card';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsTechnologyFeaturesSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_sections_technology_features_sections';
+  info: {
+    displayName: 'Technology Features Section';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'sections.technology-feature-card', true>;
+    ctaHref: Schema.Attribute.String;
+    ctaLabel: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'The network integrates multiple technologies that work together to provide'>;
   };
 }
 
@@ -494,9 +577,15 @@ declare module '@strapi/strapi' {
       'sections.payment-systems-card': SectionsPaymentSystemsCard;
       'sections.payment-systems-section': SectionsPaymentSystemsSection;
       'sections.project-overview-section': SectionsProjectOverviewSection;
+      'sections.smart-contract-benefit': SectionsSmartContractBenefit;
+      'sections.smart-contract-step': SectionsSmartContractStep;
+      'sections.smart-contract-tag': SectionsSmartContractTag;
+      'sections.smart-contracts-section': SectionsSmartContractsSection;
       'sections.start-exploring-card': SectionsStartExploringCard;
       'sections.start-exploring-section': SectionsStartExploringSection;
       'sections.subscribe-section': SectionsSubscribeSection;
+      'sections.technology-feature-card': SectionsTechnologyFeatureCard;
+      'sections.technology-features-section': SectionsTechnologyFeaturesSection;
       'sections.tool-card': SectionsToolCard;
       'sections.tools-infrastructure-section': SectionsToolsInfrastructureSection;
       'sections.tools-infrastructure-social-link': SectionsToolsInfrastructureSocialLink;

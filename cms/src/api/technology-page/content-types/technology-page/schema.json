@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "technology_pages",
+  "info": {
+    "singularName": "technology-page",
+    "pluralName": "technology-pages",
+    "displayName": "Technology Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "sections.page-hero",
+      "repeatable": false
+    },
+    "features": {
+      "type": "component",
+      "component": "sections.technology-features-section",
+      "repeatable": false
+    },
+    "TransactionModel": {
+      "type": "component",
+      "component": "sections.smart-contracts-section",
+      "repeatable": false
+    }
+  }
+}

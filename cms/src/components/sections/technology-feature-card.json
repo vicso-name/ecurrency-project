@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_sections_technology_feature_cards",
+  "info": {
+    "displayName": "Technology Feature Card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

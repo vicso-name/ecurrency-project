@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_sections_smart_contract_benefits",
+  "info": {
+    "displayName": "Smart Contract Benefit"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "tags": {
+      "type": "component",
+      "component": "sections.smart-contract-tag",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_sections_technology_features_sections",
+  "info": {
+    "displayName": "Technology Features Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "The network integrates multiple technologies that work together to provide",
+      "required": true
+    },
+    "cards": {
+      "type": "component",
+      "component": "sections.technology-feature-card",
+      "repeatable": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "ctaLabel": {
+      "type": "string"
+    },
+    "ctaHref": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_sections_smart_contracts_sections",
+  "info": {
+    "displayName": "Smart Contracts Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "howItWorksTitle": {
+      "type": "string",
+      "default": "How It Works",
+      "required": true
+    },
+    "steps": {
+      "type": "component",
+      "component": "sections.smart-contract-step",
+      "repeatable": true
+    },
+    "benefitsTitle": {
+      "type": "string",
+      "default": "Why It Matters",
+      "required": true
+    },
+    "benefits": {
+      "type": "component",
+      "component": "sections.smart-contract-benefit",
+      "repeatable": true
+    },
+    "ctaLabel": {
+      "type": "string"
+    },
+    "ctaHref": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
