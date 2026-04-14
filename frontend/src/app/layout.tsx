@@ -23,6 +23,14 @@ const robotoMono = Roboto_Mono({
 export const metadata: Metadata = {
   title: 'eCurrency Project',
   description: 'eCurrency website',
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
 };
 
 type RootLayoutProps = {
