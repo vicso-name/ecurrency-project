@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_sections_tools_sections",
+  "info": {
+    "displayName": "Tools Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Tools and Resources",
+      "required": true
+    },
+    "cards": {
+      "type": "component",
+      "component": "sections.tool-card",
+      "repeatable": true
+    },
+    "ctaLabel": {
+      "type": "string"
+    },
+    "ctaHref": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

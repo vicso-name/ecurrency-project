@@ -162,6 +162,32 @@ export interface SectionsInnerHeroCard extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsOpportunitiesSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_opportunities_sections';
+  info: {
+    displayName: 'Opportunities Section';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'sections.opportunity-card', true>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Developer Opportunities'>;
+  };
+}
+
+export interface SectionsOpportunityCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_opportunity_cards';
+  info: {
+    displayName: 'Opportunity Card';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'>;
+    sizeVariant: Schema.Attribute.Enumeration<['tall', 'small', 'wide']> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionsPageHero extends Struct.ComponentSchema {
   collectionName: 'components_sections_page_heroes';
   info: {
@@ -258,6 +284,21 @@ export interface SectionsSubscribeSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsToolCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_tool_cards';
+  info: {
+    displayName: 'Tool Card';
+  };
+  attributes: {
+    buttonHref: Schema.Attribute.String & Schema.Attribute.Required;
+    buttonLabel: Schema.Attribute.String & Schema.Attribute.Required;
+    showBottomDash: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    showTopDash: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionsToolsInfrastructureSection
   extends Struct.ComponentSchema {
   collectionName: 'components_sections_tools_infrastructure_sections';
@@ -295,6 +336,21 @@ export interface SectionsToolsInfrastructureTab extends Struct.ComponentSchema {
   attributes: {
     label: Schema.Attribute.String & Schema.Attribute.Required;
     previewImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsToolsSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_tools_sections';
+  info: {
+    displayName: 'Tools Section';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'sections.tool-card', true>;
+    ctaHref: Schema.Attribute.String;
+    ctaLabel: Schema.Attribute.String;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Tools and Resources'>;
   };
 }
 
@@ -432,6 +488,8 @@ declare module '@strapi/strapi' {
       'sections.economic-layer-section': SectionsEconomicLayerSection;
       'sections.hero-section': SectionsHeroSection;
       'sections.inner-hero-card': SectionsInnerHeroCard;
+      'sections.opportunities-section': SectionsOpportunitiesSection;
+      'sections.opportunity-card': SectionsOpportunityCard;
       'sections.page-hero': SectionsPageHero;
       'sections.payment-systems-card': SectionsPaymentSystemsCard;
       'sections.payment-systems-section': SectionsPaymentSystemsSection;
@@ -439,9 +497,11 @@ declare module '@strapi/strapi' {
       'sections.start-exploring-card': SectionsStartExploringCard;
       'sections.start-exploring-section': SectionsStartExploringSection;
       'sections.subscribe-section': SectionsSubscribeSection;
+      'sections.tool-card': SectionsToolCard;
       'sections.tools-infrastructure-section': SectionsToolsInfrastructureSection;
       'sections.tools-infrastructure-social-link': SectionsToolsInfrastructureSocialLink;
       'sections.tools-infrastructure-tab': SectionsToolsInfrastructureTab;
+      'sections.tools-section': SectionsToolsSection;
       'sections.used-for-card': SectionsUsedForCard;
       'sections.used-for-section': SectionsUsedForSection;
       'shared.footer-bottom-link': SharedFooterBottomLink;

@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_sections_opportunity_cards",
+  "info": {
+    "displayName": "Opportunity Card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "sizeVariant": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "tall",
+        "small",
+        "wide"
+      ]
+    }
+  },
+  "config": {}
+}

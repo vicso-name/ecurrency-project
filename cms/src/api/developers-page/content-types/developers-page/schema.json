@@ -15,6 +15,16 @@
       "type": "component",
       "component": "sections.page-hero",
       "repeatable": false
+    },
+    "opportunities": {
+      "type": "component",
+      "component": "sections.opportunities-section",
+      "repeatable": false
+    },
+    "tools": {
+      "type": "component",
+      "component": "sections.tools-section",
+      "repeatable": false
     }
   }
 }

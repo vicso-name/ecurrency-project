@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_sections_tool_cards",
+  "info": {
+    "displayName": "Tool Card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "buttonLabel": {
+      "type": "string",
+      "required": true
+    },
+    "buttonHref": {
+      "type": "string",
+      "required": true
+    },
+    "showTopDash": {
+      "type": "boolean",
+      "default": false
+    },
+    "showBottomDash": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

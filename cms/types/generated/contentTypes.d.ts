@@ -556,7 +556,12 @@ export interface ApiDevelopersPageDevelopersPage
       'api::developers-page.developers-page'
     > &
       Schema.Attribute.Private;
+    opportunities: Schema.Attribute.Component<
+      'sections.opportunities-section',
+      false
+    >;
     publishedAt: Schema.Attribute.DateTime;
+    tools: Schema.Attribute.Component<'sections.tools-section', false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
