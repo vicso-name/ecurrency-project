@@ -767,6 +767,15 @@ export interface ApiTechnologyPageTechnologyPage
     draftAndPublish: true;
   };
   attributes: {
+    architectureMatters: Schema.Attribute.Component<
+      'sections.start-exploring-section',
+      false
+    >;
+    clientSideSmartContracts: Schema.Attribute.Component<
+      'sections.smart-contracts-section',
+      false
+    >;
+    consensus: Schema.Attribute.Component<'sections.consensus-section', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -775,12 +784,21 @@ export interface ApiTechnologyPageTechnologyPage
       false
     >;
     hero: Schema.Attribute.Component<'sections.page-hero', false>;
+    infrastructure: Schema.Attribute.Component<
+      'sections.infrastructure-section',
+      false
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::technology-page.technology-page'
     > &
       Schema.Attribute.Private;
+    nextSteps: Schema.Attribute.Component<'sections.tools-section', false>;
+    postQuantumCryptography: Schema.Attribute.Component<
+      'sections.smart-contracts-section',
+      false
+    >;
     publishedAt: Schema.Attribute.DateTime;
     TransactionModel: Schema.Attribute.Component<
       'sections.smart-contracts-section',
@@ -789,6 +807,7 @@ export interface ApiTechnologyPageTechnologyPage
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    useCases: Schema.Attribute.Component<'sections.used-for-section', false>;
   };
 }
 

@@ -121,6 +121,16 @@ function useSwipe(onSwipeLeft: () => void, onSwipeRight: () => void) {
   return { onTouchStart, onTouchMove, onTouchEnd };
 }
 
+function BottomTextBlock({ text }: { text: string }) {
+  return (
+    <div className="flex items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center">
+      <p className="max-w-[600px] [font-family:var(--font-manrope)] text-[16px] font-normal leading-normal text-[rgba(51,51,51,0.40)]">
+        {text}
+      </p>
+    </div>
+  );
+}
+
 export function StartExploringSection({ data }: StartExploringSectionProps) {
   const cards = useMemo(() => data?.cards ?? [], [data?.cards]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -174,6 +184,15 @@ export function StartExploringSection({ data }: StartExploringSectionProps) {
           ))}
         </div>
 
+        {/* Desktop bottom text */}
+        {data.bottomText && (
+          <FadeUp delay={600} duration={1200} y={14}>
+            <div className="mt-10 hidden lg:block">
+              <BottomTextBlock text={data.bottomText} />
+            </div>
+          </FadeUp>
+        )}
+
         <div className="lg:hidden">
           <div className="overflow-hidden" {...swipeHandlers}>
             <div
@@ -225,17 +244,24 @@ export function StartExploringSection({ data }: StartExploringSectionProps) {
             </button>
           </div>
 
-          <div className="mt-[52px] flex flex-col items-center gap-[18px]">
-            {cards.map((card) =>
-              card.buttonLabel ? (
-                <ExploreButton
-                  key={card.id}
-                  href={card.buttonHref || '#'}
-                  label={card.buttonLabel}
-                />
-              ) : null,
-            )}
-          </div>
+          {/* Mobile: bottom text OR buttons */}
+          {data.bottomText ? (
+            <div className="mt-[40px] px-4">
+              <BottomTextBlock text={data.bottomText} />
+            </div>
+          ) : (
+            <div className="mt-[52px] flex flex-col items-center gap-[18px]">
+              {cards.map((card) =>
+                card.buttonLabel ? (
+                  <ExploreButton
+                    key={card.id}
+                    href={card.buttonHref || '#'}
+                    label={card.buttonLabel}
+                  />
+                ) : null,
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>

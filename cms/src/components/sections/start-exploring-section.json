@@ -16,6 +16,9 @@
       "type": "component",
       "component": "sections.start-exploring-card",
       "repeatable": true
+    },
+    "bottomText": {
+      "type": "text"
     }
   },
   "config": {}

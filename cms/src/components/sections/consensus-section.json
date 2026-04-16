@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_sections_consensus_sections",
+  "info": {
+    "displayName": "Consensus Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Proof-of-Stake Consensus"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "rowTitle": {
+      "type": "string",
+      "default": "// Staking Without Lockups //"
+    },
+    "cards": {
+      "type": "component",
+      "component": "sections.consensus-card",
+      "repeatable": true
+    },
+    "ctaLabel": {
+      "type": "string"
+    },
+    "ctaHref": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

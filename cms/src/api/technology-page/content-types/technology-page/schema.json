@@ -25,6 +25,41 @@
       "type": "component",
       "component": "sections.smart-contracts-section",
       "repeatable": false
+    },
+    "consensus": {
+      "type": "component",
+      "component": "sections.consensus-section",
+      "repeatable": false
+    },
+    "clientSideSmartContracts": {
+      "type": "component",
+      "component": "sections.smart-contracts-section",
+      "repeatable": false
+    },
+    "postQuantumCryptography": {
+      "type": "component",
+      "component": "sections.smart-contracts-section",
+      "repeatable": false
+    },
+    "infrastructure": {
+      "type": "component",
+      "component": "sections.infrastructure-section",
+      "repeatable": false
+    },
+    "architectureMatters": {
+      "type": "component",
+      "component": "sections.start-exploring-section",
+      "repeatable": false
+    },
+    "useCases": {
+      "type": "component",
+      "component": "sections.used-for-section",
+      "repeatable": false
+    },
+    "nextSteps": {
+      "type": "component",
+      "component": "sections.tools-section",
+      "repeatable": false
     }
   }
 }

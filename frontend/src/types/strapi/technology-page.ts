@@ -1,3 +1,5 @@
+import { ToolsSection } from './developers-page';
+import { HomePageStartExploring, HomePageUsedFor } from './home-page';
 import type { PageHero } from './page-hero';
 
 export type TechnologyFeatureCard = {
@@ -27,6 +29,13 @@ export type TechnologyPageData = {
   hero?: PageHero | null;
   features?: TechnologyFeaturesSection | null;
   TransactionModel?: SmartContractsSection | null;
+  consensus?: ConsensusSection | null;
+  clientSideSmartContracts?: SmartContractsSection | null;
+  postQuantumCryptography?: SmartContractsSection | null;
+  infrastructure?: InfrastructureSection | null;
+  architectureMatters?: HomePageStartExploring | null;
+  useCases?: HomePageUsedFor | null;
+  nextSteps?: ToolsSection | null;
 };
 
 export type SmartContractStep = {
@@ -53,6 +62,43 @@ export type SmartContractsSection = {
   steps?: SmartContractStep[];
   benefitsTitle: string;
   benefits?: SmartContractBenefit[];
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+export type ConsensusCard = {
+  id: number;
+  text: string;
+  icon?: {
+    id?: number;
+    url: string;
+    alternativeText?: string | null;
+    width?: number;
+    height?: number;
+  } | null;
+};
+
+export type ConsensusSection = {
+  id: number;
+  title: string;
+  subtitle?: string;
+  rowTitle?: string;
+  cards?: ConsensusCard[];
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+export type InfrastructureCard = {
+  id: number;
+  text: string;
+};
+
+export type InfrastructureSection = {
+  id: number;
+  title: string;
+  subtitle?: string;
+  cards?: InfrastructureCard[];
+  bottomText?: string;
   ctaLabel?: string;
   ctaHref?: string;
 };

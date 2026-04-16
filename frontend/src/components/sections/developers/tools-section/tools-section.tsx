@@ -52,7 +52,7 @@ function CtaButton({ href, label }: { href: string; label: string }) {
 
 function ToolCardBlock({ card }: { card: ToolCard }) {
   return (
-    <div className="relative flex flex-col items-center gap-6 rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8">
+    <div className="relative flex h-full flex-col items-center gap-6 rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8">
       {/* Top dash */}
       {card.showTopDash && (
         <span
@@ -74,11 +74,13 @@ function ToolCardBlock({ card }: { card: ToolCard }) {
         {card.title}
       </p>
 
-      {/* Button */}
-      <CardButton
-        href={card.buttonHref || '#'}
-        label={card.buttonLabel}
-      />
+      {/* Button - pinned to bottom */}
+      <div className="mt-auto w-full">
+        <CardButton
+          href={card.buttonHref || '#'}
+          label={card.buttonLabel}
+        />
+      </div>
     </div>
   );
 }
@@ -89,18 +91,19 @@ export function ToolsSectionBlock({ data }: ToolsSectionProps) {
   const cards = data.cards ?? [];
 
   return (
-    <section className="px-4 py-[40px] md:py-[70px]">
+    <section className="px-4 py-[80px] md:py-[120px]">
       <div className="mx-auto max-w-[1200px]">
         {/* Title */}
         <FadeUp delay={0} duration={1200} y={20}>
-          <h2 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px]">
+          <h2 className="mx-auto mb-[40px] max-w-[488px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px]">
             {data.title}
           </h2>
         </FadeUp>
 
         {/* Cards */}
         {cards.length > 0 && (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className={`grid gap-6 md:grid-cols-2 ${cards.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
+
             {cards.map((card, index) => (
               <RevealCard
                 key={card.id}

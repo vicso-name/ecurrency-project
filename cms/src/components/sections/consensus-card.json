@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_sections_consensus_cards",
+  "info": {
+    "displayName": "Consensus Card"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_sections_infrastructure_cards",
+  "info": {
+    "displayName": "Infrastructure Card"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

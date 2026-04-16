@@ -160,6 +160,7 @@ export type HomePageStartExploring = {
   title: string;
   subtitle?: string;
   cards?: StartExploringCard[];
+  bottomText?: string;
 };
 
 export type PaymentSystemsCard = {

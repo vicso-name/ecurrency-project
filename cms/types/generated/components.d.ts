@@ -120,6 +120,34 @@ export interface SectionsCommunitySection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsConsensusCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_consensus_cards';
+  info: {
+    displayName: 'Consensus Card';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'>;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsConsensusSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_consensus_sections';
+  info: {
+    displayName: 'Consensus Section';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'sections.consensus-card', true>;
+    ctaHref: Schema.Attribute.String;
+    ctaLabel: Schema.Attribute.String;
+    rowTitle: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'// Staking Without Lockups //'>;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Proof-of-Stake Consensus'>;
+  };
+}
+
 export interface SectionsEconomicLayerSection extends Struct.ComponentSchema {
   collectionName: 'components_sections_economic_layer_sections';
   info: {
@@ -147,6 +175,33 @@ export interface SectionsHeroSection extends Struct.ComponentSchema {
     secondaryButtonLabel: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsInfrastructureCard extends Struct.ComponentSchema {
+  collectionName: 'components_sections_infrastructure_cards';
+  info: {
+    displayName: 'Infrastructure Card';
+  };
+  attributes: {
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsInfrastructureSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_infrastructure_sections';
+  info: {
+    displayName: 'Infrastructure Section';
+  };
+  attributes: {
+    bottomText: Schema.Attribute.Text;
+    cards: Schema.Attribute.Component<'sections.infrastructure-card', true>;
+    ctaHref: Schema.Attribute.String;
+    ctaLabel: Schema.Attribute.String;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Programmable Payment Infrastructure'>;
   };
 }
 
@@ -318,6 +373,7 @@ export interface SectionsStartExploringSection extends Struct.ComponentSchema {
     displayName: 'Start Exploring Section';
   };
   attributes: {
+    bottomText: Schema.Attribute.Text;
     cards: Schema.Attribute.Component<'sections.start-exploring-card', true>;
     subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -568,8 +624,12 @@ declare module '@strapi/strapi' {
       'sections.blockchain-designed-tab': SectionsBlockchainDesignedTab;
       'sections.community-card': SectionsCommunityCard;
       'sections.community-section': SectionsCommunitySection;
+      'sections.consensus-card': SectionsConsensusCard;
+      'sections.consensus-section': SectionsConsensusSection;
       'sections.economic-layer-section': SectionsEconomicLayerSection;
       'sections.hero-section': SectionsHeroSection;
+      'sections.infrastructure-card': SectionsInfrastructureCard;
+      'sections.infrastructure-section': SectionsInfrastructureSection;
       'sections.inner-hero-card': SectionsInnerHeroCard;
       'sections.opportunities-section': SectionsOpportunitiesSection;
       'sections.opportunity-card': SectionsOpportunityCard;
