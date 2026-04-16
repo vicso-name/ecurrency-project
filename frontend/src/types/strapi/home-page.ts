@@ -25,6 +25,12 @@ export type BlockchainDesignedFeatureCard = {
   } | null;
 };
 
+export type BlockchainDesignedLink = {
+  id: number;
+  label: string;
+  href: string;
+};
+
 export type BlockchainDesignedTab = {
   id: number;
   tabNumber: number;
@@ -45,8 +51,7 @@ export type BlockchainDesignedTab = {
 export type HomePageBlockchainDesigned = {
   id: number;
   tabs?: BlockchainDesignedTab[];
-  bottomCtaLabel?: string;
-  bottomCtaHref?: string;
+  links?: BlockchainDesignedLink[];
 };
 
 export type BlockchainArchitectureCard = {
@@ -69,8 +74,6 @@ export type HomePageBlockchainArchitecture = {
   title: string;
   subTitle?: string;
   cards?: BlockchainArchitectureCard[];
-  bottomCtaLabel?: string;
-  bottomCtaHref?: string;
 };
 
 export type HomePageData = {

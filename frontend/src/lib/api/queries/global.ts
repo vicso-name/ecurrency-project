@@ -7,7 +7,7 @@ type GlobalResponse = {
 
 export async function getGlobalData(): Promise<GlobalData | null> {
   const response = (await fetchFromStrapi(
-    '/api/global?populate[headerLogo]=true&populate[headerNavigation][populate][children]=true&populate[headerCta]=true&populate[footerLogo]=true&populate[footerContacts]=true&populate[footerColumns][populate][links]=true&populate[footerBottomLinks]=true'
+    '/api/global?populate[headerLogo]=true&populate[headerNavigation][populate][children]=true&populate[headerCta]=true&populate[socialLinks][populate]=icon&populate[footerLogo]=true&populate[footerContacts]=true&populate[footerColumns][populate][links]=true&populate[footerBottomLinks]=true'
   )) as GlobalResponse;
 
   return response.data ?? null;

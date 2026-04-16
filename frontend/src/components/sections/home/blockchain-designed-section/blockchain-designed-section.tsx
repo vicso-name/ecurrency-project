@@ -31,6 +31,7 @@ export function BlockchainDesignedSection({ data }: Props) {
     return [...(data?.tabs ?? [])].sort((a, b) => a.tabNumber - b.tabNumber);
   }, [data?.tabs]);
 
+  const links = data?.links ?? [];
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   if (!tabs.length) {
@@ -44,9 +45,7 @@ export function BlockchainDesignedSection({ data }: Props) {
     <section className="px-4 py-12 md:py-20">
       <div className="mx-auto max-w-[1200px]">
         <div className="grid items-start gap-y-14 gap-x-16 lg:grid-cols-[1fr_492px]">
-          {/* LEFT COLUMN */}
           <div className="flex flex-col items-center text-center">
-            {/* TABS */}
             <div className="mb-14 flex items-center justify-center">
               <button
                 type="button"
@@ -121,7 +120,6 @@ export function BlockchainDesignedSection({ data }: Props) {
             </div>
           </div>
 
-          {/* RIGHT COLUMN */}
           <div className="flex justify-center lg:justify-end">
             {currentTab.previewImage ? (
               <div className="relative flex h-[562px] w-full max-w-[492px] items-center justify-center rounded-[16px] border border-[rgba(227,64,57,0.30)] bg-[radial-gradient(80.05%_147.57%_at_50%_-11.11%,rgba(0,0,0,0)_60%,rgba(255,80,80,0.05)_89.8%)] px-6">
@@ -136,11 +134,10 @@ export function BlockchainDesignedSection({ data }: Props) {
               </div>
             ) : null}
 
-           {currentTab.featureCards && currentTab.featureCards.length > 0 ? (
+            {currentTab.featureCards && currentTab.featureCards.length > 0 ? (
               <div className="flex w-full max-w-[492px] flex-col gap-4 rounded-[16px] border border-[rgba(227,64,57,0.30)] bg-[radial-gradient(80.05%_147.57%_at_50%_-11.11%,rgba(0,0,0,0)_60%,rgba(255,80,80,0.05)_89.8%)] p-5 lg:relative lg:h-[620px] lg:max-w-[520px] lg:block lg:p-0">
                 {currentTab.featureCards.map((card, index) => {
-                  const mobileOffset =
-                    index % 2 === 0 ? 'mr-auto w-[92%]' : 'ml-auto w-[92%]';
+                  const mobileOffset = index % 2 === 0 ? 'mr-auto w-[92%]' : 'ml-auto w-[92%]';
 
                   const desktopCardClasses = [
                     'lg:top-[30px] lg:left-[30px] lg:w-[285px]',
@@ -176,15 +173,17 @@ export function BlockchainDesignedSection({ data }: Props) {
           </div>
         </div>
 
-        {/* BOTTOM CTA */}
-        {data?.bottomCtaLabel ? (
-          <div className="mt-16 flex justify-center">
-            <Link
-              href={data.bottomCtaHref || '#'}
-              className="inline-flex min-h-[53px] items-center justify-center rounded-[100px] border border-[#DE3737] bg-[radial-gradient(60.21%_66.41%_at_47.91%_-7.5%,rgba(240,88,88,0.40)_0%,rgba(255,255,255,0.05)_79.27%,rgba(255,255,255,0)_100%)] px-8 text-center text-[16px] leading-9 font-normal text-[#EC0000] capitalize shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[rgba(236,0,0,0.04)]"
-            >
-              {data.bottomCtaLabel}
-            </Link>
+        {links.length > 0 ? (
+          <div className="mt-16 flex flex-col gap-4 md:flex-row md:flex-wrap md:justify-center">
+            {links.map((link) => (
+              <Link
+                key={link.id}
+                href={link.href || '#'}
+                className="inline-flex min-h-[53px] w-full items-center justify-center rounded-[100px] border border-[#DE3737] bg-[radial-gradient(60.21%_66.41%_at_47.91%_-7.5%,rgba(240,88,88,0.40)_0%,rgba(255,255,255,0.05)_79.27%,rgba(255,255,255,0)_100%)] px-8 text-center text-[16px] leading-9 font-normal text-[#EC0000] capitalize shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[rgba(236,0,0,0.04)] md:w-auto"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         ) : null}
       </div>

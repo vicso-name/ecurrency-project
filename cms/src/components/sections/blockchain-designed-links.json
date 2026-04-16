@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_sections_blockchain_designed_links",
+  "info": {
+    "displayName": "Blockchain Designed Links"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

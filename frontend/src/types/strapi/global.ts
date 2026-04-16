@@ -20,6 +20,14 @@ export type HeaderCta = {
   href: string;
 };
 
+export type HeaderSocialLink = {
+  id: number;
+  href: string;
+  icon: StrapiImage | null;
+  label?: string;
+  targetBlank?: boolean;
+};
+
 export type FooterContact = {
   id: number;
   label: string;
@@ -54,6 +62,7 @@ export type GlobalData = {
   headerLogo?: StrapiImage | null;
   headerNavigation?: NavLink[];
   headerCta?: HeaderCta | null;
+  socialLinks?: HeaderSocialLink[];
 
   footerLogo?: StrapiImage | null;
   footerContacts?: FooterContact[];

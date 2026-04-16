@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_shared_header_social_links",
+  "info": {
+    "displayName": "headerSocialLinks"
+  },
+  "options": {},
+  "attributes": {
+    "href": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "targetBlank": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

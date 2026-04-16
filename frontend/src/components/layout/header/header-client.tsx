@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import type { GlobalData, NavLink } from '@/types/strapi/global';
+import type { GlobalData, HeaderSocialLink, NavLink } from '@/types/strapi/global';
 import Image from 'next/image';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
 
@@ -90,6 +90,50 @@ function Logo({ globalData }: { globalData: GlobalData | null }) {
   );
 }
 
+function SocialLinks({
+  links,
+  className = '',
+}: {
+  links: HeaderSocialLink[];
+  className?: string;
+}) {
+  if (links.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className={`flex items-center gap-[19px] ${className}`.trim()}>
+      {links.map((item) => {
+        const iconUrl = getStrapiMediaUrl(item.icon?.url);
+        const label = item.label || 'Social link';
+
+        if (!iconUrl) {
+          return null;
+        }
+
+        return (
+          <Link
+            key={item.id}
+            href={item.href || '#'}
+            target={item.targetBlank ? '_blank' : undefined}
+            rel={item.targetBlank ? 'noopener noreferrer' : undefined}
+            aria-label={label}
+            className="flex h-[18px] w-[18px] items-center justify-center transition-opacity duration-200 hover:opacity-70"
+          >
+            <Image
+              src={iconUrl}
+              alt={item.icon?.alternativeText || label}
+              width={18}
+              height={18}
+              className="h-[18px] w-[18px] object-contain"
+            />
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
 function HeaderCta({ href, label }: { href: string; label: string }) {
   return (
     <Link
@@ -111,32 +155,32 @@ function DesktopDropdown({
 }) {
   const children = item.children ?? [];
 
-    if (!isOpen || children.length === 0) {
-        return null;
-    }
+  if (!isOpen || children.length === 0) {
+    return null;
+  }
 
-    return (
-        <div className="absolute top-full left-1/2 z-50 w-[220px] -translate-x-1/2 pt-4">
-            <div className="rounded-[20px] border border-[rgba(227,64,57,0.08)] bg-white p-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)]">
-            <div className="flex flex-col">
-                {children.map((child, index) => (
-                <div key={child.id}>
-                    <Link
-                    href={child.href || '#'}
-                    className="block px-3 py-3 text-[16px] font-medium leading-5 text-black transition-colors duration-200 hover:bg-[rgba(227,64,57,0.04)]"
-                    >
-                    {child.label}
-                    </Link>
+  return (
+    <div className="absolute top-full left-1/2 z-50 w-[220px] -translate-x-1/2 pt-4">
+      <div className="rounded-[20px] border border-[rgba(227,64,57,0.08)] bg-white p-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)]">
+        <div className="flex flex-col">
+          {children.map((child, index) => (
+            <div key={child.id}>
+              <Link
+                href={child.href || '#'}
+                className="block px-3 py-3 text-[16px] font-medium leading-5 text-black transition-colors duration-200 hover:bg-[rgba(227,64,57,0.04)]"
+              >
+                {child.label}
+              </Link>
 
-                    {index !== children.length - 1 ? (
-                    <div className="h-px bg-[rgba(0,0,0,0.08)]" />
-                    ) : null}
-                </div>
-                ))}
+              {index !== children.length - 1 ? (
+                <div className="h-px bg-[rgba(0,0,0,0.08)]" />
+              ) : null}
             </div>
-            </div>
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 function DesktopNavigation({ navigation }: { navigation: NavLink[] }) {
@@ -153,14 +197,10 @@ function DesktopNavigation({ navigation }: { navigation: NavLink[] }) {
             key={item.id}
             className="relative"
             onMouseEnter={() => {
-              if (hasChildren) {
-                setOpenDropdownId(item.id);
-              }
+              if (hasChildren) setOpenDropdownId(item.id);
             }}
             onMouseLeave={() => {
-              if (hasChildren) {
-                setOpenDropdownId(null);
-              }
+              if (hasChildren) setOpenDropdownId(null);
             }}
           >
             {hasChildren ? (
@@ -193,10 +233,12 @@ function MobileMenu({
   navigation,
   isOpen,
   onClose,
+  socialLinks,
 }: {
   navigation: NavLink[];
   isOpen: boolean;
   onClose: () => void;
+  socialLinks: HeaderSocialLink[];
 }) {
   const [expandedItemId, setExpandedItemId] = useState<number | null>(null);
 
@@ -272,6 +314,12 @@ function MobileMenu({
           );
         })}
       </nav>
+
+      {socialLinks.length > 0 ? (
+        <div className="mt-8 border-t border-[rgba(0,0,0,0.08)] pt-6">
+          <SocialLinks links={socialLinks} />
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -281,6 +329,7 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
 
   const navigation = globalData?.headerNavigation ?? [];
   const cta = globalData?.headerCta;
+  const socialLinks = globalData?.socialLinks ?? [];
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-md">
@@ -290,8 +339,10 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
 
           <DesktopNavigation navigation={navigation} />
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-5">
+            <SocialLinks links={socialLinks} className="hidden lg:flex" />
             {cta ? <HeaderCta href={cta.href || '#'} label={cta.label} /> : null}
+           
 
             <button
               type="button"
@@ -311,6 +362,7 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
           navigation={navigation}
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
+          socialLinks={socialLinks}
         />
       </div>
     </header>

@@ -10,6 +10,7 @@ const populateParams = [
   'populate[blockQuote]=true',
   'populate[blockchainDesigned][populate][tabs][populate][previewImage]=true',
   'populate[blockchainDesigned][populate][tabs][populate][featureCards][populate][icon]=true',
+  'populate[blockchainDesigned][populate][links]=true',
   'populate[blockchainArchitecture][populate][cards][populate][icon]=true',
   'populate[usedFor][populate][cards][populate][icon]=true',
   'populate[economicLayer][populate][coinImage]=true',

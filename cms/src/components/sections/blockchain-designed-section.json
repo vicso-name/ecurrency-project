@@ -11,11 +11,10 @@
       "repeatable": true,
       "required": true
     },
-    "bottomCtaLabel": {
-      "type": "string"
-    },
-    "bottomCtaHref": {
-      "type": "string"
+    "links": {
+      "type": "component",
+      "component": "sections.blockchain-designed-links",
+      "repeatable": true
     }
   },
   "config": {}

@@ -57,6 +57,18 @@ export interface SectionsBlockchainDesignedFeatureCard
   };
 }
 
+export interface SectionsBlockchainDesignedLinks
+  extends Struct.ComponentSchema {
+  collectionName: 'components_sections_blockchain_designed_links';
+  info: {
+    displayName: 'Blockchain Designed Links';
+  };
+  attributes: {
+    href: Schema.Attribute.String;
+    label: Schema.Attribute.String;
+  };
+}
+
 export interface SectionsBlockchainDesignedSection
   extends Struct.ComponentSchema {
   collectionName: 'components_sections_blockchain_designed_sections';
@@ -64,8 +76,10 @@ export interface SectionsBlockchainDesignedSection
     displayName: 'Blockchain Designed Section';
   };
   attributes: {
-    bottomCtaHref: Schema.Attribute.String;
-    bottomCtaLabel: Schema.Attribute.String;
+    links: Schema.Attribute.Component<
+      'sections.blockchain-designed-links',
+      true
+    >;
     tabs: Schema.Attribute.Component<'sections.blockchain-designed-tab', true> &
       Schema.Attribute.Required;
   };
@@ -589,6 +603,19 @@ export interface SharedHeaderCta extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedHeaderSocialLinks extends Struct.ComponentSchema {
+  collectionName: 'components_shared_header_social_links';
+  info: {
+    displayName: 'headerSocialLinks';
+  };
+  attributes: {
+    href: Schema.Attribute.String;
+    icon: Schema.Attribute.Media<'images'>;
+    label: Schema.Attribute.String;
+    targetBlank: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
+}
+
 export interface SharedNavLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_nav_links';
   info: {
@@ -620,6 +647,7 @@ declare module '@strapi/strapi' {
       'sections.blockchain-architecture-card': SectionsBlockchainArchitectureCard;
       'sections.blockchain-architecture-section': SectionsBlockchainArchitectureSection;
       'sections.blockchain-designed-feature-card': SectionsBlockchainDesignedFeatureCard;
+      'sections.blockchain-designed-links': SectionsBlockchainDesignedLinks;
       'sections.blockchain-designed-section': SectionsBlockchainDesignedSection;
       'sections.blockchain-designed-tab': SectionsBlockchainDesignedTab;
       'sections.community-card': SectionsCommunityCard;
@@ -658,6 +686,7 @@ declare module '@strapi/strapi' {
       'shared.footer-column-link': SharedFooterColumnLink;
       'shared.footer-contact': SharedFooterContact;
       'shared.header-cta': SharedHeaderCta;
+      'shared.header-social-links': SharedHeaderSocialLinks;
       'shared.nav-link': SharedNavLink;
       'shared.nav-link-child': SharedNavLinkChild;
     }
