@@ -24,33 +24,37 @@ const GRID_ROWS = [
 export function BlockchainArchitectureSection({
   data,
 }: BlockchainArchitectureSectionProps) {
-  if (!data) return null;
+  if (!data) {
+    return null;
+  }
 
   return (
     <section className="px-4 py-[80px] md:py-20">
       <div className="mx-auto max-w-[1360px]">
         <div className="mx-auto max-w-[540px] text-center">
-          {data.preTitle && (
+          {data.preTitle ? (
             <FadeUp delay={0} duration={1100} y={18}>
               <p className="mb-[30px] text-[16px] leading-5 font-normal uppercase text-[rgba(13,0,0,0.48)] [font-family:var(--font-roboto-mono)]">
                 {data.preTitle}
               </p>
             </FadeUp>
-          )}
+          ) : null}
 
-          <FadeUp delay={120} duration={1200} y={22}>
-            <h2 className="mx-auto text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
-              {data.title}
-            </h2>
-          </FadeUp>
+          {data.title ? (
+            <FadeUp delay={120} duration={1200} y={22}>
+              <h2 className="mx-auto text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
+                {data.title}
+              </h2>
+            </FadeUp>
+          ) : null}
 
-          {data.subTitle && (
+          {data.subTitle ? (
             <FadeUp delay={260} duration={1250} y={16}>
               <p className="mx-auto mt-4 max-w-[760px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(79,79,79,0.64)]">
                 {data.subTitle}
               </p>
             </FadeUp>
-          )}
+          ) : null}
         </div>
 
         {data.cards?.length ? (
@@ -60,15 +64,18 @@ export function BlockchainArchitectureSection({
                 key={row.indices.join('-')}
                 className={`grid gap-6 ${row.cols} lg:justify-center`}
               >
-                {row.indices.map((i, colIndex) => {
-                  const card = data.cards?.[i];
-                  if (!card) return null;
+                {row.indices.map((index, colIndex) => {
+                  const card = data.cards?.[index];
+
+                  if (!card) {
+                    return null;
+                  }
 
                   const delay = 120 + rowIndex * 180 + colIndex * 120;
 
                   return (
                     <RevealCard
-                      key={card.id ?? i}
+                      key={card.id ?? index}
                       delay={delay}
                       duration={1000}
                       y={30}
@@ -83,7 +90,7 @@ export function BlockchainArchitectureSection({
           </div>
         ) : null}
 
-        {data.bottomCtaLabel && (
+        {data.bottomCtaLabel ? (
           <FadeUp delay={220} duration={1200} y={20}>
             <div className="mt-[60px] flex justify-center">
               <CtaButton
@@ -92,7 +99,7 @@ export function BlockchainArchitectureSection({
               />
             </div>
           </FadeUp>
-        )}
+        ) : null}
       </div>
     </section>
   );
@@ -121,7 +128,10 @@ function ArchitectureCard({ card }: ArchitectureCardProps) {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <IconBlock iconUrl={iconUrl} alt={card.icon?.alternativeText || card.title} />
+        <IconBlock
+          iconUrl={iconUrl}
+          alt={card.icon?.alternativeText || card.title || ''}
+        />
 
         <div
           className={`flex flex-col items-center ${
@@ -131,6 +141,7 @@ function ArchitectureCard({ card }: ArchitectureCardProps) {
           <h3 className="text-center text-[18px] leading-[150%] font-semibold tracking-[-0.4px] text-black">
             {card.title}
           </h3>
+
           <p className="mt-2 text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.56)]">
             {card.subtitle}
           </p>
@@ -140,7 +151,13 @@ function ArchitectureCard({ card }: ArchitectureCardProps) {
   );
 }
 
-function IconBlock({ iconUrl, alt }: { iconUrl: string | undefined; alt: string }) {
+function IconBlock({
+  iconUrl,
+  alt,
+}: {
+  iconUrl: string | undefined;
+  alt: string;
+}) {
   return (
     <div className="relative mb-10 flex h-[153px] w-full max-w-[290px] items-center justify-center overflow-hidden rounded-[8.737px] border border-[rgba(236,236,236,0.37)] bg-[linear-gradient(273deg,#FFF_6.73%,#FAFAFA_88.91%)] shadow-[0_13.105px_17.91px_0_rgba(255,255,255,0.12)]">
       <Image
@@ -171,7 +188,7 @@ function IconBlock({ iconUrl, alt }: { iconUrl: string | undefined; alt: string 
         }}
       />
 
-      {iconUrl && (
+      {iconUrl ? (
         <Image
           src={iconUrl}
           alt={alt}
@@ -180,7 +197,7 @@ function IconBlock({ iconUrl, alt }: { iconUrl: string | undefined; alt: string 
           unoptimized
           className="relative z-10 h-[126px] w-[126px]"
         />
-      )}
+      ) : null}
     </div>
   );
 }

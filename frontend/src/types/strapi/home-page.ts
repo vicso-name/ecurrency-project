@@ -74,6 +74,8 @@ export type HomePageBlockchainArchitecture = {
   title: string;
   subTitle?: string;
   cards?: BlockchainArchitectureCard[];
+  bottomCtaLabel?: string;
+  bottomCtaHref?: string;
 };
 
 export type HomePageData = {
