@@ -114,7 +114,6 @@ export function Footer({ globalData }: FooterProps) {
         <div className="mx-auto flex max-w-[1360px] flex-col">
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:gap-16">
             <div className="w-full sm:max-w-[290px]">
-              
               <Link href="/" className="flex items-center">
                 {footerLogoUrl ? (
                   <Image
@@ -158,28 +157,30 @@ export function Footer({ globalData }: FooterProps) {
               </div>
             </div>
 
-            <div className="max-w-[640px] pt-[66px] grid flex-4 grid-cols-2 gap-20 md:grid-cols-4">
-              {columns.map((column) => (
-                <div key={column.id}>
-                  <h3 className="mb-6 [font-family:var(--font-roboto-mono)] text-[16px] leading-6 font-normal uppercase text-[rgba(0,0,0,0.16)]">
-                    {column.title}
-                  </h3>
+            <div className="w-full lg:ml-auto lg:max-w-fit lg:pt-[66px]">
+              <div className="grid grid-cols-2 gap-x-10 gap-y-10 md:gap-x-16 lg:flex lg:flex-wrap lg:justify-end lg:gap-x-5 lg:gap-y-0">
+                {columns.map((column) => (
+                  <div key={column.id} className="min-w-0 lg:w-[160px]">
+                    <h3 className="mb-6 [font-family:var(--font-roboto-mono)] text-[16px] leading-6 font-normal uppercase text-[rgba(0,0,0,0.16)]">
+                      {column.title}
+                    </h3>
 
-                  <div className="flex flex-col gap-4">
-                    {column.links?.map((link) => (
-                      <Link
-                        key={link.id}
-                        href={link.href || '#'}
-                        target={link.targetBlank ? '_blank' : undefined}
-                        rel={link.targetBlank ? 'noopener noreferrer' : undefined}
-                        className="[font-family:var(--font-roboto)] text-[16px] font-normal leading-5 tracking-[-0.16px] text-black transition-colors duration-200 hover:text-[#E34039]"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
+                    <div className="flex flex-col gap-4">
+                      {column.links?.map((link) => (
+                        <Link
+                          key={link.id}
+                          href={link.href || '#'}
+                          target={link.targetBlank ? '_blank' : undefined}
+                          rel={link.targetBlank ? 'noopener noreferrer' : undefined}
+                          className="[font-family:var(--font-roboto)] text-[16px] font-normal leading-5 tracking-[-0.16px] text-black transition-colors duration-200 hover:text-[#E34039]"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
@@ -204,14 +205,14 @@ export function Footer({ globalData }: FooterProps) {
               </div>
             </div>
           </div>
+
           {disclaimer ? (
-            <div className="pb-[12px] mt-5">
+            <div className="mt-5 pb-[12px]">
               <p className="whitespace-pre-line text-[12px] font-normal leading-4 tracking-[-0.4px] text-[rgba(0,0,0,0.40)]">
                 {disclaimer}
               </p>
             </div>
           ) : null}
-
         </div>
       </div>
     </footer>
