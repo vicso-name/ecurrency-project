@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_start_exploring_links",
+  "info": {
+    "displayName": "Start Exploring Link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

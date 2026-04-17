@@ -16,6 +16,7 @@ const populateParams = [
   'populate[economicLayer][populate][coinImage]=true',
   'populate[projectOverview][populate][icon]=true',
   'populate[startExploring][populate][cards][populate][backgroundImage]=true',
+  'populate[startExploring][populate][links]=true',
   'populate[paymentSystems][populate][cards]=true',
   'populate[toolsInfrastructure][populate][tabs][populate][previewImage]=true',
   'populate[toolsInfrastructure][populate][socialLinks][populate][icon]=true',

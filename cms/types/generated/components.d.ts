@@ -357,11 +357,11 @@ export interface SectionsSmartContractsSection extends Struct.ComponentSchema {
     benefitsTitle: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Why It Matters'>;
-    ctaHref: Schema.Attribute.String;
-    ctaLabel: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
     howItWorksTitle: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'How It Works'>;
+    links: Schema.Attribute.Component<'shared.start-exploring-link', true>;
     steps: Schema.Attribute.Component<'sections.smart-contract-step', true>;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -375,8 +375,6 @@ export interface SectionsStartExploringCard extends Struct.ComponentSchema {
   };
   attributes: {
     backgroundImage: Schema.Attribute.Media<'files' | 'images'>;
-    buttonHref: Schema.Attribute.String;
-    buttonLabel: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -390,6 +388,8 @@ export interface SectionsStartExploringSection extends Struct.ComponentSchema {
   attributes: {
     bottomText: Schema.Attribute.Text;
     cards: Schema.Attribute.Component<'sections.start-exploring-card', true>;
+    links: Schema.Attribute.Component<'shared.start-exploring-link', true>;
+    linksTitle: Schema.Attribute.String;
     subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -641,6 +641,17 @@ export interface SharedNavLinkChild extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedStartExploringLink extends Struct.ComponentSchema {
+  collectionName: 'components_shared_start_exploring_links';
+  info: {
+    displayName: 'Start Exploring Link';
+  };
+  attributes: {
+    href: Schema.Attribute.String;
+    label: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -690,6 +701,7 @@ declare module '@strapi/strapi' {
       'shared.header-social-links': SharedHeaderSocialLinks;
       'shared.nav-link': SharedNavLink;
       'shared.nav-link-child': SharedNavLinkChild;
+      'shared.start-exploring-link': SharedStartExploringLink;
     }
   }
 }

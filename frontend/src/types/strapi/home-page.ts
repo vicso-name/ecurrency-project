@@ -149,8 +149,6 @@ export type StartExploringCard = {
   id: number;
   title: string;
   subtitle?: string;
-  buttonLabel?: string;
-  buttonHref?: string;
   backgroundImage?: {
     id?: number;
     url: string;
@@ -160,11 +158,20 @@ export type StartExploringCard = {
   } | null;
 };
 
+export type StartExploringLink = {
+  id: number;
+  label: string;
+  href: string;
+};
+
 export type HomePageStartExploring = {
   id: number;
   title: string;
   subtitle?: string;
   cards?: StartExploringCard[];
+  description?: string;
+  linksTitle?: string;
+  links?: StartExploringLink[];
   bottomText?: string;
 };
 

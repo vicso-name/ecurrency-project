@@ -32,11 +32,13 @@
       "component": "sections.smart-contract-benefit",
       "repeatable": true
     },
-    "ctaLabel": {
-      "type": "string"
+    "description": {
+      "type": "richtext"
     },
-    "ctaHref": {
-      "type": "string"
+    "links": {
+      "type": "component",
+      "component": "shared.start-exploring-link",
+      "repeatable": true
     }
   },
   "config": {}

@@ -7,6 +7,8 @@ import type { HomePageStartExploring } from '@/types/strapi/home-page';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
 import { FadeUp } from '@/components/ui/fade-up';
 import { RevealCard } from '@/components/ui/reveal-card';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 type StartExploringSectionProps = {
   data: HomePageStartExploring | null | undefined;
@@ -48,11 +50,9 @@ const BUTTON_GRADIENT_HOVER = `${BUTTON_GRADIENT}, rgba(236, 0, 0, 0.04)`;
 function ExploreButton({
   href,
   label,
-  fullWidth = false,
 }: {
   href: string;
   label: string;
-  fullWidth?: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -61,7 +61,7 @@ function ExploreButton({
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`inline-flex min-h-[50px] items-center justify-center gap-1 rounded-[100px] border border-[#DE3737] px-[30px] pt-[6px] pb-[8px] text-center text-[16px] leading-9 font-normal capitalize text-[#EC0000] shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-all duration-200 ${fullWidth ? 'w-full' : 'w-[236px]'}`}
+      className="inline-flex min-h-[50px] w-full items-center justify-center gap-1 rounded-[100px] border border-[#DE3737] px-[30px] pt-[6px] pb-[8px] text-center text-[16px] leading-9 font-normal capitalize text-[#EC0000] shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-all duration-200 md:w-[236px]"
       style={{ background: hovered ? BUTTON_GRADIENT_HOVER : BUTTON_GRADIENT }}
     >
       {label}
@@ -121,18 +121,55 @@ function useSwipe(onSwipeLeft: () => void, onSwipeRight: () => void) {
   return { onTouchStart, onTouchMove, onTouchEnd };
 }
 
-function BottomTextBlock({ text }: { text: string }) {
+function BottomContent({
+  data,
+  links,
+  className = '',
+}: {
+  data: HomePageStartExploring;
+  links: NonNullable<HomePageStartExploring['links']>;
+  className?: string;
+}) {
+  const content = data.description || data.bottomText || '';
+
+  if (!data.linksTitle && !content && links.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="flex items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center">
-      <p className="max-w-[600px] [font-family:var(--font-manrope)] text-[16px] font-normal leading-normal text-[rgba(51,51,51,0.40)]">
-        {text}
-      </p>
+    <div className={className}>
+     {data.linksTitle ? (
+        <h3 className="mb-[24px] text-center [font-family:var(--font-manrope)] text-[22px] font-medium leading-[26px] tracking-[-0.6px] text-black md:text-[32px] md:leading-[36px] md:tracking-[-1.5px]">
+          {data.linksTitle}
+        </h3>
+      ) : null}
+
+      {content ? (
+        <div className="flex items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center">
+          <div className="max-w-[1024px] [font-family:var(--font-manrope)] text-[16px] font-normal leading-normal text-[rgba(51,51,51,0.72)] [&_p]:m-0 [&_strong]:font-semibold [&_b]:font-semibold">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+          </div>
+        </div>
+      ) : null}
+
+      {links.length > 0 ? (
+        <div className="mt-[40px] flex flex-col items-center gap-[18px] md:flex-row md:flex-wrap md:justify-center">
+          {links.map((link) => (
+            <ExploreButton
+              key={link.id}
+              href={link.href || '#'}
+              label={link.label}
+            />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
 
 export function StartExploringSection({ data }: StartExploringSectionProps) {
   const cards = useMemo(() => data?.cards ?? [], [data?.cards]);
+  const links = data?.links ?? [];
   const [activeIndex, setActiveIndex] = useState(0);
 
   const lastIndex = cards.length - 1;
@@ -184,15 +221,14 @@ export function StartExploringSection({ data }: StartExploringSectionProps) {
           ))}
         </div>
 
-        {/* Desktop bottom text */}
-        {data.bottomText && (
+        {/* Desktop content under cards */}
+        <div className="hidden lg:block">
           <FadeUp delay={600} duration={1200} y={14}>
-            <div className="mt-10 hidden lg:block">
-              <BottomTextBlock text={data.bottomText} />
-            </div>
+            <BottomContent data={data} links={links} className="mt-10" />
           </FadeUp>
-        )}
+        </div>
 
+        {/* Mobile slider */}
         <div className="lg:hidden">
           <div className="overflow-hidden" {...swipeHandlers}>
             <div
@@ -244,24 +280,10 @@ export function StartExploringSection({ data }: StartExploringSectionProps) {
             </button>
           </div>
 
-          {/* Mobile: bottom text OR buttons */}
-          {data.bottomText ? (
-            <div className="mt-[40px] px-4">
-              <BottomTextBlock text={data.bottomText} />
-            </div>
-          ) : (
-            <div className="mt-[52px] flex flex-col items-center gap-[18px]">
-              {cards.map((card) =>
-                card.buttonLabel ? (
-                  <ExploreButton
-                    key={card.id}
-                    href={card.buttonHref || '#'}
-                    label={card.buttonLabel}
-                  />
-                ) : null,
-              )}
-            </div>
-          )}
+          {/* Mobile content under slider */}
+          <FadeUp delay={300} duration={1000} y={14}>
+            <BottomContent data={data} links={links} className="mt-[32px]" />
+          </FadeUp>
         </div>
       </div>
     </section>
@@ -324,21 +346,11 @@ function DesktopCard({ card, index }: CardProps) {
   const backgroundUrl = getStrapiMediaUrl(card.backgroundImage?.url);
 
   return (
-    <div className="flex flex-col gap-6">
-      <div
-        className="flex h-[400px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 transition-transform duration-300 hover:-translate-y-[2px]"
-        style={CardBackground({ backgroundUrl })}
-      >
-        <CardContent card={card} index={index} />
-      </div>
-
-      {card.buttonLabel && (
-        <ExploreButton
-          href={card.buttonHref || '#'}
-          label={card.buttonLabel}
-          fullWidth
-        />
-      )}
+    <div
+      className="flex h-[400px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 transition-transform duration-300 hover:-translate-y-[2px]"
+      style={CardBackground({ backgroundUrl })}
+    >
+      <CardContent card={card} index={index} />
     </div>
   );
 }

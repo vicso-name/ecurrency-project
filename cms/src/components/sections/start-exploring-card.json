@@ -12,12 +12,6 @@
     "subtitle": {
       "type": "text"
     },
-    "buttonLabel": {
-      "type": "string"
-    },
-    "buttonHref": {
-      "type": "string"
-    },
     "backgroundImage": {
       "type": "media",
       "multiple": false,

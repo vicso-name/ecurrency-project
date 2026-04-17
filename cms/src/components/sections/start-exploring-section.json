@@ -17,8 +17,16 @@
       "component": "sections.start-exploring-card",
       "repeatable": true
     },
+    "linksTitle": {
+      "type": "string"
+    },
     "bottomText": {
       "type": "text"
+    },
+    "links": {
+      "type": "component",
+      "component": "shared.start-exploring-link",
+      "repeatable": true
     }
   },
   "config": {}
