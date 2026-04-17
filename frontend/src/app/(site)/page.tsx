@@ -22,9 +22,9 @@ export default async function HomePage() {
       <UsedForSection data={homePage?.usedFor} />
       <EconomicLayerSection data={homePage?.economicLayer} />
       <ToolsInfrastructureSection data={homePage?.toolsInfrastructure} />
-      <div className="pointer-events-none relative mt-0 md:px-4 md:-mt-[130px]">
+      <div className=" relative mt-0 md:px-4 md:-mt-[130px]">
         <div className="mx-auto max-w-[1422px]">
-          <div className="relative z-10 w-full">
+          <div className="relative z-10 w-full pointer-events-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1422 158"

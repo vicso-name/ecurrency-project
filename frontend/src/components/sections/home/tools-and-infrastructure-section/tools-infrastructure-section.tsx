@@ -153,22 +153,32 @@ export function ToolsInfrastructureSection({
                   </>
                 );
 
-                const className = isPrimary
-                  ? 'inline-flex min-h-[50px] w-full max-w-[300px] min-w-[170px] items-center justify-center gap-[10px] overflow-hidden rounded-[999px] border border-[#DE3737] bg-[radial-gradient(60.21%_66.41%_at_47.91%_-7.5%,rgba(240,88,88,0.40)_0%,rgba(255,255,255,0.05)_79.27%,rgba(255,255,255,0)_100%)] pl-[15px] pr-[15px] py-[10px] shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-all duration-200 hover:bg-[rgba(236,0,0,0.04)] md:min-h-[56px] md:w-auto md:max-w-none'
-                  : 'inline-flex min-h-[50px] w-full max-w-[300px] items-center justify-between overflow-hidden rounded-[999px] border border-[rgba(255,255,255,0.55)] bg-[linear-gradient(180deg,rgba(245,245,245,0.95)_0%,rgba(236,236,236,0.95)_100%)] pl-[15px] pr-[10px] py-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_2px_rgba(0,0,0,0.02)] backdrop-blur-[10px] transition-all duration-200 hover:bg-[linear-gradient(180deg,rgba(248,248,248,0.98)_0%,rgba(240,240,240,0.98)_100%)] md:w-auto md:max-w-none';
+                const primaryClassName =
+                  'inline-flex min-h-[50px] w-full max-w-[300px] min-w-[170px] items-center justify-center gap-[10px] overflow-hidden rounded-[999px] border border-[#DE3737] bg-[radial-gradient(60.21%_66.41%_at_47.91%_-7.5%,rgba(240,88,88,0.40)_0%,rgba(255,255,255,0.05)_79.27%,rgba(255,255,255,0)_100%)] px-[15px] py-[10px] shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-all duration-200 hover:bg-[rgba(236,0,0,0.04)] md:min-h-[56px] md:w-auto md:max-w-none';
 
-                return button.href ? (
-                  <Link
+                const secondaryClassName =
+                  'inline-flex min-h-[50px] w-full max-w-[300px] cursor-default items-center justify-between overflow-hidden rounded-[999px] border border-[rgba(255,255,255,0.55)] bg-[linear-gradient(180deg,rgba(245,245,245,0.95)_0%,rgba(236,236,236,0.95)_100%)] pl-[15px] pr-[10px] py-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_2px_rgba(0,0,0,0.02)] backdrop-blur-[10px] md:w-auto md:max-w-none';
+
+                if (isPrimary && button.href) {
+                  return (
+                    <Link
+                      key={button.id}
+                      href={button.href}
+                      className={primaryClassName}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {content}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div
                     key={button.id}
-                    href={button.href}
-                    className={className}
-                    target="_blank"
-                    rel="noreferrer"
+                    className={isPrimary ? primaryClassName : secondaryClassName}
+                    aria-disabled={!isPrimary}
                   >
-                    {content}
-                  </Link>
-                ) : (
-                  <div key={button.id} className={className}>
                     {content}
                   </div>
                 );
