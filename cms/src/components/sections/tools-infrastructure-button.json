@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_sections_tools_infrastructure_buttons",
+  "info": {
+    "displayName": "Tools Infrastructure Button"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "subLabel": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary"
+      ]
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -197,15 +197,19 @@ export type ToolsInfrastructureTab = {
     url: string;
     alternativeText?: string | null;
   };
+  buttons?: ToolsInfrastructureButton[];
 };
 
-export type ToolsInfrastructureSocialLink = {
+export type ToolsInfrastructureButton = {
   id: number;
+  label: string;
+  subLabel?: string | null;
   href?: string;
-  icon: {
+  variant: 'primary' | 'secondary';
+  icon?: {
     url: string;
     alternativeText?: string | null;
-  };
+  } | null;
 };
 
 export type HomePageToolsInfrastructure = {
@@ -213,5 +217,4 @@ export type HomePageToolsInfrastructure = {
   title: string;
   subtitle?: string;
   tabs: ToolsInfrastructureTab[];
-  socialLinks?: ToolsInfrastructureSocialLink[];
 };

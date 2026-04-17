@@ -16,6 +16,11 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "buttons": {
+      "type": "component",
+      "component": "sections.tools-infrastructure-button",
+      "repeatable": true
     }
   },
   "config": {}

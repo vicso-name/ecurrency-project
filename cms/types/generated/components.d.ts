@@ -453,6 +453,21 @@ export interface SectionsToolCard extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsToolsInfrastructureButton
+  extends Struct.ComponentSchema {
+  collectionName: 'components_sections_tools_infrastructure_buttons';
+  info: {
+    displayName: 'Tools Infrastructure Button';
+  };
+  attributes: {
+    href: Schema.Attribute.String;
+    icon: Schema.Attribute.Media<'images'>;
+    label: Schema.Attribute.String;
+    subLabel: Schema.Attribute.String;
+    variant: Schema.Attribute.Enumeration<['primary', 'secondary']>;
+  };
+}
+
 export interface SectionsToolsInfrastructureSection
   extends Struct.ComponentSchema {
   collectionName: 'components_sections_tools_infrastructure_sections';
@@ -460,25 +475,9 @@ export interface SectionsToolsInfrastructureSection
     displayName: 'Tools Infrastructure Section';
   };
   attributes: {
-    socialLinks: Schema.Attribute.Component<
-      'sections.tools-infrastructure-social-link',
-      true
-    >;
     subtitle: Schema.Attribute.Text;
     tabs: Schema.Attribute.Component<'sections.tools-infrastructure-tab', true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface SectionsToolsInfrastructureSocialLink
-  extends Struct.ComponentSchema {
-  collectionName: 'components_sections_tools_infrastructure_social_links';
-  info: {
-    displayName: 'Tools Infrastructure Social Link';
-  };
-  attributes: {
-    href: Schema.Attribute.String & Schema.Attribute.Required;
-    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
   };
 }
 
@@ -488,6 +487,10 @@ export interface SectionsToolsInfrastructureTab extends Struct.ComponentSchema {
     displayName: 'Tools Infrastructure Tab';
   };
   attributes: {
+    buttons: Schema.Attribute.Component<
+      'sections.tools-infrastructure-button',
+      true
+    >;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     previewImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
   };
@@ -687,8 +690,8 @@ declare module '@strapi/strapi' {
       'sections.technology-feature-card': SectionsTechnologyFeatureCard;
       'sections.technology-features-section': SectionsTechnologyFeaturesSection;
       'sections.tool-card': SectionsToolCard;
+      'sections.tools-infrastructure-button': SectionsToolsInfrastructureButton;
       'sections.tools-infrastructure-section': SectionsToolsInfrastructureSection;
-      'sections.tools-infrastructure-social-link': SectionsToolsInfrastructureSocialLink;
       'sections.tools-infrastructure-tab': SectionsToolsInfrastructureTab;
       'sections.tools-section': SectionsToolsSection;
       'sections.used-for-card': SectionsUsedForCard;

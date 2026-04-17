@@ -19,7 +19,7 @@ const populateParams = [
   'populate[startExploring][populate][links]=true',
   'populate[paymentSystems][populate][cards]=true',
   'populate[toolsInfrastructure][populate][tabs][populate][previewImage]=true',
-  'populate[toolsInfrastructure][populate][socialLinks][populate][icon]=true',
+  'populate[toolsInfrastructure][populate][tabs][populate][buttons][populate][icon]=true',
 ].join('&');
 
 export async function getHomePage(): Promise<HomePageData | null> {
