@@ -5,9 +5,6 @@
   },
   "options": {},
   "attributes": {
-    "text": {
-      "type": "string"
-    },
     "icon": {
       "type": "media",
       "multiple": false,
@@ -15,6 +12,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "richtext"
     }
   },
   "config": {}

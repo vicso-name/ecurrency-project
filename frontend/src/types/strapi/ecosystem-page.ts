@@ -3,6 +3,7 @@ import type { HomePageUsedFor } from './home-page';
 
 export type CommunityCard = {
   id: number;
+  title?: string;
   text: string;
   icon?: {
     id?: number;

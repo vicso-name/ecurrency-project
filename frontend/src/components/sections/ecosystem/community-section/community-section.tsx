@@ -7,6 +7,8 @@ import type { CommunitySection } from '@/types/strapi/ecosystem-page';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
 import { FadeUp } from '@/components/ui/fade-up';
 import { RevealCard } from '@/components/ui/reveal-card';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 type CommunitySectionProps = {
   data: CommunitySection | null | undefined;
@@ -81,20 +83,30 @@ export function CommunitySectionBlock({ data }: CommunitySectionProps) {
                   y={28}
                   scale={0.985}
                 >
-                  <div className="flex h-[144px] items-center justify-between rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-5">
-                    <p className="max-w-[226px] text-[20px] font-medium leading-normal text-[#333]">
-                      {card.text}
-                    </p>
+                  <div className="flex h-full min-h-[260px] flex-col items-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center">
                     {iconUrl && (
                       <Image
                         src={iconUrl}
-                        alt={card.icon?.alternativeText || card.text}
+                        alt={card.icon?.alternativeText || card.title || card.text}
                         width={48}
                         height={48}
                         unoptimized
-                        className="h-[48px] w-[48px] shrink-0"
+                        className="mb-6 h-[48px] w-[48px] shrink-0"
                       />
                     )}
+
+                    {card.title ? (
+                      <h3 className="text-center [font-family:var(--font-manrope)] text-[18px] font-semibold leading-[150%] tracking-[-0.4px] text-black">
+                        {card.title}
+                      </h3>
+                    ) : null}
+
+                    <div className="mt-3 text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.56)] [&_p]:m-0 [&_strong]:font-semibold [&_b]:font-semibold">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {card.text}
+                      </ReactMarkdown>
+                    </div>
+                    
                   </div>
                 </RevealCard>
               );

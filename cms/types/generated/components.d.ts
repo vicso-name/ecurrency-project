@@ -111,7 +111,8 @@ export interface SectionsCommunityCard extends Struct.ComponentSchema {
   };
   attributes: {
     icon: Schema.Attribute.Media<'images'>;
-    text: Schema.Attribute.String;
+    text: Schema.Attribute.RichText;
+    title: Schema.Attribute.String;
   };
 }
 
