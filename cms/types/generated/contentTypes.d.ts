@@ -492,6 +492,7 @@ export interface ApiBlogPageBlogPage extends Struct.SingleTypeSchema {
       'api::blog-page.blog-page'
     > &
       Schema.Attribute.Private;
+    pageUrl: Schema.Attribute.String & Schema.Attribute.DefaultTo<'/blog'>;
     publishedAt: Schema.Attribute.DateTime;
     searchPlaceholder: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Search'>;
@@ -560,6 +561,8 @@ export interface ApiDevelopersPageDevelopersPage
       'sections.opportunities-section',
       false
     >;
+    pageUrl: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'/developers'>;
     publishedAt: Schema.Attribute.DateTime;
     tools: Schema.Attribute.Component<'sections.tools-section', false>;
     updatedAt: Schema.Attribute.DateTime;
@@ -590,6 +593,7 @@ export interface ApiEcosystemPageEcosystemPage extends Struct.SingleTypeSchema {
       'api::ecosystem-page.ecosystem-page'
     > &
       Schema.Attribute.Private;
+    pageUrl: Schema.Attribute.String & Schema.Attribute.DefaultTo<'/ecosystem'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -619,6 +623,7 @@ export interface ApiEcrPageEcrPage extends Struct.SingleTypeSchema {
       'api::ecr-page.ecr-page'
     > &
       Schema.Attribute.Private;
+    pageUrl: Schema.Attribute.String & Schema.Attribute.DefaultTo<'/ecr'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -702,6 +707,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
       'api::home-page.home-page'
     > &
       Schema.Attribute.Private;
+    pageUrl: Schema.Attribute.String & Schema.Attribute.DefaultTo<'/'>;
     paymentSystems: Schema.Attribute.Component<
       'sections.payment-systems-section',
       false
@@ -796,6 +802,8 @@ export interface ApiTechnologyPageTechnologyPage
     > &
       Schema.Attribute.Private;
     nextSteps: Schema.Attribute.Component<'sections.tools-section', false>;
+    pageUrl: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'/technology'>;
     postQuantumCryptography: Schema.Attribute.Component<
       'sections.smart-contracts-section',
       false

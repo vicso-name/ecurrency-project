@@ -11,6 +11,10 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "pageUrl": {
+      "type": "string",
+      "default": "/technology"
+    },
     "hero": {
       "type": "component",
       "component": "sections.page-hero",

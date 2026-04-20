@@ -11,6 +11,10 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "pageUrl": {
+      "type": "string",
+      "default": "/"
+    },
     "hero": {
       "type": "component",
       "component": "sections.hero-section",

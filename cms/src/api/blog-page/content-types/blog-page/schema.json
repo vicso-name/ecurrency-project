@@ -11,6 +11,11 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "pageUrl": {
+      "type": "string",
+      "default": "/blog",
+      "required": false
+    },
     "title": {
       "type": "string",
       "required": true

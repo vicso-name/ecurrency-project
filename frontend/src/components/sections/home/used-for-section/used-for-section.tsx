@@ -102,7 +102,7 @@ export function UsedForSection({ data }: UsedForSectionProps) {
 
         {hasButtons && (
           <FadeUp delay={400} duration={1200} y={14}>
-            <div className="mt-[50px] flex flex-col items-center justify-center gap-4 md:flex-row mb-[80px]">
+            <div className="mt-[50px] flex flex-col items-center justify-center gap-4 md:flex-row mb-[40px]">
               {data.primaryButtonLabel && (
                 <PrimaryButton
                   href={data.primaryButtonHref || '#'}

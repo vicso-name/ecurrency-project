@@ -91,7 +91,7 @@ export function ToolsSectionBlock({ data }: ToolsSectionProps) {
   const cards = data.cards ?? [];
 
   return (
-    <section className="px-4 py-[80px] md:py-[120px]">
+    <section className="px-4 py-[40px] md:py-[80px]">
       <div className="mx-auto max-w-[1200px]">
         {/* Title */}
         <FadeUp delay={0} duration={1200} y={20}>

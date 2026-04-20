@@ -140,10 +140,10 @@ export function SmartContractsSectionBlock({ data }: SmartContractsSectionProps)
             <div
               className="flex h-full flex-col rounded-[16px] border border-[rgba(227,64,57,0.30)] bg-white p-8"
               style={{
-                backgroundImage: 'url(/images/technology/smart-contracts-bg-left.png)',
+                backgroundImage: 'url(/images/rainbow_frame_bg.webp)',
                 backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'top center',
-                backgroundSize: '100% auto',
+                backgroundPosition: 'top left',
+                backgroundSize: 'cover',
               }}
             >
               <h3 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[32px] font-medium leading-[36px] tracking-[-1.5px] text-black">
@@ -160,7 +160,15 @@ export function SmartContractsSectionBlock({ data }: SmartContractsSectionProps)
 
           {/* Benefits - right */}
           <RevealCard delay={240} duration={1200} y={36} scale={0.985}>
-            <div className="flex h-full flex-col rounded-[16px] border border-[#EC0000] bg-[#E00D0C] p-8">
+            <div
+              className="flex h-full flex-col rounded-[16px] border border-[#EC0000] bg-[#E00D0C] p-8"
+              style={{
+                backgroundImage: 'url(/images/dotted_frame_bg.webp)',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'bottom right',
+                backgroundSize: 'cover',
+              }}
+            >
               <h3 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[32px] font-medium leading-[36px] tracking-[-1.5px] text-white">
                 {data.benefitsTitle}
               </h3>

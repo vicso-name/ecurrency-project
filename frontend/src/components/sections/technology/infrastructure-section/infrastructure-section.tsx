@@ -54,7 +54,7 @@ export function InfrastructureSectionBlock({ data }: InfrastructureSectionProps)
   const cards = data.cards ?? [];
 
   return (
-    <section className="px-4 py-[80px] md:py-[120px]">
+    <section className="px-4 py-[40px] md:py-[80px]">
       <div className="mx-auto max-w-[1200px]">
         {/* Header */}
         <div className="mx-auto mb-[60px] max-w-[523px] text-center">
