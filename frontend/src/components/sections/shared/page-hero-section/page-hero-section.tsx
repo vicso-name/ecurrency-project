@@ -192,7 +192,7 @@ export function PageHeroSection({ hero }: PageHeroSectionProps) {
       {/* Bottom blur shape */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[-200px] left-1/2 z-[5] h-[713px] w-[2302px] -translate-x-1/2 rounded-full bg-[#FAFAFA]"
+        className="pointer-events-none absolute bottom-[-200px] left-1/2 z-[5] hidden h-[713px] w-[2302px] -translate-x-1/2 rounded-full bg-[#FAFAFA] md:block"
         style={{ filter: 'blur(100px)' }}
       />
 
@@ -204,7 +204,7 @@ export function PageHeroSection({ hero }: PageHeroSectionProps) {
         <ParticleLogo className="h-full w-full" />
       </div>
 
-      <div className="relative z-20 px-4 pt-[100px] pb-[80px] md:pt-[250px] md:pb-[80px]">
+      <div className="relative z-20 px-4 pt-[270px] pb-[80px] md:pt-[250px] md:pb-[80px]">
         <div className="mx-auto max-w-[1200px]">
         {/* Title */}
         <div className="text-center mx-auto max-w-[770px]">
