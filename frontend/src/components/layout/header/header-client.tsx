@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import type { GlobalData, HeaderSocialLink, NavLink } from '@/types/strapi/global';
 import Image from 'next/image';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
@@ -9,6 +10,48 @@ import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
 type HeaderClientProps = {
   globalData: GlobalData | null;
 };
+
+function normalizePath(path?: string) {
+  if (!path) return '/';
+
+  // если вдруг придёт полный URL, пытаемся взять только pathname
+  try {
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+      const url = new URL(path);
+      path = url.pathname;
+    }
+  } catch {
+    // ignore
+  }
+
+  const cleanPath = path.split('?')[0].split('#')[0];
+
+  if (cleanPath === '/') return '/';
+
+  return cleanPath.endsWith('/') ? cleanPath.slice(0, -1) : cleanPath;
+}
+
+function isPathActive(pathname: string, href?: string) {
+  if (!href) return false;
+
+  const current = normalizePath(pathname);
+  const target = normalizePath(href);
+
+  if (target === '/') {
+    return current === '/';
+  }
+
+  return current === target || current.startsWith(`${target}/`);
+}
+
+function isNavItemActive(pathname: string, item: NavLink) {
+  if (isPathActive(pathname, item.href)) {
+    return true;
+  }
+
+  const children = item.children ?? [];
+  return children.some((child) => isPathActive(pathname, child.href));
+}
 
 function ChevronDownIcon({ isOpen = false }: { isOpen?: boolean }) {
   return (
@@ -149,9 +192,11 @@ function HeaderCta({ href, label }: { href: string; label: string }) {
 function DesktopDropdown({
   item,
   isOpen,
+  pathname,
 }: {
   item: NavLink;
   isOpen: boolean;
+  pathname: string;
 }) {
   const children = item.children ?? [];
 
@@ -163,27 +208,39 @@ function DesktopDropdown({
     <div className="absolute top-full left-1/2 z-50 w-[220px] -translate-x-1/2 pt-4">
       <div className="rounded-[20px] border border-[rgba(227,64,57,0.08)] bg-white p-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)]">
         <div className="flex flex-col">
-          {children.map((child, index) => (
-            <div key={child.id}>
-              <Link
-                href={child.href || '#'}
-                className="block px-3 py-3 text-[16px] font-medium leading-5 text-black transition-colors duration-200 hover:bg-[rgba(227,64,57,0.04)]"
-              >
-                {child.label}
-              </Link>
+          {children.map((child, index) => {
+            const isChildActive = isPathActive(pathname, child.href);
 
-              {index !== children.length - 1 ? (
-                <div className="h-px bg-[rgba(0,0,0,0.08)]" />
-              ) : null}
-            </div>
-          ))}
+            return (
+              <div key={child.id}>
+                <Link
+                  href={child.href || '#'}
+                  className={`block px-3 py-3 text-[16px] font-medium leading-5 transition-colors duration-200 hover:bg-[rgba(227,64,57,0.04)] ${
+                    isChildActive ? 'text-[#E34039] bg-[rgba(227,64,57,0.04)]' : 'text-black'
+                  }`}
+                >
+                  {child.label}
+                </Link>
+
+                {index !== children.length - 1 ? (
+                  <div className="h-px bg-[rgba(0,0,0,0.08)]" />
+                ) : null}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
 
-function DesktopNavigation({ navigation }: { navigation: NavLink[] }) {
+function DesktopNavigation({
+  navigation,
+  pathname,
+}: {
+  navigation: NavLink[];
+  pathname: string;
+}) {
   const [openDropdownId, setOpenDropdownId] = useState<number | null>(null);
 
   return (
@@ -191,6 +248,7 @@ function DesktopNavigation({ navigation }: { navigation: NavLink[] }) {
       {navigation.map((item) => {
         const hasChildren = item.hasChildren && item.children && item.children.length > 0;
         const isOpen = openDropdownId === item.id;
+        const isActive = isNavItemActive(pathname, item);
 
         return (
           <div
@@ -206,7 +264,9 @@ function DesktopNavigation({ navigation }: { navigation: NavLink[] }) {
             {hasChildren ? (
               <button
                 type="button"
-                className="flex items-center gap-2 text-[15px] font-normal leading-[56px] text-black"
+                className={`flex items-center gap-2 text-[15px] font-normal leading-[56px] transition-colors duration-200 ${
+                  isActive ? 'text-[#E34039]' : 'text-black hover:text-[#E34039]'
+                }`}
                 aria-expanded={isOpen}
               >
                 <span>{item.label}</span>
@@ -215,13 +275,15 @@ function DesktopNavigation({ navigation }: { navigation: NavLink[] }) {
             ) : (
               <Link
                 href={item.href || '#'}
-                className="flex items-center gap-2 text-[15px] font-normal leading-[56px] text-black transition-colors duration-200 hover:text-[#E34039]"
+                className={`flex items-center gap-2 text-[15px] font-normal leading-[56px] transition-colors duration-200 ${
+                  isActive ? 'text-[#E34039]' : 'text-black hover:text-[#E34039]'
+                }`}
               >
                 <span>{item.label}</span>
               </Link>
             )}
 
-            {hasChildren ? <DesktopDropdown item={item} isOpen={isOpen} /> : null}
+            {hasChildren ? <DesktopDropdown item={item} isOpen={isOpen} pathname={pathname} /> : null}
           </div>
         );
       })}
@@ -234,11 +296,13 @@ function MobileMenu({
   isOpen,
   onClose,
   socialLinks,
+  pathname,
 }: {
   navigation: NavLink[];
   isOpen: boolean;
   onClose: () => void;
   socialLinks: HeaderSocialLink[];
+  pathname: string;
 }) {
   const [expandedItemId, setExpandedItemId] = useState<number | null>(null);
 
@@ -256,6 +320,7 @@ function MobileMenu({
         {navigation.map((item, index) => {
           const isExpanded = expandedItemId === item.id;
           const hasChildren = item.hasChildren && item.children && item.children.length > 0;
+          const isActive = isNavItemActive(pathname, item);
 
           return (
             <div key={item.id}>
@@ -264,7 +329,9 @@ function MobileMenu({
                   <button
                     type="button"
                     onClick={() => handleToggle(item.id)}
-                    className="flex items-center gap-4 text-[20px] font-medium leading-6 tracking-[-1px] text-black"
+                    className={`flex items-center gap-4 text-[20px] font-medium leading-6 tracking-[-1px] ${
+                      isActive ? 'text-[#E34039]' : 'text-black'
+                    }`}
                     aria-expanded={isExpanded}
                   >
                     <span>{item.label}</span>
@@ -272,7 +339,9 @@ function MobileMenu({
                 ) : (
                   <Link
                     href={item.href || '#'}
-                    className="text-[20px] font-medium leading-6 tracking-[-1px] text-black"
+                    className={`text-[20px] font-medium leading-6 tracking-[-1px] ${
+                      isActive ? 'text-[#E34039]' : 'text-black'
+                    }`}
                     onClick={onClose}
                   >
                     {item.label}
@@ -294,16 +363,22 @@ function MobileMenu({
 
               {hasChildren && isExpanded ? (
                 <div className="mt-6 flex flex-col gap-3">
-                  {item.children?.map((child) => (
-                    <Link
-                      key={child.id}
-                      href={child.href || '#'}
-                      className="text-[16px] font-medium leading-5 text-black/70"
-                      onClick={onClose}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
+                  {item.children?.map((child) => {
+                    const isChildActive = isPathActive(pathname, child.href);
+
+                    return (
+                      <Link
+                        key={child.id}
+                        href={child.href || '#'}
+                        className={`text-[16px] font-medium leading-5 ${
+                          isChildActive ? 'text-[#E34039]' : 'text-black/70'
+                        }`}
+                        onClick={onClose}
+                      >
+                        {child.label}
+                      </Link>
+                    );
+                  })}
                 </div>
               ) : null}
 
@@ -326,6 +401,7 @@ function MobileMenu({
 
 export function HeaderClient({ globalData }: HeaderClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const navigation = globalData?.headerNavigation ?? [];
   const cta = globalData?.headerCta;
@@ -337,12 +413,11 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
         <div className="flex items-center justify-between gap-4">
           <Logo globalData={globalData} />
 
-          <DesktopNavigation navigation={navigation} />
+          <DesktopNavigation navigation={navigation} pathname={pathname} />
 
           <div className="flex items-center gap-5">
             <SocialLinks links={socialLinks} className="hidden lg:flex" />
             {cta ? <HeaderCta href={cta.href || '#'} label={cta.label} /> : null}
-           
 
             <button
               type="button"
@@ -363,6 +438,7 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
           socialLinks={socialLinks}
+          pathname={pathname}
         />
       </div>
     </header>
