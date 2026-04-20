@@ -8,6 +8,7 @@ export async function getEcosystemPage(): Promise<EcosystemPageData | null> {
     'populate[hero][populate][card]=true',
     'populate[usedFor][populate][cards][populate][icon]=true',
     'populate[community][populate][cards][populate][icon]=true',
+    'populate[seo][populate][seoImage]=true',
   ].join('&');
 
   const response = (await fetchFromStrapi(

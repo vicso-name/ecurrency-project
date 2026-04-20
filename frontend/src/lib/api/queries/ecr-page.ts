@@ -7,6 +7,7 @@ export async function getEcrPage(): Promise<EcrPageData | null> {
   const params = [
     'populate[hero][populate][card]=true',
     'populate[usedFor][populate][cards][populate][icon]=true',
+    'populate[seo][populate][seoImage]=true',
   ].join('&');
 
   const response = (await fetchFromStrapi(

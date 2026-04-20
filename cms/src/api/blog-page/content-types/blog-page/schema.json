@@ -43,6 +43,11 @@
       "type": "component",
       "component": "sections.subscribe-section",
       "repeatable": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
     }
   }
 }

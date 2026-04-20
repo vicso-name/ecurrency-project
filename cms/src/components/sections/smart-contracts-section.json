@@ -32,9 +32,6 @@
       "component": "sections.smart-contract-benefit",
       "repeatable": true
     },
-    "description": {
-      "type": "richtext"
-    },
     "links": {
       "type": "component",
       "component": "shared.start-exploring-link",

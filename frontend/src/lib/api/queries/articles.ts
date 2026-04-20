@@ -49,6 +49,7 @@ export async function getArticleBySlug(slug: string): Promise<ArticleData | null
     `filters[slug][$eq]=${encodeURIComponent(slug)}`,
     'populate[featuredImage]=true',
     'populate[category]=true',
+    'populate[seo][populate][seoImage]=true',
   ];
 
   const path = `/api/articles?${queryParts.join('&')}`;

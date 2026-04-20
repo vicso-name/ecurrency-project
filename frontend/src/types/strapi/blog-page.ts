@@ -1,3 +1,5 @@
+import { StrapiSeo } from "./seo";
+
 export type BlogPageSubscribe = {
   id: number;
   title: string;
@@ -15,4 +17,5 @@ export type BlogPageData = {
   clearAllLabel?: string;
   loadMoreLabel?: string;
   subscribe?: BlogPageSubscribe | null;
+  seo?: StrapiSeo | null;
 };

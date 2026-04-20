@@ -24,6 +24,11 @@
       "type": "component",
       "component": "sections.used-for-section",
       "repeatable": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
     }
   }
 }

@@ -8,6 +8,7 @@ export async function getDevelopersPage(): Promise<DevelopersPageData | null> {
     'populate[hero][populate][card]=true',
     'populate[opportunities][populate][cards][populate][icon]=true',
     'populate[tools][populate][cards]=true',
+    'populate[seo][populate][seoImage]=true',
   ].join('&');
 
   const response = (await fetchFromStrapi(

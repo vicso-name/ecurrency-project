@@ -1,5 +1,6 @@
 import type { PageHero } from './page-hero';
 import type { HomePageUsedFor } from './home-page';
+import { StrapiSeo } from './seo';
 
 export type CommunityCard = {
   id: number;
@@ -30,4 +31,5 @@ export type EcosystemPageData = {
   hero?: PageHero | null;
   usedFor?: HomePageUsedFor | null;
   community?: CommunitySection | null;
+  seo?: StrapiSeo | null;
 };

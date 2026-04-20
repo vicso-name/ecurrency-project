@@ -4,8 +4,17 @@ import { getCategories } from '@/lib/api/queries/categories';
 import { BlogFilters } from '@/components/sections/blog/blog-filters/blog-filters';
 import { BlogList } from '@/components/sections/blog/blog-list/blog-list';
 import { SubscribeSection } from '@/components/sections/blog/subscribe-section/subscribe-section';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/utils/generate-metadata';
 
-import Image from 'next/image';
+export async function generateMetadata(): Promise<Metadata> {
+  const blogPage = await getBlogPage();
+  return buildMetadata({
+    seo: blogPage?.seo,
+    fallbackTitle: 'Blog — eCurrency',
+    path: '/blog',
+  });
+}
 
 type BlogPageProps = {
   searchParams?: Promise<{

@@ -1,3 +1,5 @@
+import { StrapiSeo } from "./seo";
+
 export type HomePageHero = {
   id: number;
   title: string;
@@ -91,6 +93,7 @@ export type HomePageData = {
   startExploring?: HomePageStartExploring | null;
   paymentSystems?: HomePagePaymentSystems | null;
   toolsInfrastructure?: HomePageToolsInfrastructure | null;
+  seo?: StrapiSeo | null;
 };
 
 export type UsedForCard = {

@@ -1,4 +1,5 @@
 import type { PageHero } from './page-hero';
+import { StrapiSeo } from './seo';
 
 export type OpportunityCard = {
   id: number;
@@ -25,6 +26,7 @@ export type DevelopersPageData = {
   hero?: PageHero | null;
   opportunities?: OpportunitiesSection | null;
   tools?: ToolsSection | null;
+  seo?: StrapiSeo | null;
 };
 
 export type ToolCard = {

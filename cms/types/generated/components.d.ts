@@ -357,7 +357,6 @@ export interface SectionsSmartContractsSection extends Struct.ComponentSchema {
     benefitsTitle: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Why It Matters'>;
-    description: Schema.Attribute.RichText;
     howItWorksTitle: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'How It Works'>;
@@ -644,6 +643,18 @@ export interface SharedNavLinkChild extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedSeo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_seos';
+  info: {
+    displayName: 'Seo';
+  };
+  attributes: {
+    seoDescription: Schema.Attribute.Text;
+    seoImage: Schema.Attribute.Media<'images'>;
+    seoTitle: Schema.Attribute.String;
+  };
+}
+
 export interface SharedStartExploringLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_start_exploring_links';
   info: {
@@ -704,6 +715,7 @@ declare module '@strapi/strapi' {
       'shared.header-social-links': SharedHeaderSocialLinks;
       'shared.nav-link': SharedNavLink;
       'shared.nav-link-child': SharedNavLinkChild;
+      'shared.seo': SharedSeo;
       'shared.start-exploring-link': SharedStartExploringLink;
     }
   }

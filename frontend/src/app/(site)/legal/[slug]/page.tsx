@@ -2,6 +2,18 @@ import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getLegalPageBySlug } from '@/lib/api/queries/legal-page';
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/utils/generate-metadata';
+
+export async function generateMetadata({ params }: LegalPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const page = await getLegalPageBySlug(slug);
+  return buildMetadata({
+    seo: page?.seo,
+    fallbackTitle: page?.title || 'eCurrency',
+    path: `/legal/${slug}`,
+  });
+}
 
 type LegalPageProps = {
   params: Promise<{

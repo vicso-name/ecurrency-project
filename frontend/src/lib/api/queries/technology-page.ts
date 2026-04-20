@@ -12,16 +12,19 @@ export async function getTechnologyPage(): Promise<TechnologyPageData | null> {
     'populate[consensus][populate][cards][populate][icon]=true',
     'populate[clientSideSmartContracts][populate][steps]=true',
     'populate[clientSideSmartContracts][populate][benefits][populate][tags]=true',
+    'populate[clientSideSmartContracts][populate][links]=true',
     'populate[postQuantumCryptography][populate][steps]=true',
     'populate[postQuantumCryptography][populate][benefits][populate][tags]=true',
     'populate[infrastructure][populate][cards]=true',
     'populate[architectureMatters][populate][cards][populate][backgroundImage]=true',
     'populate[useCases][populate][cards][populate][icon]=true',
     'populate[nextSteps][populate][cards]=true',
+    'populate[seo][populate][seoImage]=true',
   ].join('&');
 
   const response = (await fetchFromStrapi(
     `/api/technology-page?${params}`
   )) as TechnologyPageResponse;
+
   return response.data ?? null;
 }

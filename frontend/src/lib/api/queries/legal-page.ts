@@ -6,7 +6,12 @@ type LegalPagesResponse = {
 };
 
 export async function getLegalPageBySlug(slug: string): Promise<LegalPageData | null> {
-  const path = `/api/legal-pages?filters[slug][$eq]=${encodeURIComponent(slug)}`;
+  const path = `/api/legal-pages?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[seo][populate][seoImage]=true`;
   const response = (await fetchFromStrapi(path)) as LegalPagesResponse;
   return response.data?.[0] ?? null;
+}
+export async function getLegalPages(): Promise<LegalPageData[]> {
+  const path = '/api/legal-pages?fields[0]=title&fields[1]=slug';
+  const response = (await fetchFromStrapi(path)) as LegalPagesResponse;
+  return response.data ?? [];
 }

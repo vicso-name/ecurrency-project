@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/utils/generate-metadata';
 import { getTechnologyPage } from '@/lib/api/queries/technology-page';
 import { PageHeroSection } from '@/components/sections/shared/page-hero-section/page-hero-section';
 import { TechnologyFeaturesSectionBlock } from '@/components/sections/technology/technology-features-section/technology-features-section';
@@ -7,6 +9,15 @@ import { InfrastructureSectionBlock } from '@/components/sections/technology/inf
 import { StartExploringSection } from '@/components/sections/home/start-exploring-section/start-exploring-section';
 import { UsedForSection } from '@/components/sections/home/used-for-section/used-for-section';
 import { ToolsSectionBlock } from '@/components/sections/developers/tools-section/tools-section';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getTechnologyPage();
+  return buildMetadata({
+    seo: page?.seo,
+    fallbackTitle: 'Technology — eCurrency',
+    path: '/technology',
+  });
+}
 
 export default async function TechnologyPage() {
   const page = await getTechnologyPage();

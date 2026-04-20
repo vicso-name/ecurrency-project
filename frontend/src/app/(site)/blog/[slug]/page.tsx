@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/utils/generate-metadata';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
@@ -8,6 +10,17 @@ import { formatDate } from '@/lib/utils/format-date';
 import { ArticleCard } from '@/components/shared/article-card/article-card';
 import { ShareBlock } from '@/components/shared/share-block/share-block';
 import { OutlineButton } from '@/components/ui/outline-button/outline-button';
+
+export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
+  return buildMetadata({
+    seo: article?.seo,
+    fallbackTitle: article?.Title || 'Article — eCurrency',
+    fallbackDescription: article?.Excerpt,
+    path: `/blog/${slug}`,
+  });
+}
 
 type ArticlePageProps = {
   params: Promise<{

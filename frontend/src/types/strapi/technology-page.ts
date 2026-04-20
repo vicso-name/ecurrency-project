@@ -1,6 +1,7 @@
 import { ToolsSection } from './developers-page';
 import { HomePageStartExploring, HomePageUsedFor } from './home-page';
 import type { PageHero } from './page-hero';
+import { StrapiSeo } from './seo';
 
 export type TechnologyFeatureCard = {
   id: number;
@@ -36,6 +37,7 @@ export type TechnologyPageData = {
   architectureMatters?: HomePageStartExploring | null;
   useCases?: HomePageUsedFor | null;
   nextSteps?: ToolsSection | null;
+  seo?: StrapiSeo | null;
 };
 
 export type SmartContractStep = {
@@ -54,6 +56,12 @@ export type SmartContractBenefit = {
   tags?: SmartContractTag[];
 };
 
+export type SmartContractLink = {
+  id: number;
+  label: string;
+  href?: string;
+};
+
 export type SmartContractsSection = {
   id: number;
   title: string;
@@ -62,8 +70,7 @@ export type SmartContractsSection = {
   steps?: SmartContractStep[];
   benefitsTitle: string;
   benefits?: SmartContractBenefit[];
-  ctaLabel?: string;
-  ctaHref?: string;
+  links?: SmartContractLink[];
 };
 
 export type ConsensusCard = {

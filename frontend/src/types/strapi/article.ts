@@ -1,4 +1,5 @@
 import type { CategoryData } from '@/types/strapi/category';
+import { StrapiSeo } from './seo';
 
 export type ArticleFeaturedImage = {
   id?: number;
@@ -19,4 +20,5 @@ export type ArticleData = {
   publishedAt?: string;
   featuredImage?: ArticleFeaturedImage | null;
   category?: CategoryData | null;
+  seo?: StrapiSeo | null;
 };

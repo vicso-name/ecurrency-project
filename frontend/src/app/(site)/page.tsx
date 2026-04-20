@@ -1,3 +1,6 @@
+
+import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/utils/generate-metadata';
 import { BlockchainDesignedSection } from '@/components/sections/home/blockchain-designed-section/blockchain-designed-section';
 import { BlockchainArchitectureSection } from '@/components/sections/home/blockchain-architecture-section/blockchain-architecture-section';
 import { ProjectOverviewSection } from '@/components/sections/home/project-overview-section/project-overview-section';
@@ -9,6 +12,16 @@ import { BlockQuoteSection } from '@/components/sections/home/block-quote-sectio
 import { HeroSection } from '@/components/sections/home/hero-section/hero-section';
 import { getHomePage } from '@/lib/api/queries/home-page';
 import { ToolsInfrastructureSection } from '@/components/sections/home/tools-and-infrastructure-section/tools-infrastructure-section';
+
+
+export async function generateMetadata(): Promise<Metadata> {
+  const homePage = await getHomePage();
+  return buildMetadata({
+    seo: homePage?.seo,
+    fallbackTitle: 'eCurrency — Programmable Payment Network',
+    path: '/',
+  });
+}
 
 export default async function HomePage() {
   const homePage = await getHomePage();
