@@ -112,6 +112,7 @@ export type UsedForCard = {
 export type HomePageUsedFor = {
   id: number;
   preTitle?: string;
+  title?: string;
   cards?: UsedForCard[];
   primaryButtonLabel?: string;
   primaryButtonHref?: string;

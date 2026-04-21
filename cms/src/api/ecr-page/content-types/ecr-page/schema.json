@@ -20,9 +20,19 @@
       "component": "sections.page-hero",
       "repeatable": false
     },
+    "blockchainArchitecture": {
+      "type": "component",
+      "component": "sections.blockchain-architecture-section",
+      "repeatable": false
+    },
     "usedFor": {
       "type": "component",
       "component": "sections.used-for-section",
+      "repeatable": false
+    },
+    "useCases": {
+      "type": "component",
+      "component": "sections.ecr-use-cases",
       "repeatable": false
     },
     "seo": {

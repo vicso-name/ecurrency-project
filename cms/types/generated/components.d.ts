@@ -178,6 +178,22 @@ export interface SectionsEconomicLayerSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsEcrUseCases extends Struct.ComponentSchema {
+  collectionName: 'components_sections_ecr_use_cases';
+  info: {
+    displayName: 'ECR Use Cases';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'sections.infrastructure-card', true>;
+    primaryButtonHref: Schema.Attribute.String;
+    primaryButtonLabel: Schema.Attribute.String;
+    secondaryButtonHref: Schema.Attribute.String;
+    secondaryButtonLabel: Schema.Attribute.String;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SectionsHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_sections_hero_sections';
   info: {
@@ -542,6 +558,7 @@ export interface SectionsUsedForSection extends Struct.ComponentSchema {
     showButtons: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -681,6 +698,7 @@ declare module '@strapi/strapi' {
       'sections.consensus-card': SectionsConsensusCard;
       'sections.consensus-section': SectionsConsensusSection;
       'sections.economic-layer-section': SectionsEconomicLayerSection;
+      'sections.ecr-use-cases': SectionsEcrUseCases;
       'sections.hero-section': SectionsHeroSection;
       'sections.infrastructure-card': SectionsInfrastructureCard;
       'sections.infrastructure-section': SectionsInfrastructureSection;

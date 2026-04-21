@@ -6,7 +6,9 @@ type EcrPageResponse = { data: EcrPageData };
 export async function getEcrPage(): Promise<EcrPageData | null> {
   const params = [
     'populate[hero][populate][card]=true',
+    'populate[blockchainArchitecture][populate][cards][populate][icon]=true',
     'populate[usedFor][populate][cards][populate][icon]=true',
+    'populate[useCases][populate][cards]=true',
     'populate[seo][populate][seoImage]=true',
   ].join('&');
 

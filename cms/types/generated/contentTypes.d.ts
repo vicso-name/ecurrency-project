@@ -617,6 +617,10 @@ export interface ApiEcrPageEcrPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    blockchainArchitecture: Schema.Attribute.Component<
+      'sections.blockchain-architecture-section',
+      false
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -633,6 +637,7 @@ export interface ApiEcrPageEcrPage extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    useCases: Schema.Attribute.Component<'sections.ecr-use-cases', false>;
     usedFor: Schema.Attribute.Component<'sections.used-for-section', false>;
   };
 }

@@ -74,13 +74,22 @@ export function UsedForSection({ data }: UsedForSectionProps) {
   const isFourCards = cards.length === 4;
 
   return (
-    <section className="px-4 pt-[80px] pb-[5px]">
+    <section className={`px-4 pt-[80px] ${hasButtons ? 'pb-[5px]' : 'pb-[80px]'}`}>
       <div className="mx-auto max-w-[1200px]">
+
         {data.preTitle ? (
           <FadeUp delay={0} duration={1100} y={18}>
             <p className="mb-[40px] text-center [font-family:var(--font-roboto-mono)] text-[16px] leading-5 font-normal uppercase text-[rgba(13,0,0,0.48)] md:mb-[70px]">
               {data.preTitle}
             </p>
+          </FadeUp>
+        ) : null}
+
+        {data.title ? (
+          <FadeUp delay={60} duration={1200} y={22}>
+            <h2 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[48px] font-semibold leading-[116%] tracking-[-1px] text-black md:mb-[70px]">
+              {data.title}
+            </h2>
           </FadeUp>
         ) : null}
 
