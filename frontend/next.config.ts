@@ -9,7 +9,26 @@ const nextConfig: NextConfig = {
         port: '1337',
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'manage.ecurrency.org',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'test.ecurrency.org',
+        pathname: '/uploads/**',
+      },
     ],
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: '/uploads/:path*',
+        destination: 'https://manage.ecurrency.org/uploads/:path*',
+      },
+    ];
   },
 
   async headers() {
