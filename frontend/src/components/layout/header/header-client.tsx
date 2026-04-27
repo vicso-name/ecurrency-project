@@ -250,7 +250,7 @@ function DesktopNavigation({
       {navigation.map((item) => {
         const hasChildren = item.hasChildren && item.children && item.children.length > 0;
         const isOpen = openDropdownId === item.id;
-        const isActive = hasChildren ? isPathActive(pathname, item.href) : isNavItemActive(pathname, item);
+        const isActive = !hasChildren && isNavItemActive(pathname, item);
 
         return (
           <div
@@ -267,7 +267,7 @@ function DesktopNavigation({
               <button
                 type="button"
                 className={`flex items-center gap-2 text-[15px] font-normal leading-[56px] transition-colors duration-200 ${
-                  isActive ? 'text-[#E34039]' : 'text-black hover:text-[#E34039]'
+                  isOpen ? 'text-[#E34039]' : 'text-black hover:text-[#E34039]'
                 }`}
                 aria-expanded={isOpen}
               >
@@ -322,7 +322,7 @@ function MobileMenu({
         {navigation.map((item, index) => {
           const isExpanded = expandedItemId === item.id;
           const hasChildren = item.hasChildren && item.children && item.children.length > 0;
-          const isActive = hasChildren ? isPathActive(pathname, item.href) : isNavItemActive(pathname, item);
+          const isActive = !hasChildren && isNavItemActive(pathname, item);
 
           return (
             <div key={item.id}>
@@ -332,7 +332,7 @@ function MobileMenu({
                     type="button"
                     onClick={() => handleToggle(item.id)}
                     className={`flex items-center gap-4 text-[20px] font-medium leading-6 tracking-[-1px] ${
-                      isActive ? 'text-[#E34039]' : 'text-black'
+                      isExpanded ? 'text-[#E34039]' : 'text-black'
                     }`}
                     aria-expanded={isExpanded}
                   >
