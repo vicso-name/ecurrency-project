@@ -58,10 +58,14 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const canvasEl = canvasRef.current;
+    if (!canvasEl) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvasEl.getContext("2d");
+    if (!ctx) return;
+
+    const canvas = canvasEl;
+
     if (!ctx) return;
 
     let width = 0;
