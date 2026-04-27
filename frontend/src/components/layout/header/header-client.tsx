@@ -217,7 +217,9 @@ function DesktopDropdown({
               <div key={child.id}>
                 <Link
                   href={child.href || '#'}
-                  className={`block px-3 py-3 text-[16px] font-medium leading-5 transition-colors duration-200 hover:bg-[rgba(227,64,57,0.04)] ${
+                  target={(child as typeof child & { openInNewTab?: boolean | null }).openInNewTab ? '_blank' : undefined}
+                  rel={(child as typeof child & { openInNewTab?: boolean | null }).openInNewTab ? 'noopener noreferrer' : undefined}
+                  className={`nav-child-link item-child block px-3 py-3 text-[16px] font-medium leading-5 transition-colors duration-200 hover:bg-[rgba(227,64,57,0.04)] ${
                     isChildActive ? 'text-[#E34039] bg-[rgba(227,64,57,0.04)]' : 'text-black'
                   }`}
                 >
@@ -250,7 +252,7 @@ function DesktopNavigation({
       {navigation.map((item) => {
         const hasChildren = item.hasChildren && item.children && item.children.length > 0;
         const isOpen = openDropdownId === item.id;
-        const isActive = !hasChildren && isNavItemActive(pathname, item);
+        const isActive = hasChildren ? isPathActive(pathname, item.href) : isNavItemActive(pathname, item);
 
         return (
           <div
@@ -267,7 +269,7 @@ function DesktopNavigation({
               <button
                 type="button"
                 className={`flex items-center gap-2 text-[15px] font-normal leading-[56px] transition-colors duration-200 ${
-                  isOpen ? 'text-[#E34039]' : 'text-black hover:text-[#E34039]'
+                  isActive ? 'text-[#E34039]' : 'text-black hover:text-[#E34039]'
                 }`}
                 aria-expanded={isOpen}
               >
@@ -322,7 +324,7 @@ function MobileMenu({
         {navigation.map((item, index) => {
           const isExpanded = expandedItemId === item.id;
           const hasChildren = item.hasChildren && item.children && item.children.length > 0;
-          const isActive = !hasChildren && isNavItemActive(pathname, item);
+          const isActive = hasChildren ? isPathActive(pathname, item.href) : isNavItemActive(pathname, item);
 
           return (
             <div key={item.id}>
@@ -332,7 +334,7 @@ function MobileMenu({
                     type="button"
                     onClick={() => handleToggle(item.id)}
                     className={`flex items-center gap-4 text-[20px] font-medium leading-6 tracking-[-1px] ${
-                      isExpanded ? 'text-[#E34039]' : 'text-black'
+                      isActive ? 'text-[#E34039]' : 'text-black'
                     }`}
                     aria-expanded={isExpanded}
                   >
@@ -372,7 +374,9 @@ function MobileMenu({
                       <Link
                         key={child.id}
                         href={child.href || '#'}
-                        className={`text-[16px] font-medium leading-5 ${
+                        target={(child as typeof child & { openInNewTab?: boolean | null }).openInNewTab ? '_blank' : undefined}
+                        rel={(child as typeof child & { openInNewTab?: boolean | null }).openInNewTab ? 'noopener noreferrer' : undefined}
+                        className={`nav-child-link item-child text-[16px] font-medium leading-5 ${
                           isChildActive ? 'text-[#E34039]' : 'text-black/70'
                         }`}
                         onClick={onClose}
