@@ -122,7 +122,7 @@ function ArchitectureCard({ card }: ArchitectureCardProps) {
       <div
         className="relative flex w-full flex-col items-center justify-start rounded-[14px] px-6 pt-6 text-center"
         style={{
-          backgroundImage: 'url(/images/home/block_bg.svg)',
+          backgroundImage: 'url(/images/home/block_bg.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
