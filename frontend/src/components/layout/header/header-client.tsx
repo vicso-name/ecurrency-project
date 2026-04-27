@@ -252,7 +252,8 @@ function DesktopNavigation({
       {navigation.map((item) => {
         const hasChildren = item.hasChildren && item.children && item.children.length > 0;
         const isOpen = openDropdownId === item.id;
-        const isActive = hasChildren ? isPathActive(pathname, item.href) : isNavItemActive(pathname, item);
+        const isActive = hasChildren ? false : isNavItemActive(pathname, item);
+
 
         return (
           <div
