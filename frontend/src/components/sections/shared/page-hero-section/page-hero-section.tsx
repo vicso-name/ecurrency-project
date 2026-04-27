@@ -168,7 +168,7 @@ export function PageHeroSection({ hero }: PageHeroSectionProps) {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-bg.svg"
+          src="/images/hero-bg.png"
           alt=""
           aria-hidden="true"
           fill
@@ -200,7 +200,7 @@ export function PageHeroSection({ hero }: PageHeroSectionProps) {
       <ParallaxDashes />
 
       {/* Particle animation */}
-      <div className="pointer-events-none absolute inset-0 z-0 -translate-y-48 md:translate-y-0">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[500px] md:h-[600px]">
         <ParticleLogo className="h-full w-full" />
       </div>
 

@@ -15,7 +15,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
     <section className="relative  overflow-hidden bg-[#FFD8D8]">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-bg.svg"
+          src="/images/hero-bg.png"
           alt=""
           aria-hidden="true"
           fill

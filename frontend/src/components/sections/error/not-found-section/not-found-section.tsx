@@ -31,7 +31,7 @@ export function NotFoundSection() {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-bg.svg"
+          src="/images/hero-bg.png"
           alt=""
           aria-hidden="true"
           fill
