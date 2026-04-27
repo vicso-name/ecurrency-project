@@ -75,7 +75,7 @@ function ChevronDownIcon({ isOpen = false }: { isOpen?: boolean }) {
 
 function HeaderArrowIcon() {
   return (
-    <span className="flex h-4 w-4 rotate-[-90deg] items-center justify-center rounded-full border border-[rgba(227,64,57,0.14)]">
+    <span className="flex h-4 w-4 items-center justify-center rounded-full border border-[rgba(227,64,57,0.14)]">
       <svg xmlns="http://www.w3.org/2000/svg" width="5" height="8" viewBox="0 0 5 8" fill="none">
         <path
           d="M0.5625 7.0625L3.8125 3.8125L0.5625 0.5625"
@@ -181,6 +181,8 @@ function HeaderCta({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href || '#'}
+      target="_blank"
+      rel="noopener noreferrer"
       className="flex min-h-[34px] shrink-0 items-center justify-center gap-[10px] rounded-[60px] border border-[rgba(227,64,57,0.07)] bg-[rgba(227,64,57,0.02)] px-[8px] py-[5px] text-[14px] font-normal leading-6 text-black backdrop-blur-[12px] transition-all duration-200 hover:-translate-y-[1px] hover:border-[rgba(227,64,57,0.18)] hover:bg-[rgba(227,64,57,0.06)] hover:text-[#E34039]"
     >
       <span>{label}</span>
@@ -248,7 +250,7 @@ function DesktopNavigation({
       {navigation.map((item) => {
         const hasChildren = item.hasChildren && item.children && item.children.length > 0;
         const isOpen = openDropdownId === item.id;
-        const isActive = isNavItemActive(pathname, item);
+        const isActive = hasChildren ? isPathActive(pathname, item.href) : isNavItemActive(pathname, item);
 
         return (
           <div
@@ -320,7 +322,7 @@ function MobileMenu({
         {navigation.map((item, index) => {
           const isExpanded = expandedItemId === item.id;
           const hasChildren = item.hasChildren && item.children && item.children.length > 0;
-          const isActive = isNavItemActive(pathname, item);
+          const isActive = hasChildren ? isPathActive(pathname, item.href) : isNavItemActive(pathname, item);
 
           return (
             <div key={item.id}>
