@@ -34,7 +34,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
         className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-50 bg-gradient-to-b from-transparent to-[#f7f5f4]"
       />
 
-      <div className="pointer-events-none absolute inset-0 z-0">
+      <div className="pointer-events-none absolute inset-0 z-0 -translate-y-48 md:translate-y-0">
         <ParticleLogo className="h-full w-full" />
       </div>
 

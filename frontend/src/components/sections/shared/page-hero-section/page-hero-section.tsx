@@ -200,7 +200,7 @@ export function PageHeroSection({ hero }: PageHeroSectionProps) {
       <ParallaxDashes />
 
       {/* Particle animation */}
-      <div className="pointer-events-none absolute inset-0 z-0">
+      <div className="pointer-events-none absolute inset-0 z-0 -translate-y-48 md:translate-y-0">
         <ParticleLogo className="h-full w-full" />
       </div>
 

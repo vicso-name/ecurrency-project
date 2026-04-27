@@ -66,6 +66,9 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
     const canvas = canvasElement;
     const ctx = canvasContext;
 
+    // Detect touch device once at init — never changes during session
+    const isTouchDevice = navigator.maxTouchPoints > 0;
+
     let width = 0;
     let height = 0;
     let particles: Particle[] = [];
@@ -212,14 +215,18 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       const sphereCosB = Math.cos(sphereAngle * 0.7);
       const sphereSinB = Math.sin(sphereAngle * 0.7);
 
-      if (mouse.x > 0 && mouse.y > 0) {
+      // Touch: logo stays perfectly flat, no tilt, no idle sway
+      if (!isTouchDevice && mouse.x > 0 && mouse.y > 0) {
         smoothMouse.x += (mouse.x / width - smoothMouse.x) * 0.05;
         smoothMouse.y += (mouse.y / height - smoothMouse.y) * 0.05;
-      } else {
+      } else if (!isTouchDevice) {
         const idleX = 0.5 + Math.sin(now * 0.00035) * 0.1;
         const idleY = 0.5 + Math.cos(now * 0.0005) * 0.08;
         smoothMouse.x += (idleX - smoothMouse.x) * 0.012;
         smoothMouse.y += (idleY - smoothMouse.y) * 0.012;
+      } else {
+        smoothMouse.x = 0.5;
+        smoothMouse.y = 0.5;
       }
 
       const tiltY = (smoothMouse.x - 0.5) * 0.65;
@@ -253,7 +260,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
         const dy = mouse.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < mouse.radius && t < 0.5) {
+        if (!isTouchDevice && distance < mouse.radius && t < 0.5) {
           const force = (mouse.radius - distance) / mouse.radius;
           const angle = Math.atan2(dy, dx);
           particle.vx -= Math.cos(angle) * force * REPULSE_FORCE;
@@ -304,7 +311,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
         }
       }
 
-      if (mouse.x > 0 && mouse.y > 0) {
+      if (!isTouchDevice && mouse.x > 0 && mouse.y > 0) {
         const gradient = ctx.createRadialGradient(
           mouse.x,
           mouse.y,
@@ -329,6 +336,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
     };
 
     const onMouseMove = (event: MouseEvent) => {
+      if (isTouchDevice) return;
       updateMousePosition(event.clientX, event.clientY);
     };
 
@@ -338,31 +346,16 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
     };
 
     const onMouseDown = () => {
-      sphereTarget = 1;
+      if (!isTouchDevice) sphereTarget = 1;
     };
 
     const onMouseUp = () => {
-      sphereTarget = 0;
+      if (!isTouchDevice) sphereTarget = 0;
     };
 
-    const onTouchStart = (event: TouchEvent) => {
-      const touch = event.touches[0];
-      if (!touch) return;
-      updateMousePosition(touch.clientX, touch.clientY);
-      sphereTarget = 1;
-    };
-
-    const onTouchMove = (event: TouchEvent) => {
-      const touch = event.touches[0];
-      if (!touch) return;
-      updateMousePosition(touch.clientX, touch.clientY);
-    };
-
-    const onTouchEnd = () => {
-      mouse.x = -9999;
-      mouse.y = -9999;
-      sphereTarget = 0;
-    };
+    const onTouchStart = (_event: TouchEvent) => { /* no-op */ };
+    const onTouchMove = (_event: TouchEvent) => { /* no-op */ };
+    const onTouchEnd = () => { /* no-op */ };
 
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseleave', onMouseLeave);
