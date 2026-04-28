@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Manrope, Roboto, Roboto_Mono } from 'next/font/google';
 import './globals.css';
 
@@ -43,6 +44,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={`${manrope.variable} ${roboto.variable} ${robotoMono.variable} font-sans`}
       >
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-1PZTFJRNGL"
+            strategy="afterInteractive"
+          />
+
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-1PZTFJRNGL');
+            `}
+          </Script>
         {children}
       </body>
     </html>
