@@ -53,6 +53,19 @@ function isNavItemActive(pathname: string, item: NavLink) {
   return children.some((child) => isPathActive(pathname, child.href));
 }
 
+function shouldOpenInNewTab(item: { openInNewTab?: boolean | null }) {
+  return Boolean(item.openInNewTab);
+}
+
+function externalLinkProps(item: { openInNewTab?: boolean | null }) {
+  const openInNewTab = shouldOpenInNewTab(item);
+
+  return {
+    target: openInNewTab ? '_blank' : undefined,
+    rel: openInNewTab ? 'noopener noreferrer' : undefined,
+  };
+}
+
 function ChevronDownIcon({ isOpen = false }: { isOpen?: boolean }) {
   return (
     <span
@@ -217,8 +230,7 @@ function DesktopDropdown({
               <div key={child.id}>
                 <Link
                   href={child.href || '#'}
-                  target={(child as typeof child & { openInNewTab?: boolean | null }).openInNewTab ? '_blank' : undefined}
-                  rel={(child as typeof child & { openInNewTab?: boolean | null }).openInNewTab ? 'noopener noreferrer' : undefined}
+                  {...externalLinkProps(child)}
                   className={`nav-child-link item-child block px-3 py-3 text-[16px] font-medium leading-5 transition-colors duration-200 hover:bg-[rgba(227,64,57,0.04)] ${
                     isChildActive ? 'text-[#E34039] bg-[rgba(227,64,57,0.04)]' : 'text-black'
                   }`}
@@ -280,6 +292,7 @@ function DesktopNavigation({
             ) : (
               <Link
                 href={item.href || '#'}
+                {...externalLinkProps(item)}
                 className={`flex items-center gap-2 text-[15px] font-normal leading-[56px] transition-colors duration-200 ${
                   isActive ? 'text-[#E34039]' : 'text-black hover:text-[#E34039]'
                 }`}
@@ -344,6 +357,7 @@ function MobileMenu({
                 ) : (
                   <Link
                     href={item.href || '#'}
+                    {...externalLinkProps(item)}
                     className={`text-[20px] font-medium leading-6 tracking-[-1px] ${
                       isActive ? 'text-[#E34039]' : 'text-black'
                     }`}
@@ -375,8 +389,7 @@ function MobileMenu({
                       <Link
                         key={child.id}
                         href={child.href || '#'}
-                        target={(child as typeof child & { openInNewTab?: boolean | null }).openInNewTab ? '_blank' : undefined}
-                        rel={(child as typeof child & { openInNewTab?: boolean | null }).openInNewTab ? 'noopener noreferrer' : undefined}
+                        {...externalLinkProps(child)}
                         className={`nav-child-link item-child text-[16px] font-medium leading-5 ${
                           isChildActive ? 'text-[#E34039]' : 'text-black/70'
                         }`}
