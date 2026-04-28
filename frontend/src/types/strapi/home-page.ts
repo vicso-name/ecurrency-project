@@ -72,6 +72,7 @@ export type BlockchainArchitectureCard = {
 };
 
 export type HomePageBlockchainArchitecture = {
+  bottomCtaOpenInNewTab: boolean | null | undefined;
   id: number;
   preTitle?: string;
   title: string;

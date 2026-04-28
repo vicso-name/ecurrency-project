@@ -96,6 +96,7 @@ export function BlockchainArchitectureSection({
               <CtaButton
                 href={data.bottomCtaHref || '#'}
                 label={data.bottomCtaLabel}
+                openInNewTab={data.bottomCtaOpenInNewTab}
               />
             </div>
           </FadeUp>
@@ -202,12 +203,22 @@ function IconBlock({
   );
 }
 
-function CtaButton({ href, label }: { href: string; label: string }) {
+function CtaButton({
+  href,
+  label,
+  openInNewTab,
+}: {
+  href: string;
+  label: string;
+  openInNewTab?: boolean | null;
+}) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <Link
       href={href}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="inline-flex min-h-[53px] items-center justify-center rounded-[100px] border border-[#DE3737] px-8 text-center text-[16px] leading-9 font-normal capitalize text-[#EC0000] shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-colors duration-200"
