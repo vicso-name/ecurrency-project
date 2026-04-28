@@ -166,6 +166,7 @@ export type StartExploringCard = {
 };
 
 export type StartExploringLink = {
+  openInNewTab: boolean | null | undefined;
   id: number;
   label: string;
   href: string;

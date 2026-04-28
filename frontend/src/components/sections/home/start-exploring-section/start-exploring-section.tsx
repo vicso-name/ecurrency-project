@@ -50,15 +50,19 @@ const BUTTON_GRADIENT_HOVER = `${BUTTON_GRADIENT}, rgba(236, 0, 0, 0.04)`;
 function ExploreButton({
   href,
   label,
+  openInNewTab,
 }: {
   href: string;
   label: string;
+  openInNewTab?: boolean | null;
 }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <Link
       href={href}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="inline-flex min-h-[50px] w-full items-center justify-center gap-1 rounded-[100px] border border-[#DE3737] px-[30px] pt-[6px] pb-[8px] text-center text-[16px] leading-9 font-normal capitalize text-[#EC0000] shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-all duration-200 md:w-[236px]"
@@ -159,6 +163,7 @@ function BottomContent({
               key={link.id}
               href={link.href || '#'}
               label={link.label}
+              openInNewTab={link.openInNewTab}
             />
           ))}
         </div>
