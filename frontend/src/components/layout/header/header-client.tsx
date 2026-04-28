@@ -53,12 +53,8 @@ function isNavItemActive(pathname: string, item: NavLink) {
   return children.some((child) => isPathActive(pathname, child.href));
 }
 
-function shouldOpenInNewTab(item: { openInNewTab?: boolean | null }) {
-  return Boolean(item.openInNewTab);
-}
-
-function externalLinkProps(item: { openInNewTab?: boolean | null }) {
-  const openInNewTab = shouldOpenInNewTab(item);
+function externalLinkProps(item: unknown) {
+  const openInNewTab = Boolean((item as { openInNewTab?: boolean | null })?.openInNewTab);
 
   return {
     target: openInNewTab ? '_blank' : undefined,
