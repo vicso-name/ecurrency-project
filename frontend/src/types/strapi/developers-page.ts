@@ -40,6 +40,7 @@ export type ToolCard = {
 };
 
 export type ToolsSection = {
+  ctaOpenInNewTab: boolean | null | undefined;
   id: number;
   title: string;
   cards?: ToolCard[];

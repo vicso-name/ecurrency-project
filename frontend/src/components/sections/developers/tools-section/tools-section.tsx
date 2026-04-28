@@ -39,12 +39,22 @@ function CardButton({
   );
 }
 
-function CtaButton({ href, label }: { href: string; label: string }) {
+function CtaButton({
+  href,
+  label,
+  openInNewTab,
+}: {
+  href: string;
+  label: string;
+  openInNewTab?: boolean | null;
+}) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <Link
       href={href}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="inline-flex items-center justify-center gap-1 rounded-[100px] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal capitalize leading-[36px] text-white transition-all duration-200"
@@ -133,7 +143,7 @@ export function ToolsSectionBlock({ data }: ToolsSectionProps) {
         {data.ctaLabel && (
           <FadeUp delay={460} duration={1200} y={14}>
             <div className="mt-[50px] flex justify-center">
-              <CtaButton href={data.ctaHref || '#'} label={data.ctaLabel} />
+              <CtaButton href={data.ctaHref || '#'} label={data.ctaLabel} openInNewTab={data.ctaOpenInNewTab} />
             </div>
           </FadeUp>
         )}
