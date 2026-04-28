@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 const SVG_PATH =
-  'M1035.99 614.718C1018.6 632.486 1000.64 637.801 938.184 637.801C864.692 637.801 861.671 637.338 861.671 637.338H660.269C631.406 678.802 584.089 705.881 530.553 705.881C442.656 705.881 371.401 632.967 371.401 543.002C371.401 453.02 442.66 380.088 530.553 380.088C582.879 380.088 629.301 405.943 658.311 445.84H860.078C818.372 300.667 687.046 194.373 531.897 194.373C343.312 194.373 189.898 351.411 189.898 544.431C189.898 737.468 343.312 894.494 531.897 894.494C627.691 894.494 714.41 853.969 776.545 788.786C776.545 788.786 847.035 788.279 913.45 788.279C916.248 788.279 937.789 788.279 940.315 788.279C980.652 788.279 987.045 821.402 972.569 842.121C970.963 844.404 965.753 852.696 963.974 855.295C934.265 898.896 920.879 913.824 883.532 948.002C789.682 1033.8 665.941 1086 530.504 1086C237.97 1086 0 842.428 0 543.02C0 243.608 237.971 0 530.5 0C823.007 0 1061 243.608 1061 543.02C1061 566.939 1055.74 594.547 1035.99 614.718Z';
+  "M1035.99 614.718C1018.6 632.486 1000.64 637.801 938.184 637.801C864.692 637.801 861.671 637.338 861.671 637.338H660.269C631.406 678.802 584.089 705.881 530.553 705.881C442.656 705.881 371.401 632.967 371.401 543.002C371.401 453.02 442.66 380.088 530.553 380.088C582.879 380.088 629.301 405.943 658.311 445.84H860.078C818.372 300.667 687.046 194.373 531.897 194.373C343.312 194.373 189.898 351.411 189.898 544.431C189.898 737.468 343.312 894.494 531.897 894.494C627.691 894.494 714.41 853.969 776.545 788.786C776.545 788.786 847.035 788.279 913.45 788.279C916.248 788.279 937.789 788.279 940.315 788.279C980.652 788.279 987.045 821.402 972.569 842.121C970.963 844.404 965.753 852.696 963.974 855.295C934.265 898.896 920.879 913.824 883.532 948.002C789.682 1033.8 665.941 1086 530.504 1086C237.97 1086 0 842.428 0 543.02C0 243.608 237.971 0 530.5 0C823.007 0 1061 243.608 1061 543.02C1061 566.939 1055.74 594.547 1035.99 614.718Z";
 
 const DENSITY = 6;
 const RETURN_SPEED = 0.045;
@@ -30,6 +30,10 @@ type Particle = {
   size: number;
   hue: number;
   sat: number;
+  phase: number;
+  phase2: number;
+  floatAmp: number;
+  floatSpeed: number;
 };
 
 type ParticleLogoProps = {
@@ -60,14 +64,15 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
     const canvasElement = canvasRef.current;
     if (!canvasElement) return;
 
-    const canvasContext = canvasElement.getContext('2d');
+    const canvasContext = canvasElement.getContext("2d");
     if (!canvasContext) return;
 
     const canvas = canvasElement;
     const ctx = canvasContext;
 
     // Detect touch device once at init — never changes during session
-    const isTouchDevice = navigator.maxTouchPoints > 0;
+    const isTouchDevice =
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
     let width = 0;
     let height = 0;
@@ -101,15 +106,15 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       const renderW = Math.max(Math.floor(svgW * scale), 2);
       const renderH = Math.max(Math.floor(svgH * scale), 2);
 
-      const offscreen = document.createElement('canvas');
+      const offscreen = document.createElement("canvas");
       offscreen.width = renderW;
       offscreen.height = renderH;
 
-      const offscreenCtx = offscreen.getContext('2d');
+      const offscreenCtx = offscreen.getContext("2d");
       if (!offscreenCtx) return;
 
       offscreenCtx.scale(scale, scale);
-      offscreenCtx.fillStyle = '#fff';
+      offscreenCtx.fillStyle = "#fff";
       offscreenCtx.fill(new Path2D(SVG_PATH));
       offscreenCtx.setTransform(1, 0, 0, 1, 0, 0);
 
@@ -152,7 +157,8 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
         const dx = (point.x - cx) / logoRadius;
         const dy = (point.y - cy) / logoRadius;
         const distanceSquared = dx * dx + dy * dy;
-        const zNorm = distanceSquared < 1 ? Math.sqrt(1 - distanceSquared) : 0.05;
+        const zNorm =
+          distanceSquared < 1 ? Math.sqrt(1 - distanceSquared) : 0.05;
         const domeDepth = 180;
         const logoZ = zNorm * domeDepth - domeDepth * 0.3;
 
@@ -175,6 +181,10 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
           size: 1.4 + Math.random() * 1.2,
           hue: 354 + Math.random() * 14,
           sat: 75 + Math.random() * 22,
+          phase: Math.random() * Math.PI * 2,
+          phase2: Math.random() * Math.PI * 2,
+          floatAmp: 1.0 + Math.random() * 2.5,
+          floatSpeed: 0.0008 + Math.random() * 0.0015,
         });
       }
     };
@@ -215,18 +225,20 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       const sphereCosB = Math.cos(sphereAngle * 0.7);
       const sphereSinB = Math.sin(sphereAngle * 0.7);
 
-      // Touch: logo stays perfectly flat, no tilt, no idle sway
-      if (!isTouchDevice && mouse.x > 0 && mouse.y > 0) {
-        smoothMouse.x += (mouse.x / width - smoothMouse.x) * 0.05;
-        smoothMouse.y += (mouse.y / height - smoothMouse.y) * 0.05;
-      } else if (!isTouchDevice) {
-        const idleX = 0.5 + Math.sin(now * 0.00035) * 0.1;
-        const idleY = 0.5 + Math.cos(now * 0.0005) * 0.08;
+      const idleX = 0.5 + Math.sin(now * 0.00035) * 0.1;
+      const idleY = 0.5 + Math.cos(now * 0.0005) * 0.08;
+
+      if (isTouchDevice) {
+        // Mobile/tablet: passive idle animation only, no touch/click interaction.
         smoothMouse.x += (idleX - smoothMouse.x) * 0.012;
         smoothMouse.y += (idleY - smoothMouse.y) * 0.012;
+      } else if (mouse.x > 0 && mouse.y > 0) {
+        // Desktop: mouse-reactive tilt.
+        smoothMouse.x += (mouse.x / width - smoothMouse.x) * 0.05;
+        smoothMouse.y += (mouse.y / height - smoothMouse.y) * 0.05;
       } else {
-        smoothMouse.x = 0.5;
-        smoothMouse.y = 0.5;
+        smoothMouse.x += (idleX - smoothMouse.x) * 0.012;
+        smoothMouse.y += (idleY - smoothMouse.y) * 0.012;
       }
 
       const tiltY = (smoothMouse.x - 0.5) * 0.65;
@@ -237,10 +249,13 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       const sinTiltY = Math.sin(tiltY);
       const cx = width / 2;
       const cy = height / 2;
+      const levitationY = Math.sin(now * 0.0008) * 6;
 
       for (const particle of particles) {
-        const sphereX = particle.sphereX * sphereCosA - particle.sphereZ * sphereSinA;
-        const sphereZ = particle.sphereX * sphereSinA + particle.sphereZ * sphereCosA;
+        const sphereX =
+          particle.sphereX * sphereCosA - particle.sphereZ * sphereSinA;
+        const sphereZ =
+          particle.sphereX * sphereSinA + particle.sphereZ * sphereCosA;
         const sphereY = particle.sphereY * sphereCosB - sphereZ * sphereSinB;
         const sphereZ2 = particle.sphereY * sphereSinB + sphereZ * sphereCosB;
 
@@ -252,9 +267,20 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
         const logoY2 = logoY * cosTiltX - logoZ2 * sinTiltX;
         const logoZ3 = logoY * sinTiltX + logoZ2 * cosTiltX;
 
-        particle.originX = (1 - t) * (cx + logoX2) + t * (cx + sphereX);
-        particle.originY = (1 - t) * (cy + logoY2) + t * (cy + sphereY);
-        particle.originZ = (1 - t) * logoZ3 + t * sphereZ2;
+        const floatTime = now * particle.floatSpeed;
+        const floatX = Math.sin(floatTime + particle.phase) * particle.floatAmp;
+        const floatY =
+          Math.cos(floatTime * 0.9 + particle.phase2) * particle.floatAmp;
+        const floatZ =
+          Math.sin(floatTime * 0.7 + particle.phase + 1.5) *
+          particle.floatAmp *
+          0.5;
+
+        particle.originX =
+          (1 - t) * (cx + logoX2 + floatX) + t * (cx + sphereX);
+        particle.originY =
+          (1 - t) * (cy + logoY2 + levitationY + floatY) + t * (cy + sphereY);
+        particle.originZ = (1 - t) * (logoZ3 + floatZ) + t * sphereZ2;
 
         const dx = mouse.x - particle.x;
         const dy = mouse.y - particle.y;
@@ -304,7 +330,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
             y - drawSize * 0.3,
             drawSize * 0.3,
             0,
-            Math.PI * 2
+            Math.PI * 2,
           );
           ctx.fillStyle = `rgba(255, 230, 230, ${(depth - 0.85) * 1.8})`;
           ctx.fill();
@@ -318,10 +344,10 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
           0,
           mouse.x,
           mouse.y,
-          mouse.radius
+          mouse.radius,
         );
-        gradient.addColorStop(0, 'rgba(255,50,50,0.08)');
-        gradient.addColorStop(1, 'rgba(255,0,0,0)');
+        gradient.addColorStop(0, "rgba(255,50,50,0.08)");
+        gradient.addColorStop(1, "rgba(255,0,0,0)");
         ctx.beginPath();
         ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
         ctx.fillStyle = gradient;
@@ -353,32 +379,22 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       if (!isTouchDevice) sphereTarget = 0;
     };
 
-    const onTouchStart = (_event: TouchEvent) => { /* no-op */ };
-    const onTouchMove = (_event: TouchEvent) => { /* no-op */ };
-    const onTouchEnd = () => { /* no-op */ };
-
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseleave', onMouseLeave);
-    canvas.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mouseup', onMouseUp);
-    canvas.addEventListener('touchstart', onTouchStart, { passive: true });
-    canvas.addEventListener('touchmove', onTouchMove, { passive: true });
-    canvas.addEventListener('touchend', onTouchEnd);
-    window.addEventListener('resize', resize);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseleave", onMouseLeave);
+    canvas.addEventListener("mousedown", onMouseDown);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("resize", resize);
 
     resize();
     animationFrame = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animationFrame);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseleave', onMouseLeave);
-      canvas.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mouseup', onMouseUp);
-      canvas.removeEventListener('touchstart', onTouchStart);
-      canvas.removeEventListener('touchmove', onTouchMove);
-      canvas.removeEventListener('touchend', onTouchEnd);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
+      canvas.removeEventListener("mousedown", onMouseDown);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("resize", resize);
     };
   }, []);
 
