@@ -32,8 +32,8 @@ export default async function HomePage() {
       <BlockQuoteSection blockQuote={homePage?.blockQuote} />
       <BlockchainDesignedSection data={homePage?.blockchainDesigned} />
       <BlockchainArchitectureSection data={homePage?.blockchainArchitecture} />
-      <UsedForSection data={homePage?.usedFor} />
       <EconomicLayerSection data={homePage?.economicLayer} />
+      <UsedForSection data={homePage?.usedFor} />
       <ToolsInfrastructureSection data={homePage?.toolsInfrastructure} />
       <div className=" relative mt-0 md:px-4 md:-mt-[130px]">
         <div className="mx-auto max-w-[1422px]">
