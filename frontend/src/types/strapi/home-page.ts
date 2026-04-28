@@ -31,6 +31,7 @@ export type BlockchainDesignedLink = {
   id: number;
   label: string;
   href: string;
+  openInNewTab?: boolean | null;
 };
 
 export type BlockchainDesignedTab = {

@@ -179,6 +179,8 @@ export function BlockchainDesignedSection({ data }: Props) {
               <Link
                 key={link.id}
                 href={link.href || '#'}
+                target={link.openInNewTab ? '_blank' : undefined}
+                rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
                 className="inline-flex min-h-[53px] w-full items-center justify-center rounded-[100px] border border-[#DE3737] bg-[radial-gradient(60.21%_66.41%_at_47.91%_-7.5%,rgba(240,88,88,0.40)_0%,rgba(255,255,255,0.05)_79.27%,rgba(255,255,255,0)_100%)] px-8 text-center text-[16px] leading-9 font-normal text-[#EC0000] capitalize shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-all duration-200 hover:-translate-y-[1px] hover:bg-[rgba(236,0,0,0.04)] md:w-auto"
               >
                 {link.label}
