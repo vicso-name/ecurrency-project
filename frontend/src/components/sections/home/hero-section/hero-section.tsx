@@ -4,9 +4,20 @@ import { ParticleLogo } from './ParticleLogo';
 import Image from 'next/image';
 import { FadeUp } from '@/components/ui/fade-up';
 
-type HeroSectionProps = {
-  hero: HomePageHero | null | undefined;
+type HeroWithButtonTargets = HomePageHero & {
+  primaryButtonOpenInNewTab?: boolean | null;
+  secondaryButtonOpenInNewTab?: boolean | null;
 };
+
+type HeroSectionProps = {
+  hero: HeroWithButtonTargets | null | undefined;
+};
+
+function externalLinkProps(openInNewTab?: boolean | null) {
+  return openInNewTab
+    ? { target: '_blank', rel: 'noopener noreferrer' }
+    : {};
+}
 
 export function HeroSection({ hero }: HeroSectionProps) {
   if (!hero) return null;
@@ -58,6 +69,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             {hero.primaryButtonLabel ? (
               <Link
                 href={hero.primaryButtonHref || '#'}
+                {...externalLinkProps(hero.primaryButtonOpenInNewTab)}
                 className="flex h-[53px] w-full items-center justify-center rounded-[100px] bg-[linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)] px-6 text-center text-[15px] font-normal text-white capitalize shadow-[0_2px_2px_0_rgba(214,214,214,0.74)] transition-transform duration-200 hover:-translate-y-[1px] sm:max-w-[230px]"
               >
                 {hero.primaryButtonLabel}
@@ -67,6 +79,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             {hero.secondaryButtonLabel ? (
               <Link
                 href={hero.secondaryButtonHref || '#'}
+                {...externalLinkProps(hero.secondaryButtonOpenInNewTab)}
                 className="flex h-[53px] w-full items-center justify-center rounded-[60px] border border-[rgba(32,32,32,0.07)] bg-[rgba(32,32,32,0.02)] px-6 text-center text-[15px] font-normal text-[#202020] whitespace-nowrap backdrop-blur-[12px] transition-all duration-200 hover:-translate-y-[1px] hover:border-[rgba(32,32,32,0.14)] hover:bg-[rgba(32,32,32,0.04)] sm:max-w-[230px]"
               >
                 {hero.secondaryButtonLabel}
