@@ -10,12 +10,22 @@ type ToolsSectionProps = {
   data: ToolsSection | null | undefined;
 };
 
-function CardButton({ href, label }: { href: string; label: string }) {
+function CardButton({
+  href,
+  label,
+  openInNewTab,
+}: {
+  href: string;
+  label: string;
+  openInNewTab?: boolean | null;
+}) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <Link
       href={href}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="flex h-[53px] w-full items-center justify-center rounded-[60px] border border-[rgba(32,32,32,0.07)] text-center [font-family:var(--font-manrope)] text-[15px] font-normal capitalize leading-[36px] text-[#202020] transition-all duration-200"
@@ -79,6 +89,7 @@ function ToolCardBlock({ card }: { card: ToolCard }) {
         <CardButton
           href={card.buttonHref || '#'}
           label={card.buttonLabel}
+          openInNewTab={card.buttonOpenInNewTab}
         />
       </div>
     </div>

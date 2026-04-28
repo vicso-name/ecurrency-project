@@ -30,6 +30,7 @@ export type DevelopersPageData = {
 };
 
 export type ToolCard = {
+  buttonOpenInNewTab: boolean | null | undefined;
   id: number;
   title: string;
   buttonLabel: string;
