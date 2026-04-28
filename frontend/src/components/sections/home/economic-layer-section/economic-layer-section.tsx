@@ -83,8 +83,10 @@ export function EconomicLayerSection({ data }: EconomicLayerSectionProps) {
               {data.buttonLabel ? (
                 <FadeUp delay={460} duration={1200} y={14}>
                   <div className="mt-[40px] md:mt-[50px]">
-                    <Link
+                   <Link
                       href={data.buttonHref || '#'}
+                      target={data.buttonOpenInNewTab ? '_blank' : undefined}
+                      rel={data.buttonOpenInNewTab ? 'noopener noreferrer' : undefined}
                       className="inline-flex items-center justify-center gap-1 rounded-[100px] bg-[linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)] px-[30px] pt-[6px] pb-[8px] text-center text-[16px] leading-9 font-normal capitalize text-white shadow-[0_2px_2px_rgba(214,214,214,0.74)] transition duration-200 hover:bg-[linear-gradient(0deg,rgba(0,0,0,0.10)_0%,rgba(0,0,0,0.10)_100%),linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)]"
                     >
                       <span>{data.buttonLabel}</span>

@@ -124,6 +124,7 @@ export type HomePageUsedFor = {
 };
 
 export type HomePageEconomicLayer = {
+  buttonOpenInNewTab?: boolean | null;
   id: number;
   title: string;
   subtitle?: string;
