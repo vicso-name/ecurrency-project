@@ -1,59 +1,39 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import RAW_POINTS_JSON from "./raw-points.json";
 
-const SVG_PATH =
-  "M1035.99 614.718C1018.6 632.486 1000.64 637.801 938.184 637.801C864.692 637.801 861.671 637.338 861.671 637.338H660.269C631.406 678.802 584.089 705.881 530.553 705.881C442.656 705.881 371.401 632.967 371.401 543.002C371.401 453.02 442.66 380.088 530.553 380.088C582.879 380.088 629.301 405.943 658.311 445.84H860.078C818.372 300.667 687.046 194.373 531.897 194.373C343.312 194.373 189.898 351.411 189.898 544.431C189.898 737.468 343.312 894.494 531.897 894.494C627.691 894.494 714.41 853.969 776.545 788.786C776.545 788.786 847.035 788.279 913.45 788.279C916.248 788.279 937.789 788.279 940.315 788.279C980.652 788.279 987.045 821.402 972.569 842.121C970.963 844.404 965.753 852.696 963.974 855.295C934.265 898.896 920.879 913.824 883.532 948.002C789.682 1033.8 665.941 1086 530.504 1086C237.97 1086 0 842.428 0 543.02C0 243.608 237.971 0 530.5 0C823.007 0 1061 243.608 1061 543.02C1061 566.939 1055.74 594.547 1035.99 614.718Z";
+const BASE_RX = -28 * Math.PI / 180;
+const BASE_RY =  24 * Math.PI / 180;
+const BASE_RZ =   9 * Math.PI / 180;
 
-const DENSITY = 6;
-const RETURN_SPEED = 0.045;
-const FRICTION = 0.86;
-const REPULSE_FORCE = 14;
-const MOUSE_RADIUS = 150;
+const RETURN_SPEED = 0.025;
+const FRICTION      = 0.89;
 
 type Particle = {
-  x: number;
-  y: number;
-  z: number;
-  sphereX: number;
-  sphereY: number;
-  sphereZ: number;
-  logoX: number;
-  logoY: number;
-  logoZ: number;
-  originX: number;
-  originY: number;
-  originZ: number;
-  vx: number;
-  vy: number;
-  vz: number;
+  x: number; y: number; z: number;
+  sphereX: number; sphereY: number; sphereZ: number;
+  logoX: number; logoY: number; logoZ: number;
+  originX: number; originY: number; originZ: number;
+  vx: number; vy: number; vz: number;
   size: number;
-  hue: number;
-  sat: number;
-  phase: number;
-  phase2: number;
-  floatAmp: number;
-  floatSpeed: number;
+  hue: number; sat: number;
+  phase: number; phase2: number; phase3: number;
+  floatAmp: number; floatSpeed: number;
+  popFreq: number; popPhase: number; popAmp: number;
+  hoverGlow: number;
 };
 
-type ParticleLogoProps = {
-  className?: string;
-};
+type ParticleLogoProps = { className?: string };
 
 function shuffleIndexes(length: number) {
   const indexes = Array.from({ length }, (_, i) => i);
   let seed = 12345;
-
-  const random = () => {
-    seed = (seed * 16807) % 2147483647;
-    return seed / 2147483647;
-  };
-
-  for (let i = indexes.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(random() * (i + 1));
+  const rng = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  for (let i = indexes.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
     [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
   }
-
   return indexes;
 }
 
@@ -61,340 +41,256 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvasElement = canvasRef.current;
-    if (!canvasElement) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    const canvasContext = canvasElement.getContext("2d");
-    if (!canvasContext) return;
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-    const canvas = canvasElement;
-    const ctx = canvasContext;
-
-    // Detect touch device once at init — never changes during session
-    const isTouchDevice =
-      "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-    let width = 0;
-    let height = 0;
+    let W = 0, H = 0;
     let particles: Particle[] = [];
     let animationFrame = 0;
     let initialized = false;
     let sphereAngle = 0;
-    let sphereT = 0;
-    let sphereTarget = 0;
-    let sphereVel = 0;
+    let sphereT = 0, sphereTarget = 0, sphereVel = 0;
 
-    const mouse = { x: -9999, y: -9999, radius: MOUSE_RADIUS };
-    const smoothMouse = { x: 0.5, y: 0.5 };
-
-    const getCanvasSize = () => {
-      const parent = canvas.parentElement;
-      const rect = parent?.getBoundingClientRect();
-
-      return {
-        w: Math.max(1, Math.floor(rect?.width || window.innerWidth || 800)),
-        h: Math.max(1, Math.floor(rect?.height || window.innerHeight || 600)),
-      };
-    };
+    const mouse = { x: -9999, y: -9999, radius: 160 };
+    const RAW_POINTS = RAW_POINTS_JSON as [number, number, number][];
 
     const initParticles = () => {
       particles = [];
+      const skip = isTouchDevice ? 2 : 1;
+      const used: [number, number, number][] = [];
+      for (let i = 0; i < RAW_POINTS.length; i += skip) used.push(RAW_POINTS[i]);
 
-      const svgW = 1061;
-      const svgH = 1086;
-      const scale = Math.min((width * 0.55) / svgW, (height * 0.55) / svgH);
-      const renderW = Math.max(Math.floor(svgW * scale), 2);
-      const renderH = Math.max(Math.floor(svgH * scale), 2);
+      const count = used.length;
+      const modelScale = Math.min(W, H) * 0.32;
+      const sphereR = modelScale * 0.95;
+      const mb = isTouchDevice ? 1.3 : 1;
 
-      const offscreen = document.createElement("canvas");
-      offscreen.width = renderW;
-      offscreen.height = renderH;
-
-      const offscreenCtx = offscreen.getContext("2d");
-      if (!offscreenCtx) return;
-
-      offscreenCtx.scale(scale, scale);
-      offscreenCtx.fillStyle = "#fff";
-      offscreenCtx.fill(new Path2D(SVG_PATH));
-      offscreenCtx.setTransform(1, 0, 0, 1, 0, 0);
-
-      const imageData = offscreenCtx.getImageData(0, 0, renderW, renderH).data;
-      const offsetX = (width - renderW) / 2;
-      const offsetY = (height - renderH) / 2;
-      const points: { x: number; y: number }[] = [];
-
-      for (let y = 0; y < renderH; y += DENSITY) {
-        for (let x = 0; x < renderW; x += DENSITY) {
-          if (imageData[(y * renderW + x) * 4 + 3] > 128) {
-            points.push({ x: x + offsetX, y: y + offsetY });
-          }
-        }
-      }
-
-      const count = points.length;
-      if (!count) return;
-
-      const cx = width / 2;
-      const cy = height / 2;
-      const sphereRadius = Math.min(width, height) * 0.2;
-      const logoRadius = Math.max(renderW, renderH) * 0.55;
-      const shuffledIndexes = shuffleIndexes(count);
-
-      const spherePositions = Array.from({ length: count }, (_, i) => {
-        const phi = Math.acos(1 - (2 * (i + 0.5)) / count);
+      const spherePos = Array.from({ length: count }, (_, i) => {
+        const phi   = Math.acos(1 - (2 * (i + 0.5)) / count);
         const theta = Math.PI * (1 + Math.sqrt(5)) * i;
-
         return {
-          x: sphereRadius * Math.sin(phi) * Math.cos(theta),
-          y: sphereRadius * Math.sin(phi) * Math.sin(theta),
-          z: sphereRadius * Math.cos(phi),
+          x: sphereR * Math.sin(phi) * Math.cos(theta),
+          y: sphereR * Math.sin(phi) * Math.sin(theta),
+          z: sphereR * Math.cos(phi),
         };
       });
 
-      for (let i = 0; i < count; i += 1) {
-        const point = points[i];
-        const spherePosition = spherePositions[shuffledIndexes[i]];
-        const dx = (point.x - cx) / logoRadius;
-        const dy = (point.y - cy) / logoRadius;
-        const distanceSquared = dx * dx + dy * dy;
-        const zNorm =
-          distanceSquared < 1 ? Math.sqrt(1 - distanceSquared) : 0.05;
-        const domeDepth = 180;
-        const logoZ = zNorm * domeDepth - domeDepth * 0.3;
+      const shuffled = shuffleIndexes(count);
+
+      for (let i = 0; i < count; i++) {
+        const pt = used[i];
+        const sp = spherePos[shuffled[i]];
+        const lx = pt[0] * modelScale;
+        const ly = pt[1] * modelScale;
+        const lz = pt[2] * modelScale;
+
+        const phase  = Math.random() * Math.PI * 2;
+        const phase2 = Math.random() * Math.PI * 2;
+        const phase3 = Math.random() * Math.PI * 2;
+        const floatAmp   = (2 + Math.random() * 4) * mb;
+        const floatSpeed = (0.001 + Math.random() * 0.002) * (isTouchDevice ? 1.3 : 1);
+        const wild       = Math.random();
+        const wildFactor = wild > (isTouchDevice ? 0.7 : 0.82) ? 2.5 + Math.random() * 3.5 : 1;
+        const popFreq    = 0.0003 + Math.random() * 0.0007;
+        const popPhase   = Math.random() * Math.PI * 2;
+        const popAmp     = (wild > 0.6 ? 8 + Math.random() * 20 : 2 + Math.random() * 6) * mb;
 
         particles.push({
-          x: point.x,
-          y: point.y,
-          z: logoZ,
-          sphereX: spherePosition.x,
-          sphereY: spherePosition.y,
-          sphereZ: spherePosition.z,
-          logoX: point.x,
-          logoY: point.y,
-          logoZ,
-          originX: point.x,
-          originY: point.y,
-          originZ: logoZ,
-          vx: 0,
-          vy: 0,
-          vz: 0,
-          size: 1.4 + Math.random() * 1.2,
-          hue: 354 + Math.random() * 14,
-          sat: 75 + Math.random() * 22,
-          phase: Math.random() * Math.PI * 2,
-          phase2: Math.random() * Math.PI * 2,
-          floatAmp: 1.0 + Math.random() * 2.5,
-          floatSpeed: 0.0008 + Math.random() * 0.0015,
+          x: W / 2 + lx, y: H / 2 + ly, z: lz,
+          sphereX: sp.x, sphereY: sp.y, sphereZ: sp.z,
+          logoX: lx, logoY: ly, logoZ: lz,
+          originX: W / 2 + lx, originY: H / 2 + ly, originZ: lz,
+          vx: 0, vy: 0, vz: 0,
+          size: isTouchDevice ? 0.6 + Math.random() * 0.7 : 1.2 + Math.random() * 1.4,
+          hue: 352 + Math.random() * 16,
+          sat: 72  + Math.random() * 26,
+          phase, phase2, phase3,
+          floatAmp: floatAmp * wildFactor,
+          floatSpeed,
+          popFreq, popPhase, popAmp,
+          hoverGlow: 0,
         });
       }
     };
 
     const resize = () => {
-      const size = getCanvasSize();
-      width = size.w;
-      height = size.h;
-      canvas.width = width;
-      canvas.height = height;
-
-      if (width > 10 && height > 10) {
-        initParticles();
-        initialized = true;
-      }
+      const rect = canvas.parentElement?.getBoundingClientRect();
+      W = canvas.width  = Math.max(1, Math.floor(rect?.width  || window.innerWidth  || 800));
+      H = canvas.height = Math.max(1, Math.floor(rect?.height || window.innerHeight || 600));
+      if (W > 10 && H > 10) { initParticles(); initialized = true; }
     };
 
     const animate = (now: number) => {
       animationFrame = requestAnimationFrame(animate);
-
       if (!initialized || !particles.length) {
-        if (width > 10 && height > 10 && !initialized) resize();
+        if (W > 10 && H > 10 && !initialized) resize();
         return;
       }
 
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, W, H);
 
-      sphereVel += (sphereTarget - sphereT) * 0.004;
-      sphereVel *= 0.92;
-      sphereT += sphereVel;
-      sphereT = Math.max(0, Math.min(1, sphereT));
-
-      sphereAngle += 0.008 * sphereT;
-
-      const t = sphereT;
-      const sphereCosA = Math.cos(sphereAngle);
-      const sphereSinA = Math.sin(sphereAngle);
-      const sphereCosB = Math.cos(sphereAngle * 0.7);
-      const sphereSinB = Math.sin(sphereAngle * 0.7);
-
-      const idleX = 0.5 + Math.sin(now * 0.00035) * 0.1;
-      const idleY = 0.5 + Math.cos(now * 0.0005) * 0.08;
-
-      if (isTouchDevice) {
-        // Mobile/tablet: passive idle animation only, no touch/click interaction.
-        smoothMouse.x += (idleX - smoothMouse.x) * 0.012;
-        smoothMouse.y += (idleY - smoothMouse.y) * 0.012;
-      } else if (mouse.x > 0 && mouse.y > 0) {
-        // Desktop: mouse-reactive tilt.
-        smoothMouse.x += (mouse.x / width - smoothMouse.x) * 0.05;
-        smoothMouse.y += (mouse.y / height - smoothMouse.y) * 0.05;
-      } else {
-        smoothMouse.x += (idleX - smoothMouse.x) * 0.012;
-        smoothMouse.y += (idleY - smoothMouse.y) * 0.012;
+      // Sphere morph
+      if (!isTouchDevice) {
+        sphereVel += (sphereTarget - sphereT) * 0.004;
+        sphereVel *= 0.92;
+        sphereT = Math.max(0, Math.min(1, sphereT + sphereVel));
       }
+      const t = sphereT;
 
-      const tiltY = (smoothMouse.x - 0.5) * 0.65;
-      const tiltX = (smoothMouse.y - 0.5) * -0.5;
-      const cosTiltX = Math.cos(tiltX);
-      const sinTiltX = Math.sin(tiltX);
-      const cosTiltY = Math.cos(tiltY);
-      const sinTiltY = Math.sin(tiltY);
-      const cx = width / 2;
-      const cy = height / 2;
-      const levitationY = Math.sin(now * 0.0008) * 6;
+      sphereAngle += 0.008 * t;
+      const scA = Math.cos(sphereAngle), ssA = Math.sin(sphereAngle);
+      const scB = Math.cos(sphereAngle * 0.7), ssB = Math.sin(sphereAngle * 0.7);
 
-      for (const particle of particles) {
-        const sphereX =
-          particle.sphereX * sphereCosA - particle.sphereZ * sphereSinA;
-        const sphereZ =
-          particle.sphereX * sphereSinA + particle.sphereZ * sphereCosA;
-        const sphereY = particle.sphereY * sphereCosB - sphereZ * sphereSinB;
-        const sphereZ2 = particle.sphereY * sphereSinB + sphereZ * sphereCosB;
+      // Idle sway
+      const swayX = Math.sin(now * 0.00032) * 0.07 + Math.sin(now * 0.00078) * 0.03;
+      const swayY = Math.cos(now * 0.00045) * 0.06 + Math.cos(now * 0.00090) * 0.025;
+      const swayZ = Math.sin(now * 0.00028) * 0.035;
+      const levY  = Math.sin(now * 0.0007) * 10 + Math.sin(now * 0.0013) * 4;
 
-        const logoX = particle.logoX - cx;
-        const logoY = particle.logoY - cy;
-        const logoZ = particle.logoZ;
-        const logoX2 = logoX * cosTiltY + logoZ * sinTiltY;
-        const logoZ2 = -logoX * sinTiltY + logoZ * cosTiltY;
-        const logoY2 = logoY * cosTiltX - logoZ2 * sinTiltX;
-        const logoZ3 = logoY * sinTiltX + logoZ2 * cosTiltX;
+      const tRx = BASE_RX + swayX, tRy = BASE_RY + swayY, tRz = BASE_RZ + swayZ;
+      const cUx = Math.cos(tRx), sUx = Math.sin(tRx);
+      const cUy = Math.cos(tRy), sUy = Math.sin(tRy);
+      const cUz = Math.cos(tRz), sUz = Math.sin(tRz);
 
-        const floatTime = now * particle.floatSpeed;
-        const floatX = Math.sin(floatTime + particle.phase) * particle.floatAmp;
-        const floatY =
-          Math.cos(floatTime * 0.9 + particle.phase2) * particle.floatAmp;
-        const floatZ =
-          Math.sin(floatTime * 0.7 + particle.phase + 1.5) *
-          particle.floatAmp *
-          0.5;
+      const cx = W / 2, cy = H / 2;
+      const mouseActive = !isTouchDevice && mouse.x > 0 && mouse.y > 0;
 
-        particle.originX =
-          (1 - t) * (cx + logoX2 + floatX) + t * (cx + sphereX);
-        particle.originY =
-          (1 - t) * (cy + logoY2 + levitationY + floatY) + t * (cy + sphereY);
-        particle.originZ = (1 - t) * (logoZ3 + floatZ) + t * sphereZ2;
+      for (const p of particles) {
+        // --- Sphere rotation ---
+        const rx  = p.sphereX * scA - p.sphereZ * ssA;
+        const rz  = p.sphereX * ssA + p.sphereZ * scA;
+        const ry  = p.sphereY * scB - rz * ssB;
+        const rz2 = p.sphereY * ssB + rz * scB;
 
-        const dx = mouse.x - particle.x;
-        const dy = mouse.y - particle.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        // --- Logo rotation (Euler XYZ) ---
+        const x1 = p.logoX * cUy + p.logoZ * sUy;
+        const z1 = -p.logoX * sUy + p.logoZ * cUy;
+        const y1 = p.logoY * cUx - z1 * sUx;
+        const z2 = p.logoY * sUx + z1 * cUx;
+        const x2 = x1 * cUz - y1 * sUz;
+        const y2 = x1 * sUz + y1 * cUz;
 
-        if (!isTouchDevice && distance < mouse.radius && t < 0.5) {
-          const force = (mouse.radius - distance) / mouse.radius;
-          const angle = Math.atan2(dy, dx);
-          particle.vx -= Math.cos(angle) * force * REPULSE_FORCE;
-          particle.vy -= Math.sin(angle) * force * REPULSE_FORCE;
-          particle.vz += force * 8;
+        // --- Float + pop ---
+        const ft     = now * p.floatSpeed;
+        const floatX = Math.sin(ft + p.phase)            * p.floatAmp
+                     + Math.sin(ft * 1.7 + p.phase2)     * p.floatAmp * 0.4;
+        const floatY = Math.cos(ft * 0.9 + p.phase + 1.3) * p.floatAmp
+                     + Math.cos(ft * 1.4 + p.phase3)      * p.floatAmp * 0.3;
+        const floatZ = Math.sin(ft * 0.7 + p.phase + 2.7) * p.floatAmp * 0.6;
+
+        const popVal = Math.sin(now * p.popFreq + p.popPhase);
+        const popPow = Math.max(0, popVal * popVal * popVal);
+        const norm   = Math.abs(x2) + Math.abs(y2) + Math.abs(z2) + 1;
+
+        p.originX = (1 - t) * (cx + x2 + floatX + (x2 / norm) * popPow * p.popAmp) + t * (cx + rx);
+        p.originY = (1 - t) * (cy + y2 + levY + floatY + (y2 / norm) * popPow * p.popAmp) + t * (cy + ry);
+        p.originZ = (1 - t) * (z2 + floatZ + (z2 / norm) * popPow * p.popAmp)             + t * rz2;
+
+        // --- Hover (3 zones) ---
+        if (mouseActive && t < 0.5) {
+          const dx   = mouse.x - p.x, dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const R    = mouse.radius;
+          if (dist < R) {
+            const f       = (R - dist) / R;
+            const angle   = Math.atan2(dy, dx);
+            const ringPos = dist / R;
+            if (ringPos < 0.35) {
+              p.vx -= Math.cos(angle) * f * 6;
+              p.vy -= Math.sin(angle) * f * 6;
+              p.vz += f * 4;
+            } else if (ringPos < 0.7) {
+              p.vx += -Math.sin(angle) * f * 3 - Math.cos(angle) * f * 1.5;
+              p.vy +=  Math.cos(angle) * f * 3 - Math.sin(angle) * f * 1.5;
+              p.vz += f * 2;
+            } else {
+              p.vx += Math.cos(angle) * f * 1.2;
+              p.vy += Math.sin(angle) * f * 1.2;
+            }
+            p.hoverGlow = Math.min(1, p.hoverGlow + 0.08);
+          } else {
+            p.hoverGlow = Math.max(0, p.hoverGlow - 0.03);
+          }
+        } else {
+          p.hoverGlow = Math.max(0, p.hoverGlow - 0.03);
         }
 
-        particle.vx += (particle.originX - particle.x) * RETURN_SPEED;
-        particle.vy += (particle.originY - particle.y) * RETURN_SPEED;
-        particle.vz += (particle.originZ - particle.z) * RETURN_SPEED;
-        particle.vx *= FRICTION;
-        particle.vy *= FRICTION;
-        particle.vz *= FRICTION;
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        particle.z += particle.vz;
+        p.vx += (p.originX - p.x) * RETURN_SPEED;
+        p.vy += (p.originY - p.y) * RETURN_SPEED;
+        p.vz += (p.originZ - p.z) * RETURN_SPEED;
+        p.vx *= FRICTION; p.vy *= FRICTION; p.vz *= FRICTION;
+        p.x += p.vx; p.y += p.vy; p.z += p.vz;
       }
 
       particles.sort((a, b) => a.z - b.z);
 
       const perspective = 500;
+      const maxZ = Math.min(W, H) * 0.4;
 
-      for (const particle of particles) {
-        const scale3d = perspective / (perspective + particle.z);
-        const x = cx + (particle.x - cx) * scale3d;
-        const y = cy + (particle.y - cy) * scale3d;
-        const drawSize = particle.size * scale3d;
-        const depth = Math.max(0, Math.min(1, (particle.z + 300) / 600));
-        const light = 16 + depth * 56;
-        const alpha = 0.1 + depth * 0.88;
+      for (const p of particles) {
+        const s3d      = perspective / (perspective + p.z);
+        const sx       = cx + (p.x - cx) * s3d;
+        const sy       = cy + (p.y - cy) * s3d;
+        const drawSize = p.size * s3d;
+        const dn       = Math.max(0, Math.min(1, (p.z + maxZ) / (maxZ * 2)));
+        const g        = p.hoverGlow;
+        const light    = 30 + dn * 25 - g * 3;
+        const alpha    = Math.max(0.2, 0.35 + dn * 0.65 - g * 0.15);
+        const sat      = Math.min(100, p.sat + g * 10);
+        const sz       = Math.max(drawSize * (1 - g * 0.2), 0.4);
 
         ctx.beginPath();
-        ctx.arc(x, y, Math.max(drawSize, 0.3), 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${particle.hue}, ${particle.sat}%, ${light}%, ${alpha})`;
+        ctx.arc(sx, sy, sz, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${p.hue},${sat}%,${light}%,${alpha})`;
         ctx.fill();
 
-        if (depth > 0.85) {
+        if (dn > 0.82 && g < 0.2) {
           ctx.beginPath();
-          ctx.arc(
-            x - drawSize * 0.3,
-            y - drawSize * 0.3,
-            drawSize * 0.3,
-            0,
-            Math.PI * 2,
-          );
-          ctx.fillStyle = `rgba(255, 230, 230, ${(depth - 0.85) * 1.8})`;
+          ctx.arc(sx - drawSize * 0.3, sy - drawSize * 0.3, drawSize * 0.3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,170,160,${(dn - 0.82) * 2})`;
           ctx.fill();
         }
       }
 
-      if (!isTouchDevice && mouse.x > 0 && mouse.y > 0) {
-        const gradient = ctx.createRadialGradient(
-          mouse.x,
-          mouse.y,
-          0,
-          mouse.x,
-          mouse.y,
-          mouse.radius,
-        );
-        gradient.addColorStop(0, "rgba(255,50,50,0.08)");
-        gradient.addColorStop(1, "rgba(255,0,0,0)");
+      // Minimal cursor dot
+      if (mouseActive) {
         ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
+        ctx.arc(mouse.x, mouse.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(200,50,50,0.2)";
         ctx.fill();
       }
     };
 
-    const updateMousePosition = (clientX: number, clientY: number) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = clientX - rect.left;
-      mouse.y = clientY - rect.top;
-    };
-
-    const onMouseMove = (event: MouseEvent) => {
+    const onMouseMove = (e: MouseEvent) => {
       if (isTouchDevice) return;
-      updateMousePosition(event.clientX, event.clientY);
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
     };
+    const onMouseLeave = () => { mouse.x = -9999; mouse.y = -9999; };
+    const onMouseDown  = () => { if (!isTouchDevice) sphereTarget = 1; };
+    const onMouseUp    = () => { if (!isTouchDevice) sphereTarget = 0; };
 
-    const onMouseLeave = () => {
-      mouse.x = -9999;
-      mouse.y = -9999;
-    };
-
-    const onMouseDown = () => {
-      if (!isTouchDevice) sphereTarget = 1;
-    };
-
-    const onMouseUp = () => {
-      if (!isTouchDevice) sphereTarget = 0;
-    };
-
-    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mousemove",  onMouseMove);
     window.addEventListener("mouseleave", onMouseLeave);
-    canvas.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mouseup", onMouseUp);
-    window.addEventListener("resize", resize);
+    canvas.addEventListener("mousedown",  onMouseDown);
+    window.addEventListener("mouseup",    onMouseUp);
+    window.addEventListener("resize",     resize);
 
     resize();
     animationFrame = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animationFrame);
-      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousemove",  onMouseMove);
       window.removeEventListener("mouseleave", onMouseLeave);
-      canvas.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mouseup", onMouseUp);
-      window.removeEventListener("resize", resize);
+      canvas.removeEventListener("mousedown",  onMouseDown);
+      window.removeEventListener("mouseup",    onMouseUp);
+      window.removeEventListener("resize",     resize);
     };
   }, []);
 

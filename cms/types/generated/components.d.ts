@@ -66,7 +66,6 @@ export interface SectionsBlockchainDesignedLinks
   attributes: {
     href: Schema.Attribute.String;
     label: Schema.Attribute.String;
-    openInNewTab: Schema.Attribute.Boolean;
   };
 }
 
