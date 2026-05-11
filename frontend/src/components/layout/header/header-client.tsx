@@ -256,7 +256,7 @@ function DesktopNavigation({
   const [openDropdownId, setOpenDropdownId] = useState<number | null>(null);
 
   return (
-    <nav className="hidden items-center gap-[54px] lg:flex">
+    <nav className="hidden items-center gap-[54px] min-[1321px]:flex">
       {navigation.map((item) => {
         const hasChildren = item.hasChildren && item.children && item.children.length > 0;
         const isOpen = openDropdownId === item.id;
@@ -329,7 +329,7 @@ function MobileMenu({
   };
 
   return (
-    <div className="absolute top-[68px] left-4 right-4 z-50 rounded-[20px] bg-white px-6 pt-8 pb-8 shadow-[0_12px_40px_rgba(0,0,0,0.08)] lg:hidden">
+    <div className="absolute top-[68px] left-4 right-4 z-50 rounded-[20px] bg-white px-6 pt-8 pb-8 shadow-[0_12px_40px_rgba(0,0,0,0.08)] min-[1321px]:hidden">
       <nav className="flex flex-col gap-5">
         {navigation.map((item, index) => {
           const isExpanded = expandedItemId === item.id;
@@ -432,12 +432,12 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
           <DesktopNavigation navigation={navigation} pathname={pathname} />
 
           <div className="flex items-center gap-5">
-            <SocialLinks links={socialLinks} className="hidden lg:flex" />
+            <SocialLinks links={socialLinks} className="hidden min-[1321px]:flex" />
             {cta ? <HeaderCta href={cta.href || '#'} label={cta.label} /> : null}
 
             <button
               type="button"
-              className="flex items-center justify-center lg:hidden"
+              className="flex items-center justify-center min-[1321px]:hidden"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               aria-expanded={isMobileMenuOpen}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
