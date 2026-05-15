@@ -110,7 +110,7 @@ export function Footer({ globalData }: FooterProps) {
 
   return (
     <footer className="px-4 pb-4">
-      <div className="mx-auto max-w-[1422px] rounded-[20px] bg-white px-[30px] pt-[40px] pr-8 pb-4">
+      <div className="mx-auto max-w-[1422px] rounded-[20px] bg-white px-[30px] pt-[40px] pr-8 pb-4 dark:bg-[#1e1e1e]">
         <div className="mx-auto flex max-w-[1360px] flex-col">
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:gap-16">
             <div className="w-full sm:max-w-[290px]">
@@ -121,12 +121,12 @@ export function Footer({ globalData }: FooterProps) {
                     alt={footerLogo?.alternativeText || siteName}
                     width={133}
                     height={26}
-                    className="h-auto w-auto max-w-[133px]"
+                    className="h-auto w-auto max-w-[133px] dark:[filter:invert(1)_hue-rotate(180deg)]"
                   />
                 ) : (
                   <>
                     <span className="text-[36px] leading-none text-[#E34039]">●</span>
-                    <span className="ml-3 text-[26px] leading-none font-semibold text-black">
+                    <span className="ml-3 text-[26px] leading-none font-semibold text-black dark:text-white">
                       {siteName}
                     </span>
                   </>
@@ -140,7 +140,7 @@ export function Footer({ globalData }: FooterProps) {
                       <div className="mt-[-2px] flex h-6 w-6 shrink-0 items-center justify-center">
                         <FooterContactIcon iconType={item.iconType} />
                       </div>
-                      <span className="text-[16px] font-medium leading-5 tracking-[-0.16px] text-black">
+                      <span className="text-[16px] font-medium leading-5 tracking-[-0.16px] text-black dark:text-[rgba(255,255,255,0.80)]">
                         {item.label}
                       </span>
                     </div>
@@ -161,7 +161,7 @@ export function Footer({ globalData }: FooterProps) {
               <div className="grid grid-cols-2 gap-x-10 gap-y-10 md:gap-x-16 lg:flex lg:flex-wrap lg:justify-end lg:gap-x-5 lg:gap-y-0">
                 {columns.map((column) => (
                   <div key={column.id} className="min-w-0 lg:w-[160px]">
-                    <h3 className="mb-6 [font-family:var(--font-roboto-mono)] text-[16px] leading-6 font-normal uppercase text-[rgba(0,0,0,0.16)]">
+                    <h3 className="mb-6 [font-family:var(--font-roboto-mono)] text-[16px] leading-6 font-normal uppercase text-[rgba(0,0,0,0.16)] dark:text-[rgba(255,255,255,0.25)]">
                       {column.title}
                     </h3>
 
@@ -172,7 +172,7 @@ export function Footer({ globalData }: FooterProps) {
                           href={link.href || '#'}
                           target={link.targetBlank ? '_blank' : undefined}
                           rel={link.targetBlank ? 'noopener noreferrer' : undefined}
-                          className="[font-family:var(--font-roboto)] text-[16px] font-normal leading-5 tracking-[-0.16px] text-black transition-colors duration-200 hover:text-[#E34039]"
+                          className="[font-family:var(--font-roboto)] text-[16px] font-normal leading-5 tracking-[-0.16px] text-black transition-colors duration-200 hover:text-[#E34039] dark:text-[rgba(255,255,255,0.70)] dark:hover:text-[#E34039]"
                         >
                           {link.label}
                         </Link>
@@ -184,9 +184,9 @@ export function Footer({ globalData }: FooterProps) {
             </div>
           </div>
 
-          <div className="mt-[50px] border-t border-b border-[rgba(0,0,0,0.08)] pt-[30px] pb-[30px]">
+          <div className="mt-[50px] border-t border-b border-[rgba(0,0,0,0.08)] pt-[30px] pb-[30px] dark:border-[rgba(255,255,255,0.08)]">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <p className="text-[14px] font-normal leading-5 tracking-[-0.14px] text-[rgba(0,0,0,0.40)]">
+              <p className="text-[14px] font-normal leading-5 tracking-[-0.14px] text-[rgba(0,0,0,0.40)] dark:text-[rgba(255,255,255,0.40)]">
                 {copyright}
               </p>
 
@@ -197,7 +197,7 @@ export function Footer({ globalData }: FooterProps) {
                     href={link.href || '#'}
                     target={link.targetBlank ? '_blank' : undefined}
                     rel={link.targetBlank ? 'noopener noreferrer' : undefined}
-                    className="text-[14px] font-normal leading-5 tracking-[-0.14px] text-[rgba(0,0,0,0.40)] transition-colors duration-200 hover:text-[#E34039]"
+                    className="text-[14px] font-normal leading-5 tracking-[-0.14px] text-[rgba(0,0,0,0.40)] transition-colors duration-200 hover:text-[#E34039] dark:text-[rgba(255,255,255,0.40)] dark:hover:text-[#E34039]"
                   >
                     {link.label}
                   </Link>
@@ -208,7 +208,7 @@ export function Footer({ globalData }: FooterProps) {
 
           {disclaimer ? (
             <div className="mt-5 pb-[12px]">
-              <p className="whitespace-pre-line text-[12px] font-normal leading-4 tracking-[-0.4px] text-[rgba(0,0,0,0.40)]">
+              <p className="whitespace-pre-line text-[12px] font-normal leading-4 tracking-[-0.4px] text-[rgba(0,0,0,0.40)] dark:text-[rgba(255,255,255,0.30)]">
                 {disclaimer}
               </p>
             </div>

@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import type { GlobalData, HeaderSocialLink, NavLink } from '@/types/strapi/global';
 import Image from 'next/image';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 type HeaderClientProps = {
   globalData: GlobalData | null;
@@ -14,7 +15,6 @@ type HeaderClientProps = {
 function normalizePath(path?: string) {
   if (!path) return '/';
 
-  // если вдруг придёт полный URL, пытаемся взять только pathname
   try {
     if (path.startsWith('http://') || path.startsWith('https://')) {
       const url = new URL(path);
@@ -101,9 +101,9 @@ function HeaderArrowIcon() {
 function BurgerIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <path d="M6 11H30" stroke="black" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M6 18H30" stroke="black" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M6 25H30" stroke="black" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M6 11H30" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M6 18H30" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M6 25H30" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -111,8 +111,8 @@ function BurgerIcon() {
 function CloseIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <path d="M9 9L27 27" stroke="black" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M27 9L9 27" stroke="black" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M9 9L27 27" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M27 9L9 27" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -130,12 +130,12 @@ function Logo({ globalData }: { globalData: GlobalData | null }) {
           alt={logo?.alternativeText || siteName}
           width={133}
           height={26}
-          className="h-auto w-auto max-w-[133px]"
+          className="h-auto w-auto max-w-[133px] dark:[filter:invert(1)_hue-rotate(180deg)]"
         />
       ) : (
         <>
           <span className="text-[36px] leading-none text-[#E34039]">●</span>
-          <span className="ml-3 text-[26px] leading-none font-semibold text-black">{siteName}</span>
+          <span className="ml-3 text-[26px] leading-none font-semibold text-black dark:text-white">{siteName}</span>
         </>
       )}
     </Link>
@@ -192,7 +192,7 @@ function HeaderCta({ href, label }: { href: string; label: string }) {
       href={href || '#'}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex min-h-[34px] shrink-0 items-center justify-center gap-[10px] rounded-[60px] border border-[rgba(227,64,57,0.07)] bg-[rgba(227,64,57,0.02)] px-[8px] py-[5px] text-[14px] font-normal leading-6 text-black backdrop-blur-[12px] transition-all duration-200 hover:-translate-y-[1px] hover:border-[rgba(227,64,57,0.18)] hover:bg-[rgba(227,64,57,0.06)] hover:text-[#E34039]"
+      className="flex min-h-[34px] shrink-0 items-center justify-center gap-[10px] rounded-[60px] border border-[rgba(227,64,57,0.07)] bg-[rgba(227,64,57,0.02)] px-[8px] py-[5px] text-[14px] font-normal leading-6 text-black backdrop-blur-[12px] transition-all duration-200 hover:-translate-y-[1px] hover:border-[rgba(227,64,57,0.18)] hover:bg-[rgba(227,64,57,0.06)] hover:text-[#E34039] dark:text-white dark:hover:text-[#E34039]"
     >
       <span>{label}</span>
       <HeaderArrowIcon />
@@ -217,7 +217,7 @@ function DesktopDropdown({
 
   return (
     <div className="absolute top-full left-1/2 z-50 w-[220px] -translate-x-1/2 pt-4">
-      <div className="rounded-[20px] border border-[rgba(227,64,57,0.08)] bg-white p-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)]">
+      <div className="rounded-[20px] border border-[rgba(227,64,57,0.08)] bg-white p-4 shadow-[0_16px_40px_rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1e1e1e]">
         <div className="flex flex-col">
           {children.map((child, index) => {
             const isChildActive = isPathActive(pathname, child.href);
@@ -228,14 +228,16 @@ function DesktopDropdown({
                   href={child.href || '#'}
                   {...externalLinkProps(child)}
                   className={`nav-child-link item-child block px-3 py-3 text-[16px] font-medium leading-5 transition-colors duration-200 hover:bg-[rgba(227,64,57,0.04)] ${
-                    isChildActive ? 'text-[#E34039] bg-[rgba(227,64,57,0.04)]' : 'text-black'
+                    isChildActive
+                      ? 'bg-[rgba(227,64,57,0.04)] text-[#E34039]'
+                      : 'text-black dark:text-white'
                   }`}
                 >
                   {child.label}
                 </Link>
 
                 {index !== children.length - 1 ? (
-                  <div className="h-px bg-[rgba(0,0,0,0.08)]" />
+                  <div className="h-px bg-[rgba(0,0,0,0.08)] dark:bg-[rgba(255,255,255,0.08)]" />
                 ) : null}
               </div>
             );
@@ -262,7 +264,6 @@ function DesktopNavigation({
         const isOpen = openDropdownId === item.id;
         const isActive = hasChildren ? false : isNavItemActive(pathname, item);
 
-
         return (
           <div
             key={item.id}
@@ -278,7 +279,9 @@ function DesktopNavigation({
               <button
                 type="button"
                 className={`flex items-center gap-2 text-[15px] font-normal leading-[56px] transition-colors duration-200 ${
-                  isActive ? 'text-[#E34039]' : 'text-black hover:text-[#E34039]'
+                  isActive
+                    ? 'text-[#E34039]'
+                    : 'text-black hover:text-[#E34039] dark:text-white dark:hover:text-[#E34039]'
                 }`}
                 aria-expanded={isOpen}
               >
@@ -290,7 +293,9 @@ function DesktopNavigation({
                 href={item.href || '#'}
                 {...externalLinkProps(item)}
                 className={`flex items-center gap-2 text-[15px] font-normal leading-[56px] transition-colors duration-200 ${
-                  isActive ? 'text-[#E34039]' : 'text-black hover:text-[#E34039]'
+                  isActive
+                    ? 'text-[#E34039]'
+                    : 'text-black hover:text-[#E34039] dark:text-white dark:hover:text-[#E34039]'
                 }`}
               >
                 <span>{item.label}</span>
@@ -329,7 +334,7 @@ function MobileMenu({
   };
 
   return (
-    <div className="absolute top-[68px] left-4 right-4 z-50 rounded-[20px] bg-white px-6 pt-8 pb-8 shadow-[0_12px_40px_rgba(0,0,0,0.08)] min-[1321px]:hidden">
+    <div className="absolute top-[68px] left-4 right-4 z-50 max-h-[calc(100dvh-84px)] overflow-y-auto overscroll-contain rounded-[20px] bg-white px-6 pt-8 pb-8 shadow-[0_12px_40px_rgba(0,0,0,0.08)] min-[1321px]:hidden dark:bg-[#1e1e1e]">
       <nav className="flex flex-col gap-5">
         {navigation.map((item, index) => {
           const isExpanded = expandedItemId === item.id;
@@ -344,7 +349,7 @@ function MobileMenu({
                     type="button"
                     onClick={() => handleToggle(item.id)}
                     className={`flex items-center gap-4 text-[20px] font-medium leading-6 tracking-[-1px] ${
-                      isActive ? 'text-[#E34039]' : 'text-black'
+                      isActive ? 'text-[#E34039]' : 'text-black dark:text-white'
                     }`}
                     aria-expanded={isExpanded}
                   >
@@ -355,7 +360,7 @@ function MobileMenu({
                     href={item.href || '#'}
                     {...externalLinkProps(item)}
                     className={`text-[20px] font-medium leading-6 tracking-[-1px] ${
-                      isActive ? 'text-[#E34039]' : 'text-black'
+                      isActive ? 'text-[#E34039]' : 'text-black dark:text-white'
                     }`}
                     onClick={onClose}
                   >
@@ -387,7 +392,7 @@ function MobileMenu({
                         href={child.href || '#'}
                         {...externalLinkProps(child)}
                         className={`nav-child-link item-child text-[16px] font-medium leading-5 ${
-                          isChildActive ? 'text-[#E34039]' : 'text-black/70'
+                          isChildActive ? 'text-[#E34039]' : 'text-black/70 dark:text-white/70'
                         }`}
                         onClick={onClose}
                       >
@@ -399,7 +404,7 @@ function MobileMenu({
               ) : null}
 
               {index !== navigation.length - 1 ? (
-                <div className="mt-4 h-px bg-[rgba(0,0,0,0.08)]" />
+                <div className="mt-4 h-px bg-[rgba(0,0,0,0.08)] dark:bg-[rgba(255,255,255,0.08)]" />
               ) : null}
             </div>
           );
@@ -407,7 +412,7 @@ function MobileMenu({
       </nav>
 
       {socialLinks.length > 0 ? (
-        <div className="mt-8 border-t border-[rgba(0,0,0,0.08)] pt-6">
+        <div className="mt-8 border-t border-[rgba(0,0,0,0.08)] pt-6 dark:border-[rgba(255,255,255,0.08)]">
           <SocialLinks links={socialLinks} />
         </div>
       ) : null}
@@ -419,12 +424,19 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const navigation = globalData?.headerNavigation ?? [];
   const cta = globalData?.headerCta;
   const socialLinks = globalData?.socialLinks ?? [];
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-md">
+    <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-md dark:bg-[rgba(13,13,13,0.85)]">
       <div className="mx-auto max-w-[1360px] px-4 pt-[10px]">
         <div className="flex items-center justify-between gap-4">
           <Logo globalData={globalData} />
@@ -433,11 +445,12 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
 
           <div className="flex items-center gap-5">
             <SocialLinks links={socialLinks} className="hidden min-[1321px]:flex" />
+            <ThemeToggle />
             {cta ? <HeaderCta href={cta.href || '#'} label={cta.label} /> : null}
 
             <button
               type="button"
-              className="flex items-center justify-center min-[1321px]:hidden"
+              className="flex items-center justify-center text-black min-[1321px]:hidden dark:text-white"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               aria-expanded={isMobileMenuOpen}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}

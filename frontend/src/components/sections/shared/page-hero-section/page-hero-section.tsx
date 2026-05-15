@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { PageHero } from '@/types/strapi/page-hero';
 import { FadeUp } from '@/components/ui/fade-up';
 import { RevealCard } from '@/components/ui/reveal-card';
 import { ParticleLogo } from '@/components/sections/home/hero-section/ParticleLogo';
-import Image from 'next/image';
 
 type PageHeroSectionProps = {
   hero: PageHero | null | undefined;
@@ -34,7 +34,7 @@ function ExtensionIcon() {
 
 function SoonBadge() {
   return (
-    <span className="rounded-[50px] bg-[rgba(255,255,255,0.40)] px-2 pt-[2px] pb-[4px] text-center [font-family:var(--font-manrope)] text-[15px] font-normal capitalize text-[#C6C6C6]">
+    <span className="rounded-[50px] bg-[rgba(255,255,255,0.40)] px-2 pt-[2px] pb-[4px] text-center [font-family:var(--font-manrope)] text-[15px] font-normal text-[#C6C6C6] capitalize dark:bg-[rgba(255,255,255,0.10)]">
       Soon
     </span>
   );
@@ -49,28 +49,25 @@ function FloatingBadge({
   label: string;
   position: 'left' | 'right';
 }) {
- const positionClasses =
-  position === 'left'
-    ? 'left-[20px] top-[-35px] bottom-auto rotate-[5deg] md:left-[130px] md:top-auto md:bottom-[41px]'
-    : 'right-[20px] bottom-[-26px] rotate-[-7deg] md:right-[163px]';
+  const positionClasses =
+    position === 'left'
+      ? 'left-[20px] top-[-35px] bottom-auto rotate-[5deg] md:left-[130px] md:top-auto md:bottom-[41px]'
+      : 'right-[20px] bottom-[-26px] rotate-[-7deg] md:right-[163px]';
 
   return (
     <div
-      className={`absolute z-10 flex items-center gap-[6px] rounded-[100px] border border-[#F9F9F9] px-[24px] py-[14px] ${positionClasses}`}
-      style={{
-        background:
-          'radial-gradient(30% 53.62% at 48.95% -4950%, #F17474 0%, rgba(213, 110, 108, 0.30) 37.7%, rgba(38, 21, 21, 0.00) 89.47%), linear-gradient(0deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 100%), #FFF',
-        boxShadow: '0 4px 8px 0 rgba(255, 255, 255, 0.48) inset',
-      }}
+      className={`absolute z-10 flex items-center gap-[6px] rounded-[100px] border border-[#F9F9F9] px-[24px] py-[14px] dark:border-[rgba(255,255,255,0.10)] ${positionClasses}`}
+      style={{ background: 'var(--badge-hero-bg)' }}
     >
       {icon}
-      <span className="[font-family:var(--font-manrope)] text-[16px] font-medium capitalize leading-[20px] tracking-[-0.5px] text-[rgba(0,0,0,0.40)]">
+      <span className="[font-family:var(--font-manrope)] text-[16px] leading-[20px] font-medium tracking-[-0.5px] text-[rgba(0,0,0,0.40)] capitalize dark:text-[rgba(255,255,255,0.50)]">
         {label}
       </span>
       <SoonBadge />
     </div>
   );
 }
+
 function CtaButton({ href, label }: { href: string; label: string }) {
   const [hovered, setHovered] = useState(false);
 
@@ -79,12 +76,11 @@ function CtaButton({ href, label }: { href: string; label: string }) {
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="mt-[45px] inline-flex items-center justify-center gap-1 rounded-[100px] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal capitalize leading-[36px] text-white transition-all duration-200"
+      className="mt-[45px] inline-flex items-center justify-center gap-1 rounded-[100px] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal leading-[36px] text-white capitalize transition-all duration-200"
       style={{
         background: hovered
           ? 'linear-gradient(0deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.10) 100%), linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)'
           : 'linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)',
-        boxShadow: '0 2px 2px 0 rgba(214, 214, 214, 0.74)',
       }}
     >
       {label}
@@ -93,23 +89,19 @@ function CtaButton({ href, label }: { href: string; label: string }) {
 }
 
 const DASHES = [
-  // Left side
-  { top: '52%', left: '3%',  w: 40, opacity: 0.30, depth: 0.8 },
-  { top: '60%', left: '7%',  w: 28, opacity: 0.20, depth: 0.5 },
-  { top: '72%', left: '2%',  w: 35, opacity: 0.25, depth: 1.0 },
-  { top: '80%', left: '9%',  w: 24, opacity: 0.20, depth: 0.6 },
-  { top: '88%', left: '5%',  w: 30, opacity: 0.22, depth: 0.7 },
-  // Center-left
+  { top: '52%', left: '3%', w: 40, opacity: 0.30, depth: 0.8 },
+  { top: '60%', left: '7%', w: 28, opacity: 0.20, depth: 0.5 },
+  { top: '72%', left: '2%', w: 35, opacity: 0.25, depth: 1.0 },
+  { top: '80%', left: '9%', w: 24, opacity: 0.20, depth: 0.6 },
+  { top: '88%', left: '5%', w: 30, opacity: 0.22, depth: 0.7 },
   { top: '48%', left: '22%', w: 30, opacity: 0.22, depth: 0.4 },
   { top: '56%', left: '18%', w: 22, opacity: 0.18, depth: 0.9 },
-  // Center-right
   { top: '50%', right: '20%', w: 26, opacity: 0.20, depth: 0.5 },
   { top: '58%', right: '24%', w: 22, opacity: 0.18, depth: 0.8 },
-  // Right side
-  { top: '54%', right: '5%',  w: 40, opacity: 0.30, depth: 0.9 },
-  { top: '64%', right: '2%',  w: 32, opacity: 0.25, depth: 0.6 },
-  { top: '74%', right: '8%',  w: 28, opacity: 0.20, depth: 1.0 },
-  { top: '82%', right: '4%',  w: 24, opacity: 0.22, depth: 0.4 },
+  { top: '54%', right: '5%', w: 40, opacity: 0.30, depth: 0.9 },
+  { top: '64%', right: '2%', w: 32, opacity: 0.25, depth: 0.6 },
+  { top: '74%', right: '8%', w: 28, opacity: 0.20, depth: 1.0 },
+  { top: '82%', right: '4%', w: 24, opacity: 0.22, depth: 0.4 },
   { top: '90%', right: '10%', w: 30, opacity: 0.20, depth: 0.7 },
 ];
 
@@ -164,35 +156,42 @@ export function PageHeroSection({ hero }: PageHeroSectionProps) {
   if (!hero) return null;
 
   return (
-    <section className="relative overflow-hidden bg-[#FFD8D8]">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero-bg.png"
-          alt=""
-          aria-hidden="true"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-      </div>
+    <section className="relative overflow-hidden bg-[#FFD8D8] dark:bg-[#0d0d0d]">
+      {/* Background images */}
+      <Image
+        src="/images/hero-bg.png"
+        alt=""
+        aria-hidden="true"
+        fill
+        priority
+        className="object-cover object-center dark:hidden"
+      />
+
+      <Image
+        src="/images/hero-dark-bg.webp"
+        alt=""
+        aria-hidden="true"
+        fill
+        priority
+        className="hidden object-cover object-center dark:block"
+      />
 
       {/* Top gradient */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-35 bg-gradient-to-b from-[#FAFAFA] to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-35 bg-gradient-to-b from-[#FAFAFA] to-transparent dark:from-[#0d0d0d]"
       />
 
       {/* Bottom gradient */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-50 bg-gradient-to-b from-transparent to-[#f7f5f4]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-50 bg-gradient-to-b from-transparent to-[#f7f5f4] dark:to-[#0d0d0d]"
       />
 
       {/* Bottom blur shape */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[-200px] left-1/2 z-[5] hidden h-[713px] w-[2302px] -translate-x-1/2 rounded-full bg-[#FAFAFA] md:block"
+        className="pointer-events-none absolute bottom-[-200px] left-1/2 z-[5] hidden h-[713px] w-[2302px] -translate-x-1/2 rounded-full bg-[#FAFAFA] md:block dark:bg-[#0d0d0d]"
         style={{ filter: 'blur(100px)' }}
       />
 
@@ -206,79 +205,79 @@ export function PageHeroSection({ hero }: PageHeroSectionProps) {
 
       <div className="relative z-20 px-4 pt-[270px] pb-[80px] md:pt-[250px] md:pb-[80px]">
         <div className="mx-auto max-w-[1200px]">
-        {/* Title */}
-        <div className="text-center mx-auto max-w-[770px]">
-          <FadeUp delay={0} duration={1200} y={20}>
-            <h1 className="[font-family:var(--font-manrope)] text-[48px] font-semibold leading-[104%] tracking-[-2px] text-[#202020] md:text-[64px] md:tracking-[-3px] xl:text-[80px] xl:tracking-[-4px]">
-              {hero.title}
-            </h1>
-          </FadeUp>
-
-          {hero.subtitle && (
-            <FadeUp delay={120} duration={1200} y={14}>
-              <p className="mx-auto mt-4 max-w-[400px] [font-family:var(--font-manrope)] text-[16px] font-normal leading-[150%] tracking-[-0.4px] text-[rgba(32,32,32,0.56)]">
-                {hero.subtitle}
-              </p>
+          {/* Title */}
+          <div className="mx-auto max-w-[770px] text-center">
+            <FadeUp delay={0} duration={1200} y={20}>
+              <h1 className="[font-family:var(--font-manrope)] text-[48px] leading-[104%] font-semibold tracking-[-2px] text-[#202020] md:text-[64px] md:tracking-[-3px] xl:text-[80px] xl:tracking-[-4px] dark:text-[#f0f0f0]">
+                {hero.title}
+              </h1>
             </FadeUp>
+
+            {hero.subtitle && (
+              <FadeUp delay={120} duration={1200} y={14}>
+                <p className="mx-auto mt-4 max-w-[400px] [font-family:var(--font-manrope)] text-[16px] leading-[150%] font-normal tracking-[-0.4px] text-[rgba(32,32,32,0.56)] dark:text-[rgba(240,240,240,0.56)]">
+                  {hero.subtitle}
+                </p>
+              </FadeUp>
+            )}
+          </div>
+
+          {/* Card */}
+          {hero.card && (
+            <div className="mt-[50px]">
+              <RevealCard duration={1200} y={36} scale={0.985}>
+                <div
+                  className="relative mx-auto flex w-full max-w-[1011px] flex-col items-center rounded-[20px] border-2 border-white px-6 py-[64px] md:px-[133px] dark:border-[rgba(255,255,255,0.08)]"
+                  style={{
+                    background: 'var(--glassmorphism-hero-bg)',
+                    backdropFilter: 'blur(2px)',
+                  }}
+                >
+                  {/* Description */}
+                  <FadeUp delay={180} duration={1200} y={20}>
+                    <p
+                      className="text-center [font-family:var(--font-manrope)] text-[24px] leading-[126%] font-medium tracking-[-1px] md:text-[32px]"
+                      style={{
+                        background: 'var(--gradient-hero-text)',
+                        backgroundClip: 'text',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                      }}
+                    >
+                      {hero.card.description}
+                    </p>
+                  </FadeUp>
+
+                  {/* CTA Button */}
+                  {hero.card.buttonLabel && (
+                    <FadeUp delay={320} duration={1200} y={14}>
+                      <CtaButton
+                        href={hero.card.buttonHref || '#'}
+                        label={hero.card.buttonLabel}
+                      />
+                    </FadeUp>
+                  )}
+
+                  {/* Floating badges */}
+                  {hero.showWalletBadge && (
+                    <FloatingBadge
+                      icon={<WalletIcon />}
+                      label="Mobile Wallet"
+                      position="left"
+                    />
+                  )}
+                  {hero.showExtensionBadge && (
+                    <FloatingBadge
+                      icon={<ExtensionIcon />}
+                      label="Browser Extension"
+                      position="right"
+                    />
+                  )}
+                </div>
+              </RevealCard>
+            </div>
           )}
         </div>
-
-        {/* Card */}
-        {hero.card && (
-          <div className="mt-[50px]">
-            <RevealCard duration={1200} y={36} scale={0.985}>
-              <div
-                className="relative mx-auto flex w-full max-w-[1011px] flex-col items-center rounded-[20px] border-2 border-white px-6 py-[64px] md:px-[133px]"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.64)',
-                  backdropFilter: 'blur(2px)',
-                }}
-              >
-                {/* Description */}
-                <FadeUp delay={180} duration={1200} y={20}>
-                  <p
-                    className="text-center [font-family:var(--font-manrope)] text-[24px] font-medium leading-[126%] tracking-[-1px] md:text-[32px]"
-                    style={{
-                      background: 'linear-gradient(95deg, #0D0000 0.71%, #8B8B8B 100.05%)',
-                      backgroundClip: 'text',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                    }}
-                  >
-                    {hero.card.description}
-                  </p>
-                </FadeUp>
-
-                {/* CTA Button */}
-                {hero.card.buttonLabel && (
-                  <FadeUp delay={320} duration={1200} y={14}>
-                    <CtaButton
-                      href={hero.card.buttonHref || '#'}
-                      label={hero.card.buttonLabel}
-                    />
-                  </FadeUp>
-                )}
-
-                {/* Floating badges */}
-                {hero.showWalletBadge && (
-                  <FloatingBadge
-                    icon={<WalletIcon />}
-                    label="Mobile Wallet"
-                    position="left"
-                  />
-                )}
-                {hero.showExtensionBadge && (
-                  <FloatingBadge
-                    icon={<ExtensionIcon />}
-                    label="Browser Extension"
-                    position="right"
-                  />
-                )}
-              </div>
-            </RevealCard>
-          </div>
-        )}
-      </div>
       </div>
     </section>
   );

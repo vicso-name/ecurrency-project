@@ -48,6 +48,7 @@ export default async function HomePage() {
               <path
                 d="M0 0H355.5L441.5 124.558L711 128.97H980.5L1066.5 0H1422V158H0L0 0Z"
                 fill="white"
+                className="fill-white dark:fill-[#1a1a1a]"
               />
               <path
                 d="M0 0H355.5L441.5 124.558L711 128.97H980.5L1066.5 0H1422V158H0L0 0Z"
@@ -71,10 +72,9 @@ export default async function HomePage() {
           </div>
 
           <div
-            className="overflow-hidden rounded-bl-[20px] rounded-br-[20px] bg-white"
+            className="overflow-hidden rounded-bl-[20px] rounded-br-[20px] bg-white dark:bg-[#1a1a1a]"
             style={{
-              background:
-                'radial-gradient(80.05% 137.14% at 50% -10.33%, rgba(0, 0, 0, 0) 60%, rgba(255, 80, 80, 0.05) 89.8%), #FFF',
+              background: 'var(--payment-container-bg)',
             }}
           >
             <PaymentSystemsSection data={homePage?.paymentSystems} />

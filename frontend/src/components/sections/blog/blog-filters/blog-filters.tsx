@@ -39,7 +39,7 @@ function SelectIcon({ isOpen }: { isOpen: boolean }) {
       height="26"
       viewBox="0 0 26 26"
       fill="none"
-      className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+      className={`transition-transform duration-200 dark:invert ${isOpen ? 'rotate-180' : ''}`}
     >
       <circle cx="13" cy="13" r="12.5" stroke="black" strokeOpacity="0.14" />
       <path
@@ -236,7 +236,7 @@ export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
 
   return (
     <div className="mx-auto mt-10 flex max-w-[980px] flex-col gap-4 md:flex-row md:items-start md:justify-center">
-      <div className="flex w-full items-center gap-[6px] rounded-[240px] bg-white px-5 py-3 md:max-w-[692px]">
+      <div className="flex w-full items-center gap-[6px] rounded-[240px] bg-white px-5 py-3 md:max-w-[692px] dark:bg-[#1e1e1e]">
         <SearchIcon />
 
         <input
@@ -244,7 +244,7 @@ export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
           value={searchValue}
           placeholder={blogPage?.searchPlaceholder || 'Search'}
           onChange={(e) => setSearchValue(e.target.value)}
-          className="w-full bg-transparent text-[16px] font-semibold leading-[30px] text-black outline-none placeholder:text-[rgba(0,0,0,0.24)]"
+          className="w-full bg-transparent text-[16px] font-semibold leading-[30px] text-black outline-none placeholder:text-[rgba(0,0,0,0.24)] dark:text-white dark:placeholder:text-[rgba(255,255,255,0.25)]"
           aria-label={blogPage?.searchPlaceholder || 'Search'}
         />
       </div>
@@ -256,11 +256,11 @@ export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
             setPendingCategories(currentCategories);
             setIsOpen((prev) => !prev);
           }}
-          className="flex w-full items-center justify-between gap-4 rounded-[240px] border border-white bg-[rgba(255,255,255,0.40)] px-5 py-3 text-left"
+          className="flex w-full items-center justify-between gap-4 rounded-[240px] border border-white bg-[rgba(255,255,255,0.40)] px-5 py-3 text-left dark:border-[rgba(255,255,255,0.12)] dark:bg-[rgba(255,255,255,0.06)]"
           aria-haspopup="dialog"
           aria-expanded={isOpen}
         >
-          <span className="truncate text-[16px] font-semibold leading-[30px] text-black">
+          <span className="truncate text-[16px] font-semibold leading-[30px] text-black dark:text-white">
             {triggerLabel}
           </span>
 
@@ -270,7 +270,7 @@ export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
         </button>
 
         {isOpen ? (
-          <div className="absolute left-0 top-[calc(100%+16px)] z-30 flex w-full flex-col items-start gap-12 rounded-[20px] bg-white p-6 shadow-[0_2px_12px_0_rgba(0,0,0,0.12)]">
+          <div className="absolute left-0 top-[calc(100%+16px)] z-30 flex w-full flex-col items-start gap-12 rounded-[20px] bg-white p-6 shadow-[0_2px_12px_0_rgba(0,0,0,0.12)] dark:bg-[#1e1e1e] dark:shadow-[0_2px_12px_0_rgba(0,0,0,0.50)]">
             <div className="flex w-full flex-col items-start gap-6">
               {categories.map((category) => {
                 const isChecked = pendingCategories.includes(category.slug);
@@ -286,13 +286,13 @@ export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border transition-colors ${
                         isChecked
                           ? 'border-[#EC0000] bg-[#EC0000]'
-                          : 'border-[rgba(32,32,32,0.16)] bg-white'
+                          : 'border-[rgba(32,32,32,0.16)] bg-white dark:border-[rgba(255,255,255,0.20)] dark:bg-[#2a2a2a]'
                       }`}
                     >
                       {isChecked ? <CheckIcon /> : null}
                     </span>
 
-                    <span className="text-[16px] font-semibold leading-6 text-black">
+                    <span className="text-[16px] font-semibold leading-6 text-black dark:text-white">
                       {category.title}
                     </span>
                   </button>
@@ -313,7 +313,7 @@ export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
               <button
                 type="button"
                 onClick={handleClearAll}
-                className="flex h-[53px] w-full items-center justify-center gap-[10px] rounded-[60px] border border-[rgba(32,32,32,0.07)] bg-[rgba(32,32,32,0.02)] text-center text-[15px] font-normal leading-9 capitalize text-[#202020] backdrop-blur-[12px]"
+                className="flex h-[53px] w-full items-center justify-center gap-[10px] rounded-[60px] border border-[rgba(32,32,32,0.07)] bg-[rgba(32,32,32,0.02)] text-center text-[15px] font-normal leading-9 capitalize text-[#202020] backdrop-blur-[12px] dark:border-[rgba(255,255,255,0.12)] dark:bg-[rgba(255,255,255,0.06)] dark:text-white"
               >
                 {blogPage?.clearAllLabel || 'Clear All'}
               </button>

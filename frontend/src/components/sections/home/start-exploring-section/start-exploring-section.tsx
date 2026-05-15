@@ -143,14 +143,14 @@ function BottomContent({
   return (
     <div className={className}>
      {data.linksTitle ? (
-        <h3 className="mb-[24px] text-center [font-family:var(--font-manrope)] text-[22px] font-medium leading-[26px] tracking-[-0.6px] text-black md:text-[32px] md:leading-[36px] md:tracking-[-1.5px]">
+        <h3 className="mb-[24px] text-center [font-family:var(--font-manrope)] text-[22px] font-medium leading-[26px] tracking-[-0.6px] text-black md:text-[32px] md:leading-[36px] md:tracking-[-1.5px] dark:text-white">
           {data.linksTitle}
         </h3>
       ) : null}
 
       {content ? (
-        <div className="flex items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center">
-          <div className="max-w-[1024px] [font-family:var(--font-manrope)] text-[16px] font-normal leading-normal text-[rgba(51,51,51,0.72)] [&_p]:m-0 [&_strong]:font-semibold [&_b]:font-semibold">
+        <div className="flex items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center dark:border-[rgba(255,255,255,0.08)] dark:bg-[#2a2a2a]">
+          <div className="max-w-[1024px] [font-family:var(--font-manrope)] text-[16px] font-normal leading-normal text-[rgba(51,51,51,0.72)] [&_p]:m-0 [&_strong]:font-semibold [&_b]:font-semibold dark:text-[rgba(255,255,255,0.60)]">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
           </div>
         </div>
@@ -198,14 +198,14 @@ export function StartExploringSection({ data }: StartExploringSectionProps) {
       <div className="mx-auto max-w-[1200px]">
         <div className="mx-auto mb-[40px] max-w-[462px] text-center md:mb-[60px]">
           <FadeUp delay={80} duration={1200} y={20}>
-            <h2 className="text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-black md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
+            <h2 className="text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-black md:text-[48px] md:leading-[116%] md:tracking-[-1px] dark:text-white">
               {data.title}
             </h2>
           </FadeUp>
 
           {data.subtitle && (
             <FadeUp delay={220} duration={1250} y={14}>
-              <p className="mx-auto mt-4 max-w-[438px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.64)]">
+              <p className="mx-auto mt-4 max-w-[438px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.64)] dark:text-[rgba(255,255,255,0.50)]">
                 {data.subtitle}
               </p>
             </FadeUp>
@@ -321,11 +321,11 @@ function CardContent({ card, index }: CardProps) {
   return (
     <>
       <div>
-        <h3 className="text-left text-[20px] font-medium text-[#333]">
+        <h3 className="text-left text-[20px] font-medium text-[#333] dark:text-white">
           {card.title}
         </h3>
         {card.subtitle && (
-          <p className="mt-1 text-left text-[16px] font-normal text-[rgba(51,51,51,0.40)]">
+          <p className="mt-1 text-left text-[16px] font-normal text-[rgba(51,51,51,0.40)] dark:text-[rgba(255,255,255,0.40)]">
             {card.subtitle}
           </p>
         )}
@@ -352,7 +352,7 @@ function DesktopCard({ card, index }: CardProps) {
 
   return (
     <div
-      className="flex h-[400px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 transition-transform duration-300 hover:-translate-y-[2px]"
+      className="flex h-[400px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 transition-transform duration-300 hover:-translate-y-[2px] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#2a2a2a] dark:![background-image:none]"
       style={CardBackground({ backgroundUrl })}
     >
       <CardContent card={card} index={index} />
@@ -365,7 +365,7 @@ function MobileCard({ card, index }: CardProps) {
 
   return (
     <div
-      className="mx-auto flex h-[400px] w-full max-w-[272px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6"
+      className="mx-auto flex h-[400px] w-full max-w-[272px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 dark:border-[rgba(255,255,255,0.08)] dark:bg-[#2a2a2a] dark:![background-image:none]"
       style={CardBackground({ backgroundUrl })}
     >
       <CardContent card={card} index={index} />

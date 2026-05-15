@@ -35,7 +35,6 @@ function PrimaryButton({ href, label }: { href: string; label: string }) {
         background: hovered
           ? 'linear-gradient(0deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.10) 100%), linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)'
           : 'linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)',
-        boxShadow: '0 2px 2px 0 rgba(214, 214, 214, 0.74)',
       }}
     >
       {label}
@@ -45,18 +44,10 @@ function PrimaryButton({ href, label }: { href: string; label: string }) {
 }
 
 function SecondaryButton({ href, label }: { href: string; label: string }) {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <Link
       href={href}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="inline-flex w-full items-center justify-center gap-1 rounded-[100px] border border-[rgba(32,32,32,0.06)] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal capitalize leading-[36px] text-[#202020] transition-all duration-200 md:w-auto"
-      style={{
-        background: hovered ? 'rgba(32, 32, 32, 0.05)' : 'rgba(32, 32, 32, 0.02)',
-        backdropFilter: 'blur(12px)',
-      }}
+      className="inline-flex w-full items-center justify-center gap-1 rounded-[100px] border border-[rgba(32,32,32,0.06)] bg-[rgba(32,32,32,0.02)] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal capitalize leading-[36px] text-[#202020] backdrop-blur-[12px] transition-all duration-200 hover:bg-[rgba(32,32,32,0.05)] md:w-auto dark:border-[rgba(255,255,255,0.12)] dark:bg-[rgba(255,255,255,0.04)] dark:text-[rgba(255,255,255,0.75)] dark:hover:bg-[rgba(255,255,255,0.08)]"
     >
       {label}
     </Link>
@@ -68,8 +59,8 @@ function UseCaseCard({ text }: { text: string }) {
     <div
       className="flex h-full min-h-[164px] items-center justify-center rounded-[16px] border border-[#E34039] px-[26px] py-5 text-center"
       style={{
-        background: 'linear-gradient(273deg, #FFF 6.73%, #FFF 88.91%)',
-        boxShadow: '0 7px 16.4px 0 rgba(238, 238, 238, 0.48)',
+        background: 'var(--payment-card-bg)',
+        boxShadow: 'var(--payment-card-shadow)',
       }}
     >
       <p className="[font-family:var(--font-manrope)] text-[20px] font-normal leading-[24px] tracking-[-1px] text-[#EC0000]">
@@ -94,7 +85,7 @@ export function EcrUseCasesSection({ data }: EcrUseCasesSectionProps) {
         <div className="mx-auto mb-[60px] max-w-[523px] text-center">
           {data.title && (
             <FadeUp delay={0} duration={1200} y={20}>
-              <h2 className="[font-family:var(--font-manrope)] text-[48px] font-semibold leading-[116%] tracking-[-1px] text-black">
+              <h2 className="[font-family:var(--font-manrope)] text-[48px] font-semibold leading-[116%] tracking-[-1px] text-black dark:text-white">
                 {data.title}
               </h2>
             </FadeUp>
@@ -102,7 +93,7 @@ export function EcrUseCasesSection({ data }: EcrUseCasesSectionProps) {
 
           {data.subtitle && (
             <FadeUp delay={120} duration={1200} y={14}>
-              <p className="mt-6 [font-family:var(--font-manrope)] text-[16px] font-normal leading-[150%] tracking-[-0.4px] text-[rgba(32,32,32,0.56)]">
+              <p className="mt-6 [font-family:var(--font-manrope)] text-[16px] font-normal leading-[150%] tracking-[-0.4px] text-[rgba(32,32,32,0.56)] dark:text-[rgba(255,255,255,0.50)]">
                 {data.subtitle}
               </p>
             </FadeUp>

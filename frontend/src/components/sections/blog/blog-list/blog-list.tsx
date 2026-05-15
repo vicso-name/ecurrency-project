@@ -88,7 +88,7 @@ export function BlogList({ articles, blogPage }: BlogListProps) {
 
   if (articles.length === 0) {
     return (
-      <div className="col-span-full rounded-[18px] border border-[#E8E8E8] bg-white p-10 text-center text-[16px] text-[rgba(0,0,0,0.56)]">
+      <div className="col-span-full rounded-[18px] border border-[#E8E8E8] bg-white p-10 text-center text-[16px] text-[rgba(0,0,0,0.56)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1e1e1e] dark:text-[rgba(255,255,255,0.50)]">
         No articles found.
       </div>
     );
@@ -104,7 +104,7 @@ export function BlogList({ articles, blogPage }: BlogListProps) {
             <Link
               key={article.id}
               href={`/blog/${article.slug}`}
-              className="block rounded-[18px] border border-[#E8E8E8] bg-white p-4 shadow-[0_3px_112.1px_4px_rgba(0,0,0,0.04)] backdrop-blur-[1.8px] transition-transform duration-200 hover:-translate-y-[2px]"
+              className="block rounded-[18px] border border-[#E8E8E8] bg-white p-4 shadow-[0_3px_112.1px_4px_rgba(0,0,0,0.04)] backdrop-blur-[1.8px] transition-transform duration-200 hover:-translate-y-[2px] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1e1e1e] dark:shadow-none"
             >
               {imageUrl ? (
                 <img
@@ -113,15 +113,15 @@ export function BlogList({ articles, blogPage }: BlogListProps) {
                   className="mb-6 h-[240px] w-full rounded-[18px] object-cover"
                 />
               ) : (
-                <div className="mb-6 h-[240px] w-full rounded-[18px] bg-[rgba(32,32,32,0.04)]" />
+                <div className="mb-6 h-[240px] w-full rounded-[18px] bg-[rgba(32,32,32,0.04)] dark:bg-[rgba(255,255,255,0.08)]" />
               )}
 
-              <h2 className="mb-7 line-clamp-2 min-h-[56px] text-[22px] leading-7 font-semibold text-black">
+              <h2 className="mb-7 line-clamp-2 min-h-[56px] text-[22px] leading-7 font-semibold text-black dark:text-white">
                 {article.Title || 'Untitled article'}
               </h2>
 
               <div className="flex items-center justify-between gap-4">
-                <span className="text-[16px] leading-6 font-medium text-[rgba(0,0,0,0.51)]">
+                <span className="text-[16px] leading-6 font-medium text-[rgba(0,0,0,0.51)] dark:text-[rgba(255,255,255,0.45)]">
                   {formatBlogDate(article.publishedDate)}
                 </span>
                 <ArrowIcon />

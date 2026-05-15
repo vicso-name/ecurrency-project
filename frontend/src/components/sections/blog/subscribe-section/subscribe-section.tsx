@@ -63,9 +63,9 @@ export function SubscribeSection({ data }: SubscribeSectionProps) {
       <div className="relative w-full max-w-[1011px] pt-[90px] md:pt-[100px]">
         <RevealCard duration={1200} y={36} scale={0.985}>
           <div
-            className="relative flex w-full flex-col items-center rounded-[20px] border-2 border-white px-6 pt-[160px] pb-[50px] md:px-[80px]"
+            className="relative flex w-full flex-col items-center rounded-[20px] border-2 border-white px-6 pt-[160px] pb-[50px] md:px-[80px] dark:border-[rgba(255,255,255,0.08)]"
             style={{
-              background: 'rgba(255, 255, 255, 0.64)',
+              background: 'var(--glassmorphism-hero-bg)',
               backdropFilter: 'blur(2px)',
             }}
           >
@@ -87,7 +87,7 @@ export function SubscribeSection({ data }: SubscribeSectionProps) {
             </FadeUp>
 
             <FadeUp delay={180} duration={1200} y={20}>
-              <h2 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[32px] font-semibold leading-[40px] tracking-[-1px] text-black md:text-[48px] md:leading-[54px]">
+              <h2 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[32px] font-semibold leading-[40px] tracking-[-1px] text-black md:text-[48px] md:leading-[54px] dark:text-white">
                 {data.title}
               </h2>
             </FadeUp>
@@ -109,7 +109,7 @@ export function SubscribeSection({ data }: SubscribeSectionProps) {
                   placeholder={data.placeholder || 'Your Email'}
                   required
                   disabled={showOverlay}
-                  className="h-[50px] w-full min-w-0 flex-1 rounded-[240px] bg-[#F2F2F2] px-5 py-3 [font-family:var(--font-manrope)] text-[16px] font-semibold leading-[30px] text-black outline-none placeholder:text-[rgba(0,0,0,0.40)]"
+                  className="h-[50px] w-full min-w-0 flex-1 rounded-[240px] bg-[#F2F2F2] px-5 py-3 [font-family:var(--font-manrope)] text-[16px] font-semibold leading-[30px] text-black outline-none placeholder:text-[rgba(0,0,0,0.40)] dark:bg-[#2a2a2a] dark:text-white dark:placeholder:text-[rgba(255,255,255,0.35)]"
                 />
 
                 <button
@@ -122,7 +122,6 @@ export function SubscribeSection({ data }: SubscribeSectionProps) {
                     background: hovered
                       ? 'linear-gradient(0deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.10) 100%), linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)'
                       : 'linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)',
-                    boxShadow: '0 2px 2px 0 rgba(214, 214, 214, 0.74)',
                   }}
                 >
                   {status === 'loading' ? 'Sending...' : data.buttonLabel}
@@ -133,7 +132,7 @@ export function SubscribeSection({ data }: SubscribeSectionProps) {
               <div
                 className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-all duration-500 ${showOverlay ? 'opacity-100' : 'opacity-0'}`}
               >
-                <p className="rounded-[100px] bg-white px-6 py-2 text-center [font-family:var(--font-manrope)] text-[16px] font-semibold text-green-600 shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
+                <p className="rounded-[100px] bg-white px-6 py-2 text-center [font-family:var(--font-manrope)] text-[16px] font-semibold text-green-600 shadow-[0_4px_20px_rgba(0,0,0,0.08)] dark:bg-[#2a2a2a] dark:shadow-none">
                   ✓ Successfully subscribed!
                 </p>
               </div>

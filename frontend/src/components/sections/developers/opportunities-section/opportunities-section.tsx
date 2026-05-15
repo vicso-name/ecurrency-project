@@ -16,9 +16,9 @@ function OpportunityCardBlock({ card }: { card: OpportunityCard }) {
 
   return (
     <div
-      className={`relative flex flex-col justify-end rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white p-6 ${heightClass}`}
+      className={`relative flex flex-col justify-end rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white p-6 dark:border-[rgba(255,255,255,0.10)] dark:bg-[#2a2a2a] ${heightClass}`}
       style={{
-        backgroundImage: 'url(/images/home/use_for_block_bg.svg)',
+        backgroundImage: 'var(--used-for-card-bg-image)',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top center',
         backgroundSize: '100% auto',
@@ -37,7 +37,7 @@ function OpportunityCardBlock({ card }: { card: OpportunityCard }) {
         </div>
       )}
 
-      <p className="max-w-[226px] text-[20px] font-medium leading-normal text-[#333]">
+      <p className="max-w-[226px] text-[20px] font-medium leading-normal text-[#333] dark:text-[rgba(255,255,255,0.85)]">
         {card.title}
       </p>
     </div>
@@ -57,7 +57,7 @@ export function OpportunitiesSectionBlock({ data }: OpportunitiesSectionProps) {
       <div className="mx-auto max-w-[1200px]">
         {/* Title */}
         <FadeUp delay={0} duration={1200} y={20}>
-          <h2 className="mx-auto mb-[65px] max-w-[462px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px]">
+          <h2 className="mx-auto mb-[65px] max-w-[462px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px] dark:text-white">
             {data.title}
           </h2>
         </FadeUp>

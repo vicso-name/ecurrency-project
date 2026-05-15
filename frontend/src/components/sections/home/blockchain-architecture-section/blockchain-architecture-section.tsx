@@ -34,7 +34,7 @@ export function BlockchainArchitectureSection({
         <div className="mx-auto max-w-[540px] text-center">
           {data.preTitle ? (
             <FadeUp delay={0} duration={1100} y={18}>
-              <p className="mb-[30px] text-[16px] leading-5 font-normal uppercase text-[rgba(13,0,0,0.48)] [font-family:var(--font-roboto-mono)]">
+              <p className="mb-[30px] text-[16px] leading-5 font-normal uppercase text-[rgba(13,0,0,0.48)] [font-family:var(--font-roboto-mono)] dark:text-[rgba(255,255,255,0.40)]">
                 {data.preTitle}
               </p>
             </FadeUp>
@@ -42,7 +42,7 @@ export function BlockchainArchitectureSection({
 
           {data.title ? (
             <FadeUp delay={120} duration={1200} y={22}>
-              <h2 className="mx-auto text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
+              <h2 className="mx-auto text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px] dark:text-[#f0f0f0]">
                 {data.title}
               </h2>
             </FadeUp>
@@ -50,7 +50,7 @@ export function BlockchainArchitectureSection({
 
           {data.subTitle ? (
             <FadeUp delay={260} duration={1250} y={16}>
-              <p className="mx-auto mt-4 max-w-[760px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(79,79,79,0.64)]">
+              <p className="mx-auto mt-4 max-w-[760px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(79,79,79,0.64)] dark:text-[rgba(255,255,255,0.50)]">
                 {data.subTitle}
               </p>
             </FadeUp>
@@ -116,14 +116,15 @@ function ArchitectureCard({ card }: ArchitectureCardProps) {
 
   return (
     <div
-      className={`relative flex h-[354px] w-full justify-center rounded-[17.473px] border border-[#ECECEC] p-[11px] transition-transform duration-300 hover:-translate-y-[2px] ${
+      className={`relative flex h-[354px] w-full justify-center rounded-[17.473px] border border-[#ECECEC] p-[11px] transition-transform duration-300 hover:-translate-y-[2px] dark:border-[rgba(255,255,255,0.08)] ${
         isLarge ? 'lg:max-w-[569px]' : 'lg:max-w-[395px]'
       }`}
     >
       <div
         className="relative flex w-full flex-col items-center justify-start rounded-[14px] px-6 pt-6 text-center"
         style={{
-          backgroundImage: 'url(/images/home/block_bg.png)',
+          backgroundImage: 'var(--arch-card-bg-image)',
+          backgroundColor: 'var(--arch-card-bg-color)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -139,11 +140,11 @@ function ArchitectureCard({ card }: ArchitectureCardProps) {
             isLarge ? 'max-w-[338px]' : 'max-w-[320px]'
           }`}
         >
-          <h3 className="text-center text-[18px] leading-[150%] font-semibold tracking-[-0.4px] text-black">
+          <h3 className="text-center text-[18px] leading-[150%] font-semibold tracking-[-0.4px] text-black dark:text-white">
             {card.title}
           </h3>
 
-          <p className="mt-2 text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.56)]">
+          <p className="mt-2 text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.56)] dark:text-[rgba(255,255,255,0.50)]">
             {card.subtitle}
           </p>
         </div>
@@ -160,7 +161,7 @@ function IconBlock({
   alt: string;
 }) {
   return (
-    <div className="relative mb-10 flex h-[153px] w-full max-w-[290px] items-center justify-center overflow-hidden rounded-[8.737px] border border-[rgba(236,236,236,0.37)] bg-[linear-gradient(273deg,#FFF_6.73%,#FAFAFA_88.91%)] shadow-[0_13.105px_17.91px_0_rgba(255,255,255,0.12)]">
+    <div className="relative mb-10 flex h-[153px] w-full max-w-[290px] items-center justify-center overflow-hidden rounded-[8.737px] border border-[rgba(236,236,236,0.37)] bg-[linear-gradient(273deg,#FFF_6.73%,#FAFAFA_88.91%)] shadow-[0_13.105px_17.91px_0_rgba(255,255,255,0.12)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[linear-gradient(273deg,#2a2a2a_6.73%,#222222_88.91%)] dark:shadow-none">
       <Image
         src="/images/home/top_comb.svg"
         alt=""

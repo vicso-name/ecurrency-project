@@ -25,7 +25,6 @@ function CtaButton({ href, label }: { href: string; label: string }) {
         background: hovered
           ? 'linear-gradient(0deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.10) 100%), linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)'
           : 'linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)',
-        boxShadow: '0 2px 2px 0 rgba(214, 214, 214, 0.74)',
       }}
     >
       {label}
@@ -42,10 +41,10 @@ export function ConsensusSectionBlock({ data }: ConsensusSectionProps) {
     <section className="px-4 py-[80px] md:py-[120px]">
       <div className="mx-auto max-w-[1012px]">
         <RevealCard duration={1200} y={36} scale={0.985}>
-          <div className="flex flex-col items-center rounded-[16px] border border-white bg-white px-6 py-[64px] md:px-10">
+          <div className="flex flex-col items-center rounded-[16px] border border-white bg-white px-6 py-[64px] md:px-10 dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1e1e1e]">
             {/* Title */}
             <FadeUp delay={0} duration={1200} y={20}>
-              <h2 className="mx-auto max-w-[541px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-[#0D0000] md:text-[48px]">
+              <h2 className="mx-auto max-w-[541px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-[#0D0000] md:text-[48px] dark:text-white">
                 {data.title}
               </h2>
             </FadeUp>
@@ -53,7 +52,7 @@ export function ConsensusSectionBlock({ data }: ConsensusSectionProps) {
             {/* Subtitle */}
             {data.subtitle && (
               <FadeUp delay={120} duration={1200} y={14}>
-                <p className="mx-auto mt-6 max-w-[541px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal leading-[24px] text-[rgba(13,0,0,0.60)]">
+                <p className="mx-auto mt-6 max-w-[541px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal leading-[24px] text-[rgba(13,0,0,0.60)] dark:text-[rgba(255,255,255,0.55)]">
                   {data.subtitle}
                 </p>
               </FadeUp>
@@ -62,7 +61,7 @@ export function ConsensusSectionBlock({ data }: ConsensusSectionProps) {
             {/* Row Title */}
             {data.rowTitle && (
               <FadeUp delay={220} duration={1100} y={14}>
-                <p className="mt-[90px] mb-9 text-center [font-family:var(--font-geist-mono)] text-[16px] font-normal uppercase leading-[20px] text-[rgba(13,0,0,0.48)]">
+                <p className="mt-[90px] mb-9 text-center [font-family:var(--font-geist-mono)] text-[16px] font-normal uppercase leading-[20px] text-[rgba(13,0,0,0.48)] dark:text-[rgba(255,255,255,0.40)]">
                   {data.rowTitle}
                 </p>
               </FadeUp>
@@ -82,7 +81,7 @@ export function ConsensusSectionBlock({ data }: ConsensusSectionProps) {
                       y={28}
                       scale={0.985}
                     >
-                      <div className="flex h-[192px] flex-col items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 text-center">
+                      <div className="flex h-[192px] flex-col items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 text-center dark:border-[rgba(255,255,255,0.10)] dark:bg-[#2a2a2a]">
                         {iconUrl && (
                           <Image
                             src={iconUrl}
@@ -93,7 +92,7 @@ export function ConsensusSectionBlock({ data }: ConsensusSectionProps) {
                             className="mb-5 h-[36px] w-[36px]"
                           />
                         )}
-                        <p className="max-w-[226px] text-[20px] font-medium leading-normal text-[#333]">
+                        <p className="max-w-[226px] text-[20px] font-medium leading-normal text-[#333] dark:text-[rgba(255,255,255,0.85)]">
                           {card.text}
                         </p>
                       </div>

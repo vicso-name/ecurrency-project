@@ -48,14 +48,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     <main className="px-4 pb-24 pt-[100px] md:pt-[140px]">
       {/* Hero */}
       <div className="mx-auto max-w-[808px] text-center">
-        <h1 className="[font-family:var(--font-manrope)] text-[36px] font-semibold leading-[100%] tracking-[-1.5px] text-[#0F1324] md:text-[48px] md:tracking-[-2px] lg:text-[64px] lg:tracking-[-2.56px]">
+        <h1 className="[font-family:var(--font-manrope)] text-[36px] font-semibold leading-[100%] tracking-[-1.5px] text-[#0F1324] md:text-[48px] md:tracking-[-2px] lg:text-[64px] lg:tracking-[-2.56px] dark:text-white">
           {article.Title}
         </h1>
 
         {/* Meta: date */}
         {date && (
           <div className="mt-4 flex items-center justify-center">
-            <span className="[font-family:var(--font-manrope)] text-[16px] font-normal leading-[20px] text-[rgba(15,19,36,0.60)]">
+            <span className="[font-family:var(--font-manrope)] text-[16px] font-normal leading-[20px] text-[rgba(15,19,36,0.60)] dark:text-[rgba(255,255,255,0.50)]">
               {formatDate(date)}
             </span>
           </div>
@@ -80,7 +80,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <div className="mx-auto mt-[40px] max-w-[618px] md:mt-[60px]">
         {/* Excerpt */}
         {article.Excerpt && (
-          <p className="mb-[40px] [font-family:var(--font-manrope)] text-[22px] font-semibold leading-[126%] tracking-[-1.12px] text-[#0F1324] md:mb-[60px] md:text-[28px]">
+          <p className="mb-[40px] [font-family:var(--font-manrope)] text-[22px] font-semibold leading-[126%] tracking-[-1.12px] text-[#0F1324] md:mb-[60px] md:text-[28px] dark:text-[rgba(255,255,255,0.90)]">
             {article.Excerpt}
           </p>
         )}
@@ -101,7 +101,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       {/* Relevant Articles */}
       {relevantArticles.length > 0 && (
         <div className="mx-auto mt-[80px] max-w-[1200px] md:mt-[120px]">
-          <h2 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[100%] tracking-[-1.5px] text-[#0F1324] md:mb-[60px] md:text-[48px] md:tracking-[-1.92px]">
+          <h2 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[100%] tracking-[-1.5px] text-[#0F1324] md:mb-[60px] md:text-[48px] md:tracking-[-1.92px] dark:text-white">
             Relevant Articles
           </h2>
 

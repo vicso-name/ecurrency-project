@@ -29,19 +29,19 @@ export function ToolsInfrastructureSection({
     <section className="px-4 pb-0">
       <div className="mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[612px] text-center">
-          <h2 className="mx-auto max-w-[612px] text-[36px] font-semibold leading-[40px] tracking-[-1.5px] text-[#1E0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
+          <h2 className="mx-auto max-w-[612px] text-[36px] font-semibold leading-[40px] tracking-[-1.5px] text-[#1E0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px] dark:text-[#f0f0f0]">
             {data.title}
           </h2>
 
           {data.subtitle ? (
-            <p className="mx-auto mt-4 max-w-[439px] text-[16px] font-normal leading-[22px] tracking-[-0.4px] text-[rgba(13,0,0,0.60)]">
+            <p className="mx-auto mt-4 max-w-[439px] text-[16px] font-normal leading-[22px] tracking-[-0.4px] text-[rgba(13,0,0,0.60)] dark:text-[rgba(255,255,255,0.50)]">
               {data.subtitle}
             </p>
           ) : null}
         </div>
 
         <div className="mt-[32px] flex flex-col items-center md:mt-[40px]">
-          <div className="inline-flex items-start rounded-[100px] border border-[#DE3737] bg-[#FBFBFB] p-1 shadow-[0_2px_2px_rgba(222,222,222,0.74)]">
+          <div className="inline-flex items-start rounded-[100px] border border-[#DE3737] bg-[#FBFBFB] p-1 shadow-[0_2px_2px_rgba(222,222,222,0.74)] dark:bg-[#1a1a1a] dark:shadow-none">
             {tabs.map((tab, index) => {
               const isActive = index === safeIndex;
 
@@ -53,7 +53,7 @@ export function ToolsInfrastructureSection({
                   className={`flex h-[48px] min-w-[140px] items-center justify-center rounded-[100px] px-6 text-center text-[16px] font-medium leading-5 tracking-[-0.5px] capitalize transition-all duration-300 md:w-[154px] ${
                     isActive
                       ? 'bg-[#EC0000] text-white shadow-[inset_0_4px_10.7px_rgba(255,255,255,0.40)]'
-                      : 'text-[rgba(30,0,0,0.32)] hover:text-[rgba(30,0,0,0.56)]'
+                      : 'text-[rgba(30,0,0,0.32)] hover:text-[rgba(30,0,0,0.56)] dark:text-[rgba(255,255,255,0.35)] dark:hover:text-[rgba(255,255,255,0.65)]'
                   }`}
                   aria-pressed={isActive}
                 >
@@ -96,7 +96,7 @@ export function ToolsInfrastructureSection({
               })}
 
               {!activeImageUrl ? (
-                <div className="flex h-full items-center justify-center rounded-[20px] border border-dashed border-[rgba(30,0,0,0.12)] text-[rgba(30,0,0,0.32)]">
+                <div className="flex h-full items-center justify-center rounded-[20px] border border-dashed border-[rgba(30,0,0,0.12)] text-[rgba(30,0,0,0.32)] dark:border-[rgba(255,255,255,0.12)] dark:text-[rgba(255,255,255,0.35)]">
                   No image
                 </div>
               ) : null}
@@ -140,13 +140,13 @@ export function ToolsInfrastructureSection({
                         />
                       ) : null}
 
-                      <span className="block min-w-0 truncate text-left text-[16px] font-medium leading-5 tracking-[-0.5px] capitalize text-[rgba(0,0,0,0.42)] md:text-center">
+                      <span className="block min-w-0 truncate text-left text-[16px] font-medium leading-5 tracking-[-0.5px] capitalize text-[rgba(0,0,0,0.42)] md:text-center dark:text-[rgba(255,255,255,0.50)]">
                         {button.label}
                       </span>
                     </div>
 
                     {button.subLabel ? (
-                      <span className="ml-3 inline-flex h-[38px] shrink-0 items-center justify-center rounded-[999px] bg-[rgba(255,255,255,0.55)] px-[18px] text-[15px] font-normal leading-none capitalize text-[rgba(0,0,0,0.22)] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+                      <span className="ml-3 inline-flex h-[38px] shrink-0 items-center justify-center rounded-[999px] bg-[rgba(255,255,255,0.55)] px-[18px] text-[15px] font-normal leading-none capitalize text-[rgba(0,0,0,0.22)] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] dark:bg-[rgba(255,255,255,0.10)] dark:text-[rgba(255,255,255,0.35)] dark:shadow-none">
                         {button.subLabel}
                       </span>
                     ) : null}
@@ -157,7 +157,7 @@ export function ToolsInfrastructureSection({
                   'inline-flex min-h-[50px] w-full max-w-[300px] min-w-[170px] items-center justify-center gap-[10px] overflow-hidden rounded-[999px] border border-[#DE3737] bg-[radial-gradient(60.21%_66.41%_at_47.91%_-7.5%,rgba(240,88,88,0.40)_0%,rgba(255,255,255,0.05)_79.27%,rgba(255,255,255,0)_100%)] px-[15px] py-[10px] shadow-[0_0_7px_rgba(227,64,57,0.20)] transition-all duration-200 hover:bg-[rgba(236,0,0,0.04)] md:min-h-[56px] md:w-auto md:max-w-none';
 
                 const secondaryClassName =
-                  'inline-flex min-h-[50px] w-full max-w-[300px] cursor-default items-center justify-between overflow-hidden rounded-[999px] border border-[rgba(255,255,255,0.55)] bg-[linear-gradient(180deg,rgba(245,245,245,0.95)_0%,rgba(236,236,236,0.95)_100%)] pl-[15px] pr-[10px] py-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_2px_rgba(0,0,0,0.02)] backdrop-blur-[10px] md:w-auto md:max-w-none';
+                  'inline-flex min-h-[50px] w-full max-w-[300px] cursor-default items-center justify-between overflow-hidden rounded-[999px] border border-[rgba(255,255,255,0.55)] bg-[linear-gradient(180deg,rgba(245,245,245,0.95)_0%,rgba(236,236,236,0.95)_100%)] pl-[15px] pr-[10px] py-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_2px_rgba(0,0,0,0.02)] backdrop-blur-[10px] md:w-auto md:max-w-none dark:border-[rgba(255,255,255,0.12)] dark:bg-[linear-gradient(180deg,rgba(50,50,50,0.95)_0%,rgba(40,40,40,0.95)_100%)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]';
 
                 if (isPrimary && button.href) {
                   return (

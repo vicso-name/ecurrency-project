@@ -33,7 +33,7 @@ export function EconomicLayerSection({ data }: EconomicLayerSectionProps) {
       <div
         className="pointer-events-none absolute inset-0 z-0 bg-no-repeat"
         style={{
-          backgroundImage: 'url(/images/home/BG.png)',
+          backgroundImage: 'var(--economic-layer-bg-image)',
           backgroundPosition: 'top center',
           backgroundSize: 'cover',
         }}
@@ -41,13 +41,13 @@ export function EconomicLayerSection({ data }: EconomicLayerSectionProps) {
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-b from-transparent to-[#f7f5f4]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-b from-transparent to-[#f7f5f4] dark:to-[#0d0d0d]"
       />
 
       <div className="relative z-20 mx-auto max-w-[1200px] px-4">
         <div className="relative mx-auto w-full max-w-[1012px] pt-[90px] md:pt-[100px]">
           <RevealCard duration={1200} y={36} scale={0.985}>
-            <div className="relative mx-auto flex min-h-[500px] w-full flex-col items-center rounded-[16px] border border-white bg-white px-6 pt-[120px] pb-12 text-center md:min-h-[562px] md:px-10 md:pt-[150px]">
+            <div className="relative mx-auto flex min-h-[500px] w-full flex-col items-center rounded-[16px] border border-white bg-white px-6 pt-[120px] pb-12 text-center md:min-h-[562px] md:px-10 md:pt-[150px] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1e1e1e]">
               {coinImageUrl ? (
                   <FadeUp
                     delay={80}
@@ -67,14 +67,14 @@ export function EconomicLayerSection({ data }: EconomicLayerSectionProps) {
                 ) : null}
 
               <FadeUp delay={180} duration={1200} y={20}>
-                <h2 className="max-w-[480px] text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px]">
+                <h2 className="max-w-[480px] text-center text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-[#0D0000] md:text-[48px] md:leading-[116%] md:tracking-[-1px] dark:text-[#f0f0f0]">
                   {data.title}
                 </h2>
               </FadeUp>
 
               {data.subtitle ? (
                 <FadeUp delay={320} duration={1250} y={16}>
-                  <p className="mt-4 max-w-[439px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(13,0,0,0.60)]">
+                  <p className="mt-4 max-w-[439px] text-center text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(13,0,0,0.60)] dark:text-[rgba(255,255,255,0.50)]">
                     {data.subtitle}
                   </p>
                 </FadeUp>
@@ -87,7 +87,7 @@ export function EconomicLayerSection({ data }: EconomicLayerSectionProps) {
                       href={data.buttonHref || '#'}
                       target={data.buttonOpenInNewTab ? '_blank' : undefined}
                       rel={data.buttonOpenInNewTab ? 'noopener noreferrer' : undefined}
-                      className="inline-flex items-center justify-center gap-1 rounded-[100px] bg-[linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)] px-[30px] pt-[6px] pb-[8px] text-center text-[16px] leading-9 font-normal capitalize text-white shadow-[0_2px_2px_rgba(214,214,214,0.74)] transition duration-200 hover:bg-[linear-gradient(0deg,rgba(0,0,0,0.10)_0%,rgba(0,0,0,0.10)_100%),linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)]"
+                      className="inline-flex items-center justify-center gap-1 rounded-[100px] bg-[linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)] px-[30px] pt-[6px] pb-[8px] text-center text-[16px] leading-9 font-normal capitalize text-white transition duration-200 hover:bg-[linear-gradient(0deg,rgba(0,0,0,0.10)_0%,rgba(0,0,0,0.10)_100%),linear-gradient(268deg,#E00808_6.31%,#E34039_91.78%)]"
                     >
                       <span>{data.buttonLabel}</span>
                       <ButtonIcon />

@@ -22,7 +22,7 @@ export function ProjectOverviewSection({
           <div
             className="pointer-events-none absolute inset-0 z-0 bg-no-repeat"
             style={{
-              backgroundImage: 'url(/images/home/project_overview_bg.svg)',
+              backgroundImage: 'var(--project-overview-bg-image)',
               backgroundPosition: 'top center',
               backgroundSize: 'cover',
             }}
@@ -34,7 +34,7 @@ export function ProjectOverviewSection({
             aria-hidden="true"
             width={201}
             height={409}
-            className="pointer-events-none absolute left-0 top-1/2 z-0 hidden h-auto w-[201px] -translate-y-[25%] md:block"
+            className="pointer-events-none absolute left-0 top-1/2 z-0 hidden h-auto w-[201px] -translate-y-[25%] md:block dark:opacity-20"
           />
 
           <Image
@@ -43,7 +43,7 @@ export function ProjectOverviewSection({
             aria-hidden="true"
             width={201}
             height={409}
-            className="pointer-events-none absolute right-0 top-1/2 z-0 hidden h-auto w-[201px] -translate-y-[25%] md:block"
+            className="pointer-events-none absolute right-0 top-1/2 z-0 hidden h-auto w-[201px] -translate-y-[25%] md:block dark:opacity-20"
           />
 
           <div className="relative z-10 mx-auto max-w-[1360px] px-6 py-[80px] md:px-[30px] md:py-[120px]">
@@ -62,14 +62,14 @@ export function ProjectOverviewSection({
               ) : null}
 
               <FadeUp delay={180} duration={1250} y={20}>
-                <h2 className="max-w-[890px] text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-black md:text-[48px] md:leading-[54px] md:tracking-[-1px]">
+                <h2 className="max-w-[890px] text-[36px] leading-[40px] font-semibold tracking-[-1.5px] text-black md:text-[48px] md:leading-[54px] md:tracking-[-1px] dark:text-white">
                   {data.title}
                 </h2>
               </FadeUp>
 
               {data.subtitle ? (
                 <FadeUp delay={320} duration={1250} y={14}>
-                  <p className="mt-[28px] max-w-[678px] text-[16px] leading-[22px] font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.64)]">
+                  <p className="mt-[28px] max-w-[678px] text-[16px] leading-[22px] font-normal tracking-[-0.4px] text-[rgba(0,0,0,0.64)] dark:text-[rgba(255,255,255,0.50)]">
                     {data.subtitle}
                   </p>
                 </FadeUp>

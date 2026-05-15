@@ -25,7 +25,6 @@ function CtaButton({ href, label }: { href: string; label: string }) {
         background: hovered
           ? 'linear-gradient(0deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.10) 100%), linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)'
           : 'linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)',
-        boxShadow: '0 2px 2px 0 rgba(214, 214, 214, 0.74)',
       }}
     >
       {label}
@@ -43,7 +42,7 @@ export function TechnologyFeaturesSectionBlock({ data }: TechnologyFeaturesSecti
       <div className="mx-auto max-w-[1200px]">
         {/* Title */}
         <FadeUp delay={0} duration={1200} y={20}>
-          <h2 className="mx-auto mb-[50px] max-w-[746px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px]">
+          <h2 className="mx-auto mb-[50px] max-w-[746px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px] dark:text-white">
             {data.title}
           </h2>
         </FadeUp>
@@ -62,7 +61,7 @@ export function TechnologyFeaturesSectionBlock({ data }: TechnologyFeaturesSecti
                   y={28}
                   scale={0.985}
                 >
-                  <div className="flex h-full flex-col items-center gap-[54px] rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-[45px] pt-[54px] pb-[48px]">
+                  <div className="flex h-full flex-col items-center gap-[54px] rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-[45px] pt-[54px] pb-[48px] dark:border-[rgba(255,255,255,0.10)] dark:bg-[#2a2a2a]">
                     {iconUrl && (
                       <Image
                         src={iconUrl}
@@ -73,7 +72,7 @@ export function TechnologyFeaturesSectionBlock({ data }: TechnologyFeaturesSecti
                         className="h-[140px] w-[140px]"
                       />
                     )}
-                    <p className="max-w-[185px] text-center text-[20px] font-semibold leading-normal text-[#333]">
+                    <p className="max-w-[185px] text-center text-[20px] font-semibold leading-normal text-[#333] dark:text-[rgba(255,255,255,0.85)]">
                       {card.title}
                     </p>
                   </div>
@@ -86,7 +85,7 @@ export function TechnologyFeaturesSectionBlock({ data }: TechnologyFeaturesSecti
         {/* Description */}
         {data.description && (
           <FadeUp delay={500} duration={1200} y={14}>
-            <p className="mx-auto mt-[50px] mb-[25px] max-w-[609px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal leading-[150%] tracking-[-0.4px] text-[rgba(32,32,32,0.56)]">
+            <p className="mx-auto mt-[50px] mb-[25px] max-w-[609px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal leading-[150%] tracking-[-0.4px] text-[rgba(32,32,32,0.56)] dark:text-[rgba(255,255,255,0.50)]">
               {data.description}
             </p>
           </FadeUp>

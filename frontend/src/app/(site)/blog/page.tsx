@@ -49,12 +49,12 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
       <div className="mx-auto max-w-[1360px]">
         <section className="text-center">
-          <h1 className="text-[48px] leading-[104%] font-semibold tracking-[-2px] text-[#202020] md:text-[64px] md:tracking-[-3px] xl:text-[80px] xl:tracking-[-4px]">
+          <h1 className="text-[48px] leading-[104%] font-semibold tracking-[-2px] text-[#202020] md:text-[64px] md:tracking-[-3px] xl:text-[80px] xl:tracking-[-4px] dark:text-[#f0f0f0]">
             {blogPage?.title || 'Blog'}
           </h1>
 
           {blogPage?.subtitle ? (
-            <p className="mx-auto mt-6 max-w-[403px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(32,32,32,0.56)]">
+            <p className="mx-auto mt-6 max-w-[403px] text-[16px] leading-6 font-normal tracking-[-0.4px] text-[rgba(32,32,32,0.56)] dark:text-[rgba(255,255,255,0.50)]">
               {blogPage.subtitle}
             </p>
           ) : null}

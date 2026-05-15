@@ -1,8 +1,97 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #f7f5f4;
   --foreground: #000000;
+
+  /* Hero gradient text — used via inline style so dark: variant can't reach it */
+  --gradient-hero-text: linear-gradient(95deg, #0D0000 0.71%, #8B8B8B 100.05%);
+
+  /* Glassmorphism card background — inline style in page-hero and block-quote */
+  --glassmorphism-hero-bg: rgba(255, 255, 255, 0.64);
+
+  /* Floating badge background — inline style in page-hero */
+  --badge-hero-bg:
+    radial-gradient(30% 53.62% at 48.95% -4950%, #F17474 0%, rgba(213, 110, 108, 0.30) 37.7%, rgba(38, 21, 21, 0.00) 89.47%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 100%),
+    #FFF;
+
+  /* Architecture card inner panel — inline style, switched off in dark */
+  --arch-card-bg-image: url('/images/home/block_bg.png');
+  --arch-card-bg-color: transparent;
+
+  /* Economic layer section background — inline style, removed in dark */
+  --economic-layer-bg-image: url('/images/home/BG.png');
+
+  /* UsedFor card inner decorative SVG — inline style, removed in dark */
+  --used-for-card-bg-image: url('/images/home/use_for_block_bg.svg');
+
+  /* Project overview section bg SVG — inline style, removed in dark */
+  --project-overview-bg-image: url('/images/home/project_overview_bg.svg');
+
+  /* SmartContracts Benefits panel background color + dotted image — inline style */
+  --benefits-panel-bg: #E00D0C;
+  --dotted-frame-bg-image: url('/images/dotted_frame_bg.webp');
+
+  /* SmartContracts BenefitCard tags — inline style, inverted in dark */
+  --benefit-tag-bg:
+    radial-gradient(30% 53.62% at 48.95% -4950%, #F17474 0%, rgba(213, 110, 108, 0.30) 37.7%, rgba(38, 21, 21, 0.00) 89.47%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 100%),
+    #FFF;
+  --benefit-tag-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.48) inset;
+
+  /* SmartContracts "How it works" panel bg — inline style, removed in dark */
+  --smart-contract-panel-bg-image: url('/images/rainbow_frame_bg.webp');
+
+  /* Technology page bottom section bg — inline style, removed in dark */
+  --tech-bottom-bg-image: url('/images/technologi_bottom_bg.png');
+
+  /* Payment container (page.tsx white wrapper) — inline style */
+  --payment-container-bg: radial-gradient(80.05% 137.14% at 50% -10.33%, rgba(0, 0, 0, 0) 60%, rgba(255, 80, 80, 0.05) 89.8%), #FFF;
+
+  /* CardBox in payment-systems-section — inline styles */
+  --payment-card-bg: linear-gradient(273deg, #FFF 6.73%, #FFF 88.91%);
+  --payment-card-shadow: 0 7px 16.4px 0 rgba(238, 238, 238, 0.48);
+}
+
+html.dark {
+  --background: #0d0d0d;
+  --foreground: #f0f0f0;
+
+  --gradient-hero-text: linear-gradient(95deg, #e8e8e8 0.71%, #888888 100.05%);
+  --glassmorphism-hero-bg: rgba(255, 255, 255, 0.04);
+  --badge-hero-bg:
+    radial-gradient(30% 53.62% at 48.95% -4950%, #F17474 0%, rgba(213, 110, 108, 0.30) 37.7%, rgba(38, 21, 21, 0.00) 89.47%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 100%),
+    #1a1a1a;
+
+  --arch-card-bg-image: none;
+  --arch-card-bg-color: #1e1e1e;
+
+  --economic-layer-bg-image: none;
+
+  --used-for-card-bg-image: none;
+
+  --project-overview-bg-image: none;
+
+  --smart-contract-panel-bg-image: none;
+
+  --tech-bottom-bg-image: none;
+
+  --benefits-panel-bg: #8a0808;
+  --dotted-frame-bg-image: none;
+
+  --benefit-tag-bg:
+    radial-gradient(30% 53.62% at 48.95% -4950%, #F17474 0%, rgba(213, 110, 108, 0.30) 37.7%, rgba(38, 21, 21, 0.00) 89.47%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 100%),
+    #333333;
+  --benefit-tag-shadow: none;
+
+  --payment-container-bg: radial-gradient(80.05% 137.14% at 50% -10.33%, rgba(0, 0, 0, 0) 60%, rgba(255, 80, 80, 0.05) 89.8%), #1a1a1a;
+  --payment-card-bg: linear-gradient(273deg, #2a2a2a 6.73%, #282828 88.91%);
+  --payment-card-shadow: none;
 }
 
 html,
@@ -190,4 +279,46 @@ body {
     margin-top: 24px;
     margin-bottom: 12px;
   }
+}
+
+/* ── Article Content Dark Mode ── */
+html.dark .article-content h1,
+html.dark .article-content h2,
+html.dark .article-content h3,
+html.dark .article-content h4 {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+html.dark .article-content p {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+html.dark .article-content ul,
+html.dark .article-content ol {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+html.dark .article-content blockquote {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark .article-content blockquote p {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark .article-content strong {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+html.dark .article-content code {
+  background: #2a2a2a;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+html.dark .article-content pre {
+  background: #1e1e1e;
+}
+
+html.dark .article-content hr {
+  border-color: rgba(255, 255, 255, 0.10);
 }

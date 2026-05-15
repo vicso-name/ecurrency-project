@@ -68,7 +68,7 @@ function VerticalConnectorMobile() {
 function NumberBadge({ number }: { number: string }) {
   return (
     <div
-      className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-white text-center [font-family:var(--font-inter)] text-[16px] font-semibold leading-[20.25px] text-[#EC0000]"
+      className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-white text-center [font-family:var(--font-inter)] text-[16px] font-semibold leading-[20.25px] text-[#EC0000] dark:bg-[#2a2a2a]"
       style={{
         boxShadow:
           '0 0 0 0.884px rgba(194, 0, 0, 0.06), 0 0.884px 0.884px -0.442px rgba(202, 0, 0, 0.03), 0 2.653px 2.653px -1.326px rgba(227, 64, 57, 0.12), 0 4.421px 4.421px -2.211px rgba(227, 64, 57, 0.12), 0 14.149px 14.149px -7.074px rgba(227, 64, 57, 0.16), 0 21.223px 21.223px -7.074px rgba(227, 64, 57, 0.12)',
@@ -84,8 +84,8 @@ function CardBox({ title, wide = false }: { title: string; wide?: boolean }) {
     <div
       className={`flex items-center justify-center rounded-[16px] border border-[#E34039] px-[14px] py-[20px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal leading-[20px] tracking-[-0.5px] text-[#EC0000] md:text-[20px] md:leading-[24px] md:tracking-[-1px] ${wide ? 'w-[263px]' : 'w-[213px]'}`}
       style={{
-        background: 'linear-gradient(273deg, #FFF 6.73%, #FFF 88.91%)',
-        boxShadow: '0 7px 16.4px 0 rgba(238, 238, 238, 0.48)',
+        background: 'var(--payment-card-bg)',
+        boxShadow: 'var(--payment-card-shadow)',
       }}
     >
       {title}
@@ -170,14 +170,14 @@ export function PaymentSystemsSection({ data }: PaymentSystemsSectionProps) {
         {/* Header */}
         <div className="mx-auto mb-[40px] flex max-w-[590px] flex-col items-center justify-center text-center md:mb-[60px]">
           <FadeUp delay={80} duration={1200} y={20}>
-            <h2 className="[font-family:var(--font-manrope)] text-[36px] leading-[116%] font-semibold tracking-[-1px] text-black md:text-[48px]">
+            <h2 className="[font-family:var(--font-manrope)] text-[36px] leading-[116%] font-semibold tracking-[-1px] text-black md:text-[48px] dark:text-white">
               {data.title}
             </h2>
           </FadeUp>
 
           {data.subtitle && (
             <FadeUp delay={220} duration={1250} y={14}>
-              <p className="mt-4 max-w-[440px] [font-family:var(--font-manrope)] text-[16px] font-normal leading-[22px] tracking-[-0.5px] text-[rgba(0,0,0,0.60)]">
+              <p className="mt-4 max-w-[440px] [font-family:var(--font-manrope)] text-[16px] font-normal leading-[22px] tracking-[-0.5px] text-[rgba(0,0,0,0.60)] dark:text-[rgba(255,255,255,0.50)]">
                 {data.subtitle}
               </p>
             </FadeUp>

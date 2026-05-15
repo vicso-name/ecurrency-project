@@ -19,20 +19,12 @@ function CardButton({
   label: string;
   openInNewTab?: boolean | null;
 }) {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <Link
       href={href}
       target={openInNewTab ? '_blank' : undefined}
       rel={openInNewTab ? 'noopener noreferrer' : undefined}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="flex h-[53px] w-full items-center justify-center rounded-[60px] border border-[rgba(32,32,32,0.07)] text-center [font-family:var(--font-manrope)] text-[15px] font-normal capitalize leading-[36px] text-[#202020] transition-all duration-200"
-      style={{
-        background: hovered ? 'rgba(32, 32, 32, 0.05)' : 'rgba(32, 32, 32, 0.02)',
-        backdropFilter: 'blur(12px)',
-      }}
+      className="flex h-[53px] w-full items-center justify-center rounded-[60px] border border-[rgba(32,32,32,0.07)] bg-[rgba(32,32,32,0.02)] text-center [font-family:var(--font-manrope)] text-[15px] font-normal capitalize leading-[36px] text-[#202020] backdrop-blur-[12px] transition-all duration-200 hover:bg-[rgba(32,32,32,0.05)] dark:border-[rgba(255,255,255,0.12)] dark:bg-[rgba(255,255,255,0.04)] dark:text-[rgba(255,255,255,0.75)] dark:hover:bg-[rgba(255,255,255,0.08)]"
     >
       {label}
     </Link>
@@ -62,7 +54,6 @@ function CtaButton({
         background: hovered
           ? 'linear-gradient(0deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.10) 100%), linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)'
           : 'linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)',
-        boxShadow: '0 2px 2px 0 rgba(214, 214, 214, 0.74)',
       }}
     >
       {label}
@@ -72,7 +63,7 @@ function CtaButton({
 
 function ToolCardBlock({ card }: { card: ToolCard }) {
   return (
-    <div className="relative flex h-full flex-col items-center gap-6 rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8">
+    <div className="relative flex h-full flex-col items-center gap-6 rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 dark:border-[rgba(255,255,255,0.10)] dark:bg-[#2a2a2a]">
       {/* Top dash */}
       {card.showTopDash && (
         <span
@@ -90,7 +81,7 @@ function ToolCardBlock({ card }: { card: ToolCard }) {
       )}
 
       {/* Title */}
-      <p className="text-center text-[20px] font-medium leading-normal text-[#333]">
+      <p className="text-center text-[20px] font-medium leading-normal text-[#333] dark:text-[rgba(255,255,255,0.85)]">
         {card.title}
       </p>
 
@@ -116,7 +107,7 @@ export function ToolsSectionBlock({ data }: ToolsSectionProps) {
       <div className="mx-auto max-w-[1200px]">
         {/* Title */}
         <FadeUp delay={0} duration={1200} y={20}>
-          <h2 className="mx-auto mb-[40px] max-w-[488px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px]">
+          <h2 className="mx-auto mb-[40px] max-w-[488px] text-center [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px] dark:text-white">
             {data.title}
           </h2>
         </FadeUp>

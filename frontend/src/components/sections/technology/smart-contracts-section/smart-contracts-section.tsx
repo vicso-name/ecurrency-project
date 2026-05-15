@@ -13,7 +13,7 @@ type SmartContractsSectionProps = {
 function NumberBadge({ number }: { number: number }) {
   return (
     <div
-      className="flex h-[45px] w-[45px] shrink-0 items-center justify-center rounded-full bg-white text-center [font-family:var(--font-inter)] text-[16px] font-semibold leading-[20.25px] text-[#EC0000]"
+      className="flex h-[45px] w-[45px] shrink-0 items-center justify-center rounded-full bg-white text-center [font-family:var(--font-inter)] text-[16px] font-semibold leading-[20.25px] text-[#EC0000] dark:bg-[#1a1a1a] dark:text-white"
       style={{
         boxShadow:
           '0 0 0 0.884px rgba(194, 0, 0, 0.06), 0 14.149px 14.149px -7.074px rgba(227, 64, 57, 0.16)',
@@ -29,11 +29,11 @@ function StepCard({ text, index }: { text: string; index: number }) {
     <div
       className="flex items-center justify-between gap-[10px] rounded-[16px] border border-[#E34039] px-5 py-[18px]"
       style={{
-        background: 'linear-gradient(273deg, #FFF 6.73%, #FFF 88.91%)',
-        boxShadow: '0 7px 16.4px 0 rgba(238, 238, 238, 0.48)',
+        background: 'var(--payment-card-bg)',
+        boxShadow: 'var(--payment-card-shadow)',
       }}
     >
-      <p className="max-w-[267px] [font-family:var(--font-manrope)] text-[18px] font-normal leading-[22px] tracking-[-1px] text-black">
+      <p className="max-w-[267px] [font-family:var(--font-manrope)] text-[18px] font-normal leading-[22px] tracking-[-1px] text-black dark:text-[rgba(255,255,255,0.85)]">
         {text}
       </p>
       <NumberBadge number={index + 1} />
@@ -99,7 +99,6 @@ function CtaButton({ href, label }: { href: string; label: string }) {
         background: hovered
           ? 'linear-gradient(0deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.10) 100%), linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)'
           : 'linear-gradient(268deg, #E00808 6.31%, #E34039 91.78%)',
-        boxShadow: '0 2px 2px 0 rgba(214, 214, 214, 0.74)',
       }}
     >
       {label}
@@ -121,14 +120,14 @@ export function SmartContractsSectionBlock({ data }: SmartContractsSectionProps)
       <div className="mx-auto max-w-[1200px]">
         <div className="mx-auto mb-[60px] max-w-[456px] text-center">
           <FadeUp delay={0} duration={1200} y={20}>
-            <h2 className="mb-6 [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px]">
+            <h2 className="mb-6 [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[116%] tracking-[-1px] text-black md:text-[48px] dark:text-white">
               {data.title}
             </h2>
           </FadeUp>
 
           {data.subtitle ? (
             <FadeUp delay={120} duration={1200} y={14}>
-              <p className="[font-family:var(--font-manrope)] text-[16px] font-normal leading-[150%] tracking-[-0.4px] text-[rgba(32,32,32,0.56)]">
+              <p className="[font-family:var(--font-manrope)] text-[16px] font-normal leading-[150%] tracking-[-0.4px] text-[rgba(32,32,32,0.56)] dark:text-[rgba(255,255,255,0.50)]">
                 {data.subtitle}
               </p>
             </FadeUp>
@@ -138,15 +137,15 @@ export function SmartContractsSectionBlock({ data }: SmartContractsSectionProps)
         <div className="grid gap-6 lg:grid-cols-2">
           <RevealCard delay={100} duration={1200} y={36} scale={0.985}>
             <div
-              className="flex h-full flex-col rounded-[16px] border border-[rgba(227,64,57,0.30)] bg-white p-8"
+              className="flex h-full flex-col rounded-[16px] border border-[rgba(227,64,57,0.30)] bg-white p-8 dark:border-[rgba(227,64,57,0.15)] dark:bg-[#2a2a2a]"
               style={{
-                backgroundImage: 'url(/images/rainbow_frame_bg.webp)',
+                backgroundImage: 'var(--smart-contract-panel-bg-image)',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'top left',
                 backgroundSize: 'cover',
               }}
             >
-              <h3 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[32px] font-medium leading-[36px] tracking-[-1.5px] text-black">
+              <h3 className="mb-[40px] text-center [font-family:var(--font-manrope)] text-[32px] font-medium leading-[36px] tracking-[-1.5px] text-black dark:text-white">
                 {data.howItWorksTitle}
               </h3>
 
@@ -160,8 +159,9 @@ export function SmartContractsSectionBlock({ data }: SmartContractsSectionProps)
 
           <RevealCard delay={240} duration={1200} y={36} scale={0.985}>
             <div
-              className="flex h-full flex-col rounded-[16px] border border-[#EC0000] bg-[#E00D0C] p-8"
+              className="flex h-full flex-col rounded-[16px] border border-[#EC0000] p-8"
               style={{
+                backgroundColor: 'var(--benefits-panel-bg)',
                 backgroundImage: 'url(/images/dotted_frame_bg.webp)',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'bottom right',

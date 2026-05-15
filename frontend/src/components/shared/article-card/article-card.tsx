@@ -27,14 +27,13 @@ export function ArticleCard({ article }: ArticleCardProps) {
   return (
     <Link href={`/blog/${article.slug}`} className="group block">
       <article
-        className="flex h-full flex-col rounded-[18px] border border-[#E8E8E8] bg-white p-[20px]"
+        className="flex h-full flex-col rounded-[18px] border border-[#E8E8E8] bg-white p-[20px] shadow-[0_3px_112.1px_4px_rgba(0,0,0,0.04)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1e1e1e] dark:shadow-none"
         style={{
-          boxShadow: '0 3px 112.1px 4px rgba(0, 0, 0, 0.04)',
           backdropFilter: 'blur(1.8px)',
         }}
       >
         {/* Image */}
-        <div className="mb-6 aspect-[4/3] overflow-hidden rounded-[12px] bg-[#F2F2F2]">
+        <div className="mb-6 aspect-[4/3] overflow-hidden rounded-[12px] bg-[#F2F2F2] dark:bg-[rgba(255,255,255,0.08)]">
           {imageUrl ? (
             <Image
               src={imageUrl}
@@ -48,14 +47,14 @@ export function ArticleCard({ article }: ArticleCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="mb-2 [font-family:var(--font-manrope)] text-[18px] font-semibold leading-[24px] tracking-[-0.5px] text-[#0F1324]">
+        <h3 className="mb-2 [font-family:var(--font-manrope)] text-[18px] font-semibold leading-[24px] tracking-[-0.5px] text-[#0F1324] dark:text-white">
           {article.Title}
         </h3>
 
         {/* Date + Arrow */}
         <div className="mt-auto flex items-center justify-between pt-2">
           {date ? (
-            <span className="[font-family:var(--font-manrope)] text-[14px] font-normal leading-[20px] text-[rgba(15,19,36,0.40)]">
+            <span className="[font-family:var(--font-manrope)] text-[14px] font-normal leading-[20px] text-[rgba(15,19,36,0.40)] dark:text-[rgba(255,255,255,0.40)]">
               {formatDate(date)}
             </span>
           ) : null}

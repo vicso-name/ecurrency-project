@@ -2,7 +2,7 @@
 
 function ShareIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none" className="dark:invert">
       <path
         d="M19.25 10.9999L12.8333 4.58325V8.24992C6.41667 9.16659 3.66667 13.7499 2.75 18.3333C5.04167 15.1249 8.25 13.6583 12.8333 13.6583V17.4166L19.25 10.9999Z"
         fill="#0F1324"
@@ -67,9 +67,9 @@ export function ShareBlock({ title }: ShareBlockProps) {
   };
 
   return (
-    <div className="flex h-[53px] w-full max-w-[618px] items-center justify-between rounded-[94px] bg-white px-6">
+    <div className="flex h-[53px] w-full max-w-[618px] items-center justify-between rounded-[94px] bg-white px-6 dark:bg-[#1e1e1e]">
       <div className="flex items-center gap-2">
-        <span className="[font-family:var(--font-manrope)] text-[16px] font-normal leading-[20px] text-[rgba(15,19,36,0.60)]">
+        <span className="[font-family:var(--font-manrope)] text-[16px] font-normal leading-[20px] text-[rgba(15,19,36,0.60)] dark:text-[rgba(255,255,255,0.50)]">
           Share
         </span>
         <ShareIcon />

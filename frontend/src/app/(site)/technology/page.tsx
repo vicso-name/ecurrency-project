@@ -43,7 +43,7 @@ export default async function TechnologyPage() {
             >
               <path
                 d="M0 0H355.5L441.5 124.558L711 128.97H980.5L1066.5 0H1422V158H0L0 0Z"
-                fill="white"
+                className="fill-white dark:fill-[#1a1a1a]"
               />
               <path
                 d="M0 0H355.5L441.5 124.558L711 128.97H980.5L1066.5 0H1422V158H0L0 0Z"
@@ -67,10 +67,9 @@ export default async function TechnologyPage() {
           </div>
 
           <div
-            className="overflow-hidden rounded-bl-[20px] rounded-br-[20px] bg-white"
+            className="overflow-hidden rounded-bl-[20px] rounded-br-[20px] dark:bg-[#1a1a1a]"
             style={{
-              background:
-                'radial-gradient(80.05% 137.14% at 50% -10.33%, rgba(0, 0, 0, 0) 60%, rgba(255, 80, 80, 0.05) 89.8%), #FFF',
+              background: 'var(--payment-container-bg)',
             }}
           >
             <InfrastructureSectionBlock data={page?.infrastructure} />
@@ -83,15 +82,15 @@ export default async function TechnologyPage() {
         <div
           className="mx-auto max-w-[1440px] absolute inset-0 -z-20 hidden bg-no-repeat md:block"
           style={{
-            backgroundImage: "url('/images/technologi_bottom_bg.png')",
+            backgroundImage: 'var(--tech-bottom-bg-image)',
             backgroundSize: '103% auto',
             backgroundPosition: 'center bottom',
           }}
         />
 
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 hidden h-[380px] bg-gradient-to-b from-[#f7f5f4] via-[#f7f5f4] via-45% to-transparent md:block" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 hidden h-[380px] bg-gradient-to-b from-[#f7f5f4] via-[#f7f5f4] via-45% to-transparent md:block dark:from-[#0d0d0d] dark:via-[#0d0d0d]" />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden h-[140px] bg-gradient-to-t from-[#f7f5f4]/80 via-[#f7f5f4]/40 to-transparent md:block" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden h-[140px] bg-gradient-to-t from-[#f7f5f4]/80 via-[#f7f5f4]/40 to-transparent md:block dark:from-[#0d0d0d]/80 dark:via-[#0d0d0d]/40" />
 
         <div className="relative z-20">
           <UsedForSection data={page?.useCases} />
