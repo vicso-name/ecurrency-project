@@ -149,7 +149,7 @@ function BottomContent({
       ) : null}
 
       {content ? (
-        <div className="flex items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center dark:border-[rgba(255,255,255,0.08)] dark:bg-[#2a2a2a]">
+        <div className="flex items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center dark:border-[rgba(255,255,255,0.08)] dark:bg-[#191919]">
           <div className="max-w-[1024px] [font-family:var(--font-manrope)] text-[16px] font-normal leading-normal text-[rgba(51,51,51,0.72)] [&_p]:m-0 [&_strong]:font-semibold [&_b]:font-semibold dark:text-[rgba(255,255,255,0.60)]">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
           </div>
@@ -352,7 +352,7 @@ function DesktopCard({ card, index }: CardProps) {
 
   return (
     <div
-      className="flex h-[400px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 transition-transform duration-300 hover:-translate-y-[2px] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#2a2a2a] dark:![background-image:none]"
+      className="flex h-[400px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 transition-transform duration-300 hover:-translate-y-[2px] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#191919] dark:![background-image:none]"
       style={CardBackground({ backgroundUrl })}
     >
       <CardContent card={card} index={index} />
@@ -365,7 +365,7 @@ function MobileCard({ card, index }: CardProps) {
 
   return (
     <div
-      className="mx-auto flex h-[400px] w-full max-w-[272px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 dark:border-[rgba(255,255,255,0.08)] dark:bg-[#2a2a2a] dark:![background-image:none]"
+      className="mx-auto flex h-[400px] w-full max-w-[272px] flex-col rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-5 pt-6 dark:border-[rgba(255,255,255,0.08)] dark:bg-[#191919] dark:![background-image:none]"
       style={CardBackground({ backgroundUrl })}
     >
       <CardContent card={card} index={index} />

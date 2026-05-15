@@ -63,7 +63,7 @@ function CtaButton({
 
 function ToolCardBlock({ card }: { card: ToolCard }) {
   return (
-    <div className="relative flex h-full flex-col items-center gap-6 rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 dark:border-[rgba(255,255,255,0.10)] dark:bg-[#2a2a2a]">
+    <div className="relative flex h-full flex-col items-center gap-6 rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 dark:border-[rgba(255,255,255,0.10)] dark:bg-[#191919]">
       {/* Top dash */}
       {card.showTopDash && (
         <span

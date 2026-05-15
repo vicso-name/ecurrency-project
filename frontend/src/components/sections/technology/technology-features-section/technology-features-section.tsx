@@ -61,7 +61,7 @@ export function TechnologyFeaturesSectionBlock({ data }: TechnologyFeaturesSecti
                   y={28}
                   scale={0.985}
                 >
-                  <div className="flex h-full flex-col items-center gap-[54px] rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-[45px] pt-[54px] pb-[48px] dark:border-[rgba(255,255,255,0.10)] dark:bg-[#2a2a2a]">
+                  <div className="flex h-full flex-col items-center gap-[54px] rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-[45px] pt-[54px] pb-[48px] dark:border-[rgba(255,255,255,0.10)] dark:bg-[#191919]">
                     {iconUrl && (
                       <Image
                         src={iconUrl}

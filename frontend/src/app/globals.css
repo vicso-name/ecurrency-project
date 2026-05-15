@@ -90,7 +90,7 @@ html.dark {
   --benefit-tag-shadow: none;
 
   --payment-container-bg: radial-gradient(80.05% 137.14% at 50% -10.33%, rgba(0, 0, 0, 0) 60%, rgba(255, 80, 80, 0.05) 89.8%), #1a1a1a;
-  --payment-card-bg: linear-gradient(273deg, #2a2a2a 6.73%, #282828 88.91%);
+  --payment-card-bg: linear-gradient(273deg, #191919 6.73%, #282828 88.91%);
   --payment-card-shadow: none;
 }
 
@@ -311,7 +311,7 @@ html.dark .article-content strong {
 }
 
 html.dark .article-content code {
-  background: #2a2a2a;
+  background: #191919;
   color: rgba(255, 255, 255, 0.85);
 }
 

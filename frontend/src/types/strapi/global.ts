@@ -60,6 +60,7 @@ export type GlobalData = {
   documentId: string;
   siteName?: string;
   headerLogo?: StrapiImage | null;
+  headerDarckThemeLogo?: StrapiImage | null;
   headerNavigation?: NavLink[];
   headerCta?: HeaderCta | null;
   socialLinks?: HeaderSocialLink[];

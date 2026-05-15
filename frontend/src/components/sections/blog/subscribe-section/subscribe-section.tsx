@@ -109,7 +109,7 @@ export function SubscribeSection({ data }: SubscribeSectionProps) {
                   placeholder={data.placeholder || 'Your Email'}
                   required
                   disabled={showOverlay}
-                  className="h-[50px] w-full min-w-0 flex-1 rounded-[240px] bg-[#F2F2F2] px-5 py-3 [font-family:var(--font-manrope)] text-[16px] font-semibold leading-[30px] text-black outline-none placeholder:text-[rgba(0,0,0,0.40)] dark:bg-[#2a2a2a] dark:text-white dark:placeholder:text-[rgba(255,255,255,0.35)]"
+                  className="h-[50px] w-full min-w-0 flex-1 rounded-[240px] bg-[#F2F2F2] px-5 py-3 [font-family:var(--font-manrope)] text-[16px] font-semibold leading-[30px] text-black outline-none placeholder:text-[rgba(0,0,0,0.40)] dark:bg-[#191919] dark:text-white dark:placeholder:text-[rgba(255,255,255,0.35)]"
                 />
 
                 <button
@@ -132,7 +132,7 @@ export function SubscribeSection({ data }: SubscribeSectionProps) {
               <div
                 className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-all duration-500 ${showOverlay ? 'opacity-100' : 'opacity-0'}`}
               >
-                <p className="rounded-[100px] bg-white px-6 py-2 text-center [font-family:var(--font-manrope)] text-[16px] font-semibold text-green-600 shadow-[0_4px_20px_rgba(0,0,0,0.08)] dark:bg-[#2a2a2a] dark:shadow-none">
+                <p className="rounded-[100px] bg-white px-6 py-2 text-center [font-family:var(--font-manrope)] text-[16px] font-semibold text-green-600 shadow-[0_4px_20px_rgba(0,0,0,0.08)] dark:bg-[#191919] dark:shadow-none">
                   ✓ Successfully subscribed!
                 </p>
               </div>

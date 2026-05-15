@@ -81,7 +81,7 @@ export function ConsensusSectionBlock({ data }: ConsensusSectionProps) {
                       y={28}
                       scale={0.985}
                     >
-                      <div className="flex h-[192px] flex-col items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 text-center dark:border-[rgba(255,255,255,0.10)] dark:bg-[#2a2a2a]">
+                      <div className="flex h-[192px] flex-col items-center justify-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 text-center dark:border-[rgba(255,255,255,0.10)] dark:bg-[#191919]">
                         {iconUrl && (
                           <Image
                             src={iconUrl}

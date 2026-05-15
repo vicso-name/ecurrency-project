@@ -137,7 +137,7 @@ export function SmartContractsSectionBlock({ data }: SmartContractsSectionProps)
         <div className="grid gap-6 lg:grid-cols-2">
           <RevealCard delay={100} duration={1200} y={36} scale={0.985}>
             <div
-              className="flex h-full flex-col rounded-[16px] border border-[rgba(227,64,57,0.30)] bg-white p-8 dark:border-[rgba(227,64,57,0.15)] dark:bg-[#2a2a2a]"
+              className="flex h-full flex-col rounded-[16px] border border-[rgba(227,64,57,0.30)] bg-white p-8 dark:border-[rgba(227,64,57,0.15)] dark:bg-[#191919]"
               style={{
                 backgroundImage: 'var(--smart-contract-panel-bg-image)',
                 backgroundRepeat: 'no-repeat',

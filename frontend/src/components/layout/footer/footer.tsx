@@ -105,6 +105,8 @@ export function Footer({ globalData }: FooterProps) {
   const copyright = globalData?.footerCopyright ?? '';
   const footerLogo = globalData?.footerLogo;
   const footerLogoUrl = getStrapiMediaUrl(footerLogo?.url);
+  const footerDarkLogo = globalData?.headerDarckThemeLogo;
+  const footerDarkLogoUrl = getStrapiMediaUrl(footerDarkLogo?.url);
   const siteName = globalData?.siteName || 'eCurrency';
   const disclaimer = globalData?.footerDisclaimer ?? '';
 
@@ -116,13 +118,32 @@ export function Footer({ globalData }: FooterProps) {
             <div className="w-full sm:max-w-[290px]">
               <Link href="/" className="flex items-center">
                 {footerLogoUrl ? (
-                  <Image
-                    src={footerLogoUrl}
-                    alt={footerLogo?.alternativeText || siteName}
-                    width={133}
-                    height={26}
-                    className="h-auto w-auto max-w-[133px] dark:[filter:invert(1)_hue-rotate(180deg)]"
-                  />
+                  footerDarkLogoUrl ? (
+                    <>
+                      <Image
+                        src={footerLogoUrl}
+                        alt={footerLogo?.alternativeText || siteName}
+                        width={133}
+                        height={26}
+                        className="h-auto w-auto max-w-[133px] dark:hidden"
+                      />
+                      <Image
+                        src={footerDarkLogoUrl}
+                        alt={footerDarkLogo?.alternativeText || siteName}
+                        width={133}
+                        height={26}
+                        className="hidden h-auto w-auto max-w-[133px] dark:block"
+                      />
+                    </>
+                  ) : (
+                    <Image
+                      src={footerLogoUrl}
+                      alt={footerLogo?.alternativeText || siteName}
+                      width={133}
+                      height={26}
+                      className="h-auto w-auto max-w-[133px] dark:[filter:invert(1)_hue-rotate(180deg)]"
+                    />
+                  )
                 ) : (
                   <>
                     <span className="text-[36px] leading-none text-[#E34039]">●</span>

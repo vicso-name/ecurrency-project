@@ -74,7 +74,7 @@ export function CommunitySectionBlock({ data }: CommunitySectionProps) {
                   y={28}
                   scale={0.985}
                 >
-                  <div className="flex h-full min-h-[260px] flex-col items-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center dark:border-[rgba(255,255,255,0.10)] dark:bg-[#2a2a2a]">
+                  <div className="flex h-full min-h-[260px] flex-col items-center rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white px-6 py-8 text-center dark:border-[rgba(255,255,255,0.10)] dark:bg-[#191919]">
                     {iconUrl && (
                       <Image
                         src={iconUrl}

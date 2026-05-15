@@ -120,18 +120,39 @@ function CloseIcon() {
 function Logo({ globalData }: { globalData: GlobalData | null }) {
   const logo = globalData?.headerLogo;
   const logoUrl = getStrapiMediaUrl(logo?.url);
+  const darkLogo = globalData?.headerDarckThemeLogo;
+  const darkLogoUrl = getStrapiMediaUrl(darkLogo?.url);
   const siteName = globalData?.siteName || 'eCurrency';
 
   return (
     <Link href="/" className="flex shrink-0 items-center">
       {logoUrl ? (
-        <Image
-          src={logoUrl}
-          alt={logo?.alternativeText || siteName}
-          width={133}
-          height={26}
-          className="h-auto w-auto max-w-[133px] dark:[filter:invert(1)_hue-rotate(180deg)]"
-        />
+        darkLogoUrl ? (
+          <>
+            <Image
+              src={logoUrl}
+              alt={logo?.alternativeText || siteName}
+              width={133}
+              height={26}
+              className="h-auto w-auto max-w-[133px] dark:hidden"
+            />
+            <Image
+              src={darkLogoUrl}
+              alt={darkLogo?.alternativeText || siteName}
+              width={133}
+              height={26}
+              className="hidden h-auto w-auto max-w-[133px] dark:block"
+            />
+          </>
+        ) : (
+          <Image
+            src={logoUrl}
+            alt={logo?.alternativeText || siteName}
+            width={133}
+            height={26}
+            className="h-auto w-auto max-w-[133px] dark:[filter:invert(1)_hue-rotate(180deg)]"
+          />
+        )
       ) : (
         <>
           <span className="text-[36px] leading-none text-[#E34039]">●</span>

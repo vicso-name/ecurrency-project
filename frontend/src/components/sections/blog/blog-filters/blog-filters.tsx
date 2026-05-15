@@ -286,7 +286,7 @@ export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border transition-colors ${
                         isChecked
                           ? 'border-[#EC0000] bg-[#EC0000]'
-                          : 'border-[rgba(32,32,32,0.16)] bg-white dark:border-[rgba(255,255,255,0.20)] dark:bg-[#2a2a2a]'
+                          : 'border-[rgba(32,32,32,0.16)] bg-white dark:border-[rgba(255,255,255,0.20)] dark:bg-[#191919]'
                       }`}
                     >
                       {isChecked ? <CheckIcon /> : null}

@@ -68,7 +68,7 @@ function VerticalConnectorMobile() {
 function NumberBadge({ number }: { number: string }) {
   return (
     <div
-      className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-white text-center [font-family:var(--font-inter)] text-[16px] font-semibold leading-[20.25px] text-[#EC0000] dark:bg-[#2a2a2a]"
+      className="flex h-[45px] w-[45px] items-center justify-center rounded-full bg-white text-center [font-family:var(--font-inter)] text-[16px] font-semibold leading-[20.25px] text-[#EC0000] dark:bg-[#191919]"
       style={{
         boxShadow:
           '0 0 0 0.884px rgba(194, 0, 0, 0.06), 0 0.884px 0.884px -0.442px rgba(202, 0, 0, 0.03), 0 2.653px 2.653px -1.326px rgba(227, 64, 57, 0.12), 0 4.421px 4.421px -2.211px rgba(227, 64, 57, 0.12), 0 14.149px 14.149px -7.074px rgba(227, 64, 57, 0.16), 0 21.223px 21.223px -7.074px rgba(227, 64, 57, 0.12)',

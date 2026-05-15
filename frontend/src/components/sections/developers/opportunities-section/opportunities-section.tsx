@@ -16,7 +16,7 @@ function OpportunityCardBlock({ card }: { card: OpportunityCard }) {
 
   return (
     <div
-      className={`relative flex flex-col justify-end rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white p-6 dark:border-[rgba(255,255,255,0.10)] dark:bg-[#2a2a2a] ${heightClass}`}
+      className={`relative flex flex-col justify-end rounded-[24px] border border-[rgba(160,160,160,0.54)] bg-white p-6 dark:border-[rgba(255,255,255,0.10)] dark:bg-[#191919] ${heightClass}`}
       style={{
         backgroundImage: 'var(--used-for-card-bg-image)',
         backgroundRepeat: 'no-repeat',

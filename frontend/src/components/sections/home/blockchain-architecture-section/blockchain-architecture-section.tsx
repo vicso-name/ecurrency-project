@@ -161,7 +161,7 @@ function IconBlock({
   alt: string;
 }) {
   return (
-    <div className="relative mb-10 flex h-[153px] w-full max-w-[290px] items-center justify-center overflow-hidden rounded-[8.737px] border border-[rgba(236,236,236,0.37)] bg-[linear-gradient(273deg,#FFF_6.73%,#FAFAFA_88.91%)] shadow-[0_13.105px_17.91px_0_rgba(255,255,255,0.12)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[linear-gradient(273deg,#2a2a2a_6.73%,#222222_88.91%)] dark:shadow-none">
+    <div className="relative mb-10 flex h-[153px] w-full max-w-[290px] items-center justify-center overflow-hidden rounded-[8.737px] border border-[rgba(236,236,236,0.37)] bg-[linear-gradient(273deg,#FFF_6.73%,#FAFAFA_88.91%)] shadow-[0_13.105px_17.91px_0_rgba(255,255,255,0.12)] dark:border-[rgba(255,255,255,0.08)] dark:bg-[linear-gradient(273deg,#191919_6.73%,#222222_88.91%)] dark:shadow-none">
       <Image
         src="/images/home/top_comb.svg"
         alt=""
