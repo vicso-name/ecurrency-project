@@ -203,10 +203,10 @@ export function PageHeroSection({ hero }: PageHeroSectionProps) {
         <ParticleLogo className="h-full w-full" />
       </div>
 
-      <div className="relative z-20 px-4 pt-[270px] pb-[80px] md:pt-[250px] md:pb-[80px]">
+      <div className="relative z-20 px-4 min-h-[700px] pt-[270px] pb-[80px] md:pt-[250px] md:pb-[80px]">
         <div className="mx-auto max-w-[1200px]">
           {/* Title */}
-          <div className="mx-auto max-w-[770px] text-center">
+          <div className="mx-auto max-w-[992px] text-center">
             <FadeUp delay={0} duration={1200} y={20}>
               <h1 className="[font-family:var(--font-manrope)] text-[48px] leading-[104%] font-semibold tracking-[-2px] text-[#202020] md:text-[64px] md:tracking-[-3px] xl:text-[80px] xl:tracking-[-4px] dark:text-[#f0f0f0]">
                 {hero.title}
