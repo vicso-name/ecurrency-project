@@ -364,43 +364,31 @@ function MobileMenu({
 
           return (
             <div key={item.id}>
-              <div className="flex items-center justify-between gap-4">
-                {hasChildren ? (
-                  <button
-                    type="button"
-                    onClick={() => handleToggle(item.id)}
-                    className={`flex items-center gap-4 text-[20px] font-medium leading-6 tracking-[-1px] ${
-                      isActive ? 'text-[#E34039]' : 'text-black dark:text-white'
-                    }`}
-                    aria-expanded={isExpanded}
-                  >
-                    <span>{item.label}</span>
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href || '#'}
-                    {...externalLinkProps(item)}
-                    className={`text-[20px] font-medium leading-6 tracking-[-1px] ${
-                      isActive ? 'text-[#E34039]' : 'text-black dark:text-white'
-                    }`}
-                    onClick={onClose}
-                  >
-                    {item.label}
-                  </Link>
-                )}
-
-                {hasChildren ? (
-                  <button
-                    type="button"
-                    onClick={() => handleToggle(item.id)}
-                    className="flex items-center justify-center"
-                    aria-expanded={isExpanded}
-                    aria-label={`Toggle ${item.label} submenu`}
-                  >
-                    <ChevronDownIcon isOpen={isExpanded} />
-                  </button>
-                ) : null}
-              </div>
+              {hasChildren ? (
+                <button
+                  type="button"
+                  onClick={() => handleToggle(item.id)}
+                  className={`flex w-full items-center justify-between gap-4 text-[20px] font-medium leading-6 tracking-[-1px] ${
+                    isActive ? 'text-[#E34039]' : 'text-black dark:text-white'
+                  }`}
+                  aria-expanded={isExpanded}
+                  aria-label={`Toggle ${item.label} submenu`}
+                >
+                  <span>{item.label}</span>
+                  <ChevronDownIcon isOpen={isExpanded} />
+                </button>
+              ) : (
+                <Link
+                  href={item.href || '#'}
+                  {...externalLinkProps(item)}
+                  className={`text-[20px] font-medium leading-6 tracking-[-1px] ${
+                    isActive ? 'text-[#E34039]' : 'text-black dark:text-white'
+                  }`}
+                  onClick={onClose}
+                >
+                  {item.label}
+                </Link>
+              )}
 
               {hasChildren && isExpanded ? (
                 <div className="mt-6 flex flex-col gap-3">

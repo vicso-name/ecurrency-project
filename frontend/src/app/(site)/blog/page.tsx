@@ -33,14 +33,16 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       .map((item) => item.trim())
       .filter(Boolean) || [];
 
-  const [blogPage, categories, articles] = await Promise.all([
-    getBlogPage(),
-    getCategories(),
-    getArticles({
-      search,
-      categories: selectedCategories,
-    }),
-  ]);
+  const [blogPage, categories] = await Promise.all([getBlogPage(), getCategories()]);
+
+  // When every available category is selected treat it as "no filter" so articles
+  // without a category (or with an unlisted category) are included in results.
+  const effectiveCategories =
+    categories.length > 0 && selectedCategories.length >= categories.length
+      ? []
+      : selectedCategories;
+
+  const articles = await getArticles({ search, categories: effectiveCategories });
 
   return (
     <main className="px-4 pb-24 pt-[100px] md:pt-[160px]">
