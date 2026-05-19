@@ -50,13 +50,13 @@ export function HeroSection({ hero }: HeroSectionProps) {
         className="
           pointer-events-none
           absolute inset-x-0 bottom-0 z-[1]
-          h-[180px]
+          h-[480px]
           bg-gradient-to-t
           from-[#f7f5f4]
-          via-[#f7f5f4]/80
+          via-[#f7f5f4]/90
           to-transparent
           dark:from-[#0d0d0d]
-          dark:via-[#0d0d0d]/80
+          dark:via-[#0d0d0d]/90
         "
       />
 
