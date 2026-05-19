@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import RAW_POINTS_JSON from "./raw-points.json";
 
-const BASE_RX = -28 * Math.PI / 180;
-const BASE_RY =  24 * Math.PI / 180;
-const BASE_RZ =   9 * Math.PI / 180;
+const BASE_RX = 142 * Math.PI / 180;
+const BASE_RY = -152 * Math.PI / 180;
+const BASE_RZ = 163 * Math.PI / 180;
 
 const RETURN_SPEED = 0.025;
 const FRICTION      = 0.89;

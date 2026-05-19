@@ -45,6 +45,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
       <div className="pointer-events-none absolute inset-0 z-0 -translate-y-48 md:translate-y-0">
         <ParticleLogo className="h-full w-full" />
       </div>
+
       <div
         aria-hidden="true"
         className="
@@ -62,6 +63,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
       <div className="relative z-10 mx-auto flex min-h-[840px] max-w-[1360px] flex-col px-6 pt-24 pb-6 text-center md:min-h-[880px] md:px-10 md:pt-28 md:pb-8">
         <div className="relative z-10 mt-auto mx-auto w-full max-w-[917px] lg:mt-[150px] xl:mt-auto">
+          
           <FadeUp delay={120} duration={1400} y={20}>
             <h1 className="text-[#202020] text-center text-[48px] leading-[1.04] font-semibold tracking-[-2px] md:text-[64px] md:tracking-[-3px] xl:text-[80px] xl:tracking-[-4px] dark:text-[#f0f0f0]">
               {hero.title}
