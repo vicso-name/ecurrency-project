@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { getStrapiMediaUrl } from '@/lib/utils/get-strapi-media-url';
 import type { ArticleData } from '@/types/strapi/article';
@@ -11,7 +11,8 @@ type BlogListProps = {
   blogPage: BlogPageData | null;
 };
 
-const INITIAL_VISIBLE = 9;
+const INITIAL_VISIBLE_MOBILE = 6;
+const INITIAL_VISIBLE_DESKTOP = 9;
 const LOAD_MORE_STEP = 3;
 
 const BUTTON_GRADIENT =
@@ -74,16 +75,18 @@ function LoadMoreButton({
 }
 
 export function BlogList({ articles, blogPage }: BlogListProps) {
-  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
+  const [mobileVisible, setMobileVisible] = useState(INITIAL_VISIBLE_MOBILE);
+  const [desktopVisible, setDesktopVisible] = useState(INITIAL_VISIBLE_DESKTOP);
 
-  const visibleArticles = useMemo(() => {
-    return articles.slice(0, visibleCount);
-  }, [articles, visibleCount]);
+  const hasMobileMore = mobileVisible < articles.length;
+  const hasDesktopMore = desktopVisible < articles.length;
 
-  const hasMore = visibleCount < articles.length;
+  const handleMobileLoadMore = () => {
+    setMobileVisible((prev) => Math.min(prev + LOAD_MORE_STEP, articles.length));
+  };
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => Math.min(prev + LOAD_MORE_STEP, articles.length));
+  const handleDesktopLoadMore = () => {
+    setDesktopVisible((prev) => Math.min(prev + LOAD_MORE_STEP, articles.length));
   };
 
   if (articles.length === 0) {
@@ -97,14 +100,27 @@ export function BlogList({ articles, blogPage }: BlogListProps) {
   return (
     <>
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {visibleArticles.map((article) => {
+        {articles.map((article: ArticleData, index: number) => {
           const imageUrl = getStrapiMediaUrl(article.featuredImage?.url);
+          const shownMobile = index < mobileVisible;
+          const shownDesktop = index < desktopVisible;
+
+          let visibilityClass: string;
+          if (shownMobile && shownDesktop) {
+            visibilityClass = 'block';
+          } else if (!shownMobile && shownDesktop) {
+            visibilityClass = 'hidden min-[1321px]:block';
+          } else if (shownMobile && !shownDesktop) {
+            visibilityClass = 'block min-[1321px]:hidden';
+          } else {
+            visibilityClass = 'hidden';
+          }
 
           return (
             <Link
               key={article.id}
               href={`/blog/${article.slug}`}
-              className="block rounded-[18px] border border-[#E8E8E8] bg-white p-4 shadow-[0_3px_112.1px_4px_rgba(0,0,0,0.04)] backdrop-blur-[1.8px] transition-transform duration-200 hover:-translate-y-[2px] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1e1e1e] dark:shadow-none"
+              className={`rounded-[18px] border border-[#E8E8E8] bg-white p-4 shadow-[0_3px_112.1px_4px_rgba(0,0,0,0.04)] backdrop-blur-[1.8px] transition-transform duration-200 hover:-translate-y-[2px] dark:border-[rgba(255,255,255,0.08)] dark:bg-[#1e1e1e] dark:shadow-none ${visibilityClass}`}
             >
               {imageUrl ? (
                 <img
@@ -131,11 +147,20 @@ export function BlogList({ articles, blogPage }: BlogListProps) {
         })}
       </div>
 
-      {hasMore ? (
-        <div className="mt-12 flex justify-center">
+      {hasMobileMore ? (
+        <div className="mt-12 flex justify-center min-[1321px]:hidden">
           <LoadMoreButton
             label={blogPage?.loadMoreLabel || 'Load More'}
-            onClick={handleLoadMore}
+            onClick={handleMobileLoadMore}
+          />
+        </div>
+      ) : null}
+
+      {hasDesktopMore ? (
+        <div className="mt-12 hidden justify-center min-[1321px]:flex">
+          <LoadMoreButton
+            label={blogPage?.loadMoreLabel || 'Load More'}
+            onClick={handleDesktopLoadMore}
           />
         </div>
       ) : null}
