@@ -279,7 +279,7 @@ function DesktopNavigation({
   const [openDropdownId, setOpenDropdownId] = useState<number | null>(null);
 
   return (
-    <nav className="hidden items-center gap-[54px] min-[1321px]:flex">
+    <nav className="hidden items-center gap-[40px] min-[1025px]:flex">
       {navigation.map((item) => {
         const hasChildren = item.hasChildren && item.children && item.children.length > 0;
         const isOpen = openDropdownId === item.id;
@@ -355,7 +355,7 @@ function MobileMenu({
   };
 
   return (
-    <div className="absolute top-[68px] left-4 right-4 z-50 max-h-[calc(100dvh-84px)] overflow-y-auto overscroll-contain rounded-[20px] bg-white px-6 pt-8 pb-8 shadow-[0_12px_40px_rgba(0,0,0,0.08)] min-[1321px]:hidden dark:bg-[#1e1e1e]">
+    <div className="absolute top-[68px] left-4 right-4 z-50 max-h-[calc(100dvh-84px)] overflow-y-auto overscroll-contain rounded-[20px] bg-white px-6 pt-8 pb-8 shadow-[0_12px_40px_rgba(0,0,0,0.08)] min-[1025px]:hidden dark:bg-[#1e1e1e]">
       <nav className="flex flex-col gap-5">
         {navigation.map((item, index) => {
           const isExpanded = expandedItemId === item.id;
@@ -453,13 +453,13 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
           <DesktopNavigation navigation={navigation} pathname={pathname} />
 
           <div className="flex items-center gap-5">
-            <SocialLinks links={socialLinks} className="hidden min-[1321px]:flex" />
+            <SocialLinks links={socialLinks} className="hidden min-[1025px]:flex" />
             <ThemeToggle />
             {cta ? <HeaderCta href={cta.href || '#'} label={cta.label} /> : null}
 
             <button
               type="button"
-              className="flex items-center justify-center text-black min-[1321px]:hidden dark:text-white"
+              className="flex items-center justify-center text-black min-[1025px]:hidden dark:text-white"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               aria-expanded={isMobileMenuOpen}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
