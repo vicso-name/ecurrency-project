@@ -381,7 +381,7 @@ function MobileMenu({
                 <Link
                   href={item.href || '#'}
                   {...externalLinkProps(item)}
-                  className={`text-[20px] font-medium leading-6 tracking-[-1px] ${
+                  className={`flex w-full items-center text-[20px] font-medium leading-6 tracking-[-1px] ${
                     isActive ? 'text-[#E34039]' : 'text-black dark:text-white'
                   }`}
                   onClick={onClose}
@@ -400,7 +400,7 @@ function MobileMenu({
                         key={child.id}
                         href={child.href || '#'}
                         {...externalLinkProps(child)}
-                        className={`nav-child-link item-child text-[16px] font-medium leading-5 ${
+                        className={`nav-child-link item-child flex w-full items-center text-[16px] font-medium leading-5 ${
                           isChildActive ? 'text-[#E34039]' : 'text-black/70 dark:text-white/70'
                         }`}
                         onClick={onClose}
