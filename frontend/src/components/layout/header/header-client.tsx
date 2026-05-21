@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import type { GlobalData, HeaderSocialLink, NavLink } from '@/types/strapi/global';
 import Image from 'next/image';
@@ -432,12 +432,30 @@ function MobileMenu({
 export function HeaderClient({ globalData }: HeaderClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const burgerRef = useRef<HTMLButtonElement>(null);
+  const menuContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      const isInsideMenu = menuContainerRef.current?.contains(target);
+      const isInsideBurger = burgerRef.current?.contains(target);
+      if (!isInsideMenu && !isInsideBurger) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMobileMenuOpen]);
 
   const navigation = globalData?.headerNavigation ?? [];
@@ -458,6 +476,7 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
             {cta ? <HeaderCta href={cta.href || '#'} label={cta.label} /> : null}
 
             <button
+              ref={burgerRef}
               type="button"
               className="flex items-center justify-center text-black min-[1025px]:hidden dark:text-white"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -471,13 +490,15 @@ export function HeaderClient({ globalData }: HeaderClientProps) {
 
         <div className="mt-[8px] h-px w-full bg-[rgba(227,64,57,0.14)]" />
 
-        <MobileMenu
-          navigation={navigation}
-          isOpen={isMobileMenuOpen}
-          onClose={() => setIsMobileMenuOpen(false)}
-          socialLinks={socialLinks}
-          pathname={pathname}
-        />
+        <div ref={menuContainerRef}>
+          <MobileMenu
+            navigation={navigation}
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
+            socialLinks={socialLinks}
+            pathname={pathname}
+          />
+        </div>
       </div>
     </header>
   );

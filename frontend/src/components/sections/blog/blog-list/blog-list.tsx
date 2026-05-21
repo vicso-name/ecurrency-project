@@ -12,8 +12,9 @@ type BlogListProps = {
 };
 
 const INITIAL_VISIBLE_MOBILE = 6;
-const INITIAL_VISIBLE_DESKTOP = 9;
-const LOAD_MORE_STEP = 3;
+const INITIAL_VISIBLE_DESKTOP = 12;
+const LOAD_MORE_STEP_MOBILE = 6;
+const LOAD_MORE_STEP_DESKTOP = 12;
 
 const BUTTON_GRADIENT =
   'radial-gradient(60.21% 66.41% at 47.91% -7.5%, rgba(240, 88, 88, 0.40) 0%, rgba(255, 255, 255, 0.05) 79.27%, rgba(255, 255, 255, 0) 100%)';
@@ -82,11 +83,11 @@ export function BlogList({ articles, blogPage }: BlogListProps) {
   const hasDesktopMore = desktopVisible < articles.length;
 
   const handleMobileLoadMore = () => {
-    setMobileVisible((prev) => Math.min(prev + LOAD_MORE_STEP, articles.length));
+    setMobileVisible((prev) => Math.min(prev + LOAD_MORE_STEP_MOBILE, articles.length));
   };
 
   const handleDesktopLoadMore = () => {
-    setDesktopVisible((prev) => Math.min(prev + LOAD_MORE_STEP, articles.length));
+    setDesktopVisible((prev) => Math.min(prev + LOAD_MORE_STEP_DESKTOP, articles.length));
   };
 
   if (articles.length === 0) {
