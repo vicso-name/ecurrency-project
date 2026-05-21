@@ -179,7 +179,7 @@ export function Footer({ globalData }: FooterProps) {
             </div>
 
             <div className="w-full lg:ml-auto lg:max-w-fit lg:pt-[66px]">
-              <div className="grid grid-cols-2 gap-x-10 gap-y-10 md:gap-x-16 lg:flex lg:flex-wrap lg:justify-end lg:gap-x-5 lg:gap-y-0">
+              <div className="grid grid-cols-1 gap-x-10 gap-y-10 min-[576px]:grid-cols-3 md:gap-x-16 lg:flex lg:flex-wrap lg:justify-end lg:gap-x-5 lg:gap-y-0">
                 {columns.map((column) => (
                   <div key={column.id} className="min-w-0 lg:w-[160px]">
                     <h3 className="mb-6 [font-family:var(--font-roboto-mono)] text-[16px] leading-6 font-normal uppercase text-[rgba(0,0,0,0.16)] dark:text-[rgba(255,255,255,0.25)]">
