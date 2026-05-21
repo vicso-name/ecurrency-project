@@ -14,8 +14,10 @@ export type EcrUseCasesSection = {
   cards?: EcrUseCasesCard[];
   primaryButtonLabel?: string;
   primaryButtonHref?: string;
+  primaryButtonOpenInNewTab?: boolean | null;
   secondaryButtonLabel?: string;
   secondaryButtonHref?: string;
+  secondaryButtonOpenInNewTab?: boolean | null;
 };
 
 export type EcrPageData = {

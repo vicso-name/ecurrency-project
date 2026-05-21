@@ -22,7 +22,7 @@ function EcrIcon() {
   );
 }
 
-function PrimaryButton({ href, label }: { href: string; label: string }) {
+function PrimaryButton({ href, label, openInNewTab }: { href: string; label: string; openInNewTab?: boolean | null }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -30,6 +30,8 @@ function PrimaryButton({ href, label }: { href: string; label: string }) {
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       className="inline-flex w-full items-center justify-center gap-1 rounded-[100px] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal capitalize leading-[36px] text-white transition-all duration-200 md:w-auto"
       style={{
         background: hovered
@@ -43,10 +45,12 @@ function PrimaryButton({ href, label }: { href: string; label: string }) {
   );
 }
 
-function SecondaryButton({ href, label }: { href: string; label: string }) {
+function SecondaryButton({ href, label, openInNewTab }: { href: string; label: string; openInNewTab?: boolean | null }) {
   return (
     <Link
       href={href}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       className="inline-flex w-full items-center justify-center gap-1 rounded-[100px] border border-[rgba(32,32,32,0.06)] bg-[rgba(32,32,32,0.02)] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal capitalize leading-[36px] text-[#202020] backdrop-blur-[12px] transition-all duration-200 hover:bg-[rgba(32,32,32,0.05)] md:w-auto dark:border-[rgba(255,255,255,0.12)] dark:bg-[rgba(255,255,255,0.04)] dark:text-[rgba(255,255,255,0.75)] dark:hover:bg-[rgba(255,255,255,0.08)]"
     >
       {label}
@@ -174,12 +178,14 @@ export function EcrUseCasesSection({ data }: EcrUseCasesSectionProps) {
                 <PrimaryButton
                   href={data.primaryButtonHref || '#'}
                   label={data.primaryButtonLabel!}
+                  openInNewTab={data.primaryButtonOpenInNewTab}
                 />
               )}
               {hasSecondary && (
                 <SecondaryButton
                   href={data.secondaryButtonHref || '#'}
                   label={data.secondaryButtonLabel!}
+                  openInNewTab={data.secondaryButtonOpenInNewTab}
                 />
               )}
             </div>

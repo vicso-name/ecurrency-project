@@ -3,6 +3,7 @@ export type InnerHeroCard = {
   description: string;
   buttonLabel?: string;
   buttonHref?: string;
+  openInNewTab?: boolean | null;
 };
 
 export type PageHero = {

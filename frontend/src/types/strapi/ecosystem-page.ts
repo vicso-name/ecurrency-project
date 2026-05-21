@@ -21,8 +21,10 @@ export type CommunitySection = {
   cards?: CommunityCard[];
   primaryButtonLabel?: string;
   primaryButtonHref?: string;
+  primaryButtonOpenInNewTab?: boolean | null;
   secondaryButtonLabel?: string;
   secondaryButtonHref?: string;
+  secondaryButtonOpenInNewTab?: boolean | null;
 };
 
 export type EcosystemPageData = {

@@ -23,7 +23,7 @@ function EcrIcon() {
   );
 }
 
-function PrimaryButton({ href, label }: { href: string; label: string }) {
+function PrimaryButton({ href, label, openInNewTab }: { href: string; label: string; openInNewTab?: boolean | null }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -31,6 +31,8 @@ function PrimaryButton({ href, label }: { href: string; label: string }) {
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       className="inline-flex w-full items-center justify-center gap-1 rounded-[100px] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal capitalize leading-[36px] text-white transition-all duration-200 md:w-auto"
       style={{
         background: hovered
@@ -44,7 +46,7 @@ function PrimaryButton({ href, label }: { href: string; label: string }) {
   );
 }
 
-function SecondaryButton({ href, label }: { href: string; label: string }) {
+function SecondaryButton({ href, label, openInNewTab }: { href: string; label: string; openInNewTab?: boolean | null }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -52,6 +54,8 @@ function SecondaryButton({ href, label }: { href: string; label: string }) {
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       className="inline-flex w-full items-center justify-center gap-1 rounded-[100px] border border-[rgba(32,32,32,0.06)] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal capitalize leading-[36px] text-[#202020] transition-all duration-200 md:w-auto dark:border-[rgba(255,255,255,0.12)] dark:text-white"
       style={{
         background: hovered ? 'rgba(32, 32, 32, 0.05)' : 'rgba(32, 32, 32, 0.02)',
@@ -115,12 +119,14 @@ export function UsedForSection({ data }: UsedForSectionProps) {
                 <PrimaryButton
                   href={data.primaryButtonHref || '#'}
                   label={data.primaryButtonLabel}
+                  openInNewTab={data.primaryButtonOpenInNewTab}
                 />
               )}
               {data.secondaryButtonLabel && (
                 <SecondaryButton
                   href={data.secondaryButtonHref || '#'}
                   label={data.secondaryButtonLabel}
+                  openInNewTab={data.secondaryButtonOpenInNewTab}
                 />
               )}
             </div>

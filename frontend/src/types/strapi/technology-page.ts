@@ -22,6 +22,7 @@ export type TechnologyFeaturesSection = {
   description?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  ctaOpenInNewTab?: boolean | null;
 };
 
 export type TechnologyPageData = {
@@ -60,6 +61,7 @@ export type SmartContractLink = {
   id: number;
   label: string;
   href?: string;
+  openInNewTab?: boolean | null;
 };
 
 export type SmartContractsSection = {
@@ -93,6 +95,7 @@ export type ConsensusSection = {
   cards?: ConsensusCard[];
   ctaLabel?: string;
   ctaHref?: string;
+  openInNewTab?: boolean | null;
 };
 
 export type InfrastructureCard = {
@@ -108,4 +111,5 @@ export type InfrastructureSection = {
   bottomText?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  openInNewTab?: boolean | null;
 };

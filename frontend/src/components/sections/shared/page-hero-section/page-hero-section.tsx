@@ -68,7 +68,7 @@ function FloatingBadge({
   );
 }
 
-function CtaButton({ href, label }: { href: string; label: string }) {
+function CtaButton({ href, label, openInNewTab }: { href: string; label: string; openInNewTab?: boolean | null }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -76,6 +76,8 @@ function CtaButton({ href, label }: { href: string; label: string }) {
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       className="mt-[45px] inline-flex items-center justify-center gap-1 rounded-[100px] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[16px] font-normal leading-[36px] text-white capitalize transition-all duration-200"
       style={{
         background: hovered
@@ -254,6 +256,7 @@ export function PageHeroSection({ hero }: PageHeroSectionProps) {
                       <CtaButton
                         href={hero.card.buttonHref || '#'}
                         label={hero.card.buttonLabel}
+                        openInNewTab={hero.card.openInNewTab}
                       />
                     </FadeUp>
                   )}

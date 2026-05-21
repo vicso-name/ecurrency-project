@@ -86,7 +86,7 @@ function BenefitCard({
   );
 }
 
-function CtaButton({ href, label }: { href: string; label: string }) {
+function CtaButton({ href, label, openInNewTab }: { href: string; label: string; openInNewTab?: boolean | null }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -94,6 +94,8 @@ function CtaButton({ href, label }: { href: string; label: string }) {
       href={href || '#'}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       className="flex w-full items-center justify-center gap-2 rounded-[100px] px-8 py-2 text-center [font-family:var(--font-manrope)] text-[15px] font-normal capitalize leading-[36px] text-white transition-all duration-200 md:inline-flex md:w-auto"
       style={{
         background: hovered
@@ -194,6 +196,7 @@ export function SmartContractsSectionBlock({ data }: SmartContractsSectionProps)
                   key={link.id}
                   href={link.href || '#'}
                   label={link.label}
+                  openInNewTab={link.openInNewTab}
                 />
               ))}
             </div>

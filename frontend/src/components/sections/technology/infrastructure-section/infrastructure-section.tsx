@@ -11,7 +11,7 @@ type InfrastructureSectionProps = {
   data: InfrastructureSection | null | undefined;
 };
 
-function CtaButton({ href, label }: { href: string; label: string }) {
+function CtaButton({ href, label, openInNewTab }: { href: string; label: string; openInNewTab?: boolean | null }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -19,6 +19,8 @@ function CtaButton({ href, label }: { href: string; label: string }) {
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
       className="inline-flex items-center justify-center gap-2 rounded-[100px] px-[30px] pt-[6px] pb-[8px] text-center [font-family:var(--font-manrope)] text-[15px] font-normal capitalize leading-[36px] text-white transition-all duration-200"
       style={{
         background: hovered
@@ -152,7 +154,7 @@ export function InfrastructureSectionBlock({ data }: InfrastructureSectionProps)
         {data.ctaLabel && (
           <FadeUp delay={600} duration={1200} y={14}>
             <div className="flex justify-center">
-              <CtaButton href={data.ctaHref || '#'} label={data.ctaLabel} />
+              <CtaButton href={data.ctaHref || '#'} label={data.ctaLabel} openInNewTab={data.openInNewTab} />
             </div>
           </FadeUp>
         )}

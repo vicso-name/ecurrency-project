@@ -165,8 +165,8 @@ export function ToolsInfrastructureSection({
                       key={button.id}
                       href={button.href}
                       className={primaryClassName}
-                      target="_blank"
-                      rel="noreferrer"
+                      target={button.openInNewTab ? '_blank' : undefined}
+                      rel={button.openInNewTab ? 'noopener noreferrer' : undefined}
                     >
                       {content}
                     </Link>

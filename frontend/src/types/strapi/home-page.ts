@@ -118,8 +118,10 @@ export type HomePageUsedFor = {
   cards?: UsedForCard[];
   primaryButtonLabel?: string;
   primaryButtonHref?: string;
+  primaryButtonOpenInNewTab?: boolean | null;
   secondaryButtonLabel?: string;
   secondaryButtonHref?: string;
+  secondaryButtonOpenInNewTab?: boolean | null;
   showButtons?: boolean;
 };
 
@@ -214,6 +216,7 @@ export type ToolsInfrastructureButton = {
   subLabel?: string | null;
   href?: string;
   variant: 'primary' | 'secondary';
+  openInNewTab?: boolean | null;
   icon?: {
     url: string;
     alternativeText?: string | null;
