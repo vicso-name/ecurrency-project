@@ -5,9 +5,13 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import type { CategoryData } from '@/types/strapi/category';
 import type { BlogPageData } from '@/types/strapi/blog-page';
 
+const OTHERS_SLUG = '__others__';
+const OTHERS_LABEL = 'Others';
+
 type BlogFiltersProps = {
   categories: CategoryData[];
   blogPage: BlogPageData | null;
+  hasUncategorized: boolean;
 };
 
 function SearchIcon() {
@@ -78,7 +82,7 @@ function arraysEqual(a: string[], b: string[]) {
   return sortedA.every((item, index) => item === sortedB[index]);
 }
 
-export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
+export function BlogFilters({ categories, blogPage, hasUncategorized }: BlogFiltersProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -221,9 +225,12 @@ export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
     pushIfChanged(pathname);
   };
 
-  const appliedTitles = categories
-    .filter((category) => currentCategories.includes(category.slug))
-    .map((category) => category.title);
+  const appliedTitles = [
+    ...categories
+      .filter((category) => currentCategories.includes(category.slug))
+      .map((category) => category.title),
+    ...(currentCategories.includes(OTHERS_SLUG) ? [OTHERS_LABEL] : []),
+  ];
 
   const triggerLabel =
     appliedTitles.length > 0
@@ -298,6 +305,28 @@ export function BlogFilters({ categories, blogPage }: BlogFiltersProps) {
                   </button>
                 );
               })}
+
+              {hasUncategorized ? (
+                <button
+                  type="button"
+                  onClick={() => togglePendingCategory(OTHERS_SLUG)}
+                  className="flex items-center gap-5 text-left"
+                >
+                  <span
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border transition-colors ${
+                      pendingCategories.includes(OTHERS_SLUG)
+                        ? 'border-[#EC0000] bg-[#EC0000]'
+                        : 'border-[rgba(32,32,32,0.16)] bg-white dark:border-[rgba(255,255,255,0.20)] dark:bg-[#191919]'
+                    }`}
+                  >
+                    {pendingCategories.includes(OTHERS_SLUG) ? <CheckIcon /> : null}
+                  </span>
+
+                  <span className="text-[16px] font-semibold leading-6 text-black dark:text-white">
+                    {OTHERS_LABEL}
+                  </span>
+                </button>
+              ) : null}
             </div>
 
             <div className="flex w-full flex-col gap-3">

@@ -6,6 +6,9 @@ import { BlogList } from '@/components/sections/blog/blog-list/blog-list';
 import { SubscribeSection } from '@/components/sections/blog/subscribe-section/subscribe-section';
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/lib/utils/generate-metadata';
+import type { ArticleData } from '@/types/strapi/article';
+
+const OTHERS_SLUG = '__others__';
 
 export async function generateMetadata(): Promise<Metadata> {
   const blogPage = await getBlogPage();
@@ -35,14 +38,32 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   const [blogPage, categories] = await Promise.all([getBlogPage(), getCategories()]);
 
-  // When every available category is selected treat it as "no filter" so articles
-  // without a category (or with an unlisted category) are included in results.
-  const effectiveCategories =
-    categories.length > 0 && selectedCategories.length >= categories.length
-      ? []
-      : selectedCategories;
+  const othersSelected = selectedCategories.includes(OTHERS_SLUG);
+  const realSelectedCategories = selectedCategories.filter((c) => c !== OTHERS_SLUG);
 
-  const articles = await getArticles({ search, categories: effectiveCategories });
+  const noRealCategorySelected = realSelectedCategories.length === 0;
+  const allRealCategoriesSelected =
+    categories.length > 0 && realSelectedCategories.length >= categories.length;
+
+  // Fetch all articles with search only — category filtering is applied below in JS
+  // so the virtual "Others" slug never reaches Strapi.
+  const allArticles = await getArticles({ search });
+
+  const hasUncategorized = allArticles.some((a) => !a.category);
+
+  const matchesRealCategory = (a: ArticleData): boolean => {
+    if (noRealCategorySelected) return false;
+    if (allRealCategoriesSelected) return a.category != null;
+    return a.category != null && realSelectedCategories.includes(a.category.slug);
+  };
+
+  const noFilter = noRealCategorySelected && !othersSelected;
+
+  const articles = noFilter
+    ? allArticles
+    : allArticles.filter(
+        (a) => matchesRealCategory(a) || (othersSelected && a.category == null)
+      );
 
   return (
     <main className="px-4 pb-24 pt-[100px] md:pt-[160px]">
@@ -61,7 +82,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </p>
           ) : null}
 
-          <BlogFilters categories={categories} blogPage={blogPage} />
+          <BlogFilters categories={categories} blogPage={blogPage} hasUncategorized={hasUncategorized} />
         </section>
 
         <section className="mt-16">
