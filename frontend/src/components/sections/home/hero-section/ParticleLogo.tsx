@@ -46,7 +46,9 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    // Use screen width for performance decisions (particle density).
+    // Do NOT use maxTouchPoints — touch-capable laptops report > 0 even with a mouse.
+    const isSmallScreen = window.innerWidth <= 768;
 
     let W = 0, H = 0;
     let particles: Particle[] = [];
@@ -60,14 +62,14 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
 
     const initParticles = () => {
       particles = [];
-      const skip = isTouchDevice ? 2 : 1;
+      const skip = isSmallScreen ? 2 : 1;
       const used: [number, number, number][] = [];
       for (let i = 0; i < RAW_POINTS.length; i += skip) used.push(RAW_POINTS[i]);
 
       const count = used.length;
       const modelScale = Math.min(W, H) * 0.32;
       const sphereR = modelScale * 0.95;
-      const mb = isTouchDevice ? 1.3 : 1;
+      const mb = isSmallScreen ? 1.3 : 1;
 
       const spherePos = Array.from({ length: count }, (_, i) => {
         const phi   = Math.acos(1 - (2 * (i + 0.5)) / count);
@@ -92,9 +94,9 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
         const phase2 = Math.random() * Math.PI * 2;
         const phase3 = Math.random() * Math.PI * 2;
         const floatAmp   = (2 + Math.random() * 4) * mb;
-        const floatSpeed = (0.001 + Math.random() * 0.002) * (isTouchDevice ? 1.3 : 1);
+        const floatSpeed = (0.001 + Math.random() * 0.002) * (isSmallScreen ? 1.3 : 1);
         const wild       = Math.random();
-        const wildFactor = wild > (isTouchDevice ? 0.7 : 0.82) ? 2.5 + Math.random() * 3.5 : 1;
+        const wildFactor = wild > (isSmallScreen ? 0.7 : 0.82) ? 2.5 + Math.random() * 3.5 : 1;
         const popFreq    = 0.0003 + Math.random() * 0.0007;
         const popPhase   = Math.random() * Math.PI * 2;
         const popAmp     = (wild > 0.6 ? 8 + Math.random() * 20 : 2 + Math.random() * 6) * mb;
@@ -105,7 +107,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
           logoX: lx, logoY: ly, logoZ: lz,
           originX: W / 2 + lx, originY: H / 2 + ly, originZ: lz,
           vx: 0, vy: 0, vz: 0,
-          size: isTouchDevice ? 0.6 + Math.random() * 0.7 : 1.2 + Math.random() * 1.4,
+          size: isSmallScreen ? 0.6 + Math.random() * 0.7 : 1.2 + Math.random() * 1.4,
           hue: 352 + Math.random() * 16,
           sat: 72  + Math.random() * 26,
           phase, phase2, phase3,
@@ -134,11 +136,9 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       ctx.clearRect(0, 0, W, H);
 
       // Sphere morph
-      if (!isTouchDevice) {
-        sphereVel += (sphereTarget - sphereT) * 0.004;
-        sphereVel *= 0.92;
-        sphereT = Math.max(0, Math.min(1, sphereT + sphereVel));
-      }
+      sphereVel += (sphereTarget - sphereT) * 0.004;
+      sphereVel *= 0.92;
+      sphereT = Math.max(0, Math.min(1, sphereT + sphereVel));
       const t = sphereT;
 
       sphereAngle += 0.008 * t;
@@ -157,7 +157,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       const cUz = Math.cos(tRz), sUz = Math.sin(tRz);
 
       const cx = W / 2, cy = H / 2;
-      const mouseActive = !isTouchDevice && mouse.x > 0 && mouse.y > 0;
+      const mouseActive = mouse.x > 0 && mouse.y > 0;
 
       for (const p of particles) {
         // --- Sphere rotation ---
@@ -266,14 +266,13 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
     };
 
     const onMouseMove = (e: MouseEvent) => {
-      if (isTouchDevice) return;
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     };
     const onMouseLeave = () => { mouse.x = -9999; mouse.y = -9999; };
-    const onMouseDown  = () => { if (!isTouchDevice) sphereTarget = 1; };
-    const onMouseUp    = () => { if (!isTouchDevice) sphereTarget = 0; };
+    const onMouseDown  = () => { sphereTarget = 1; };
+    const onMouseUp    = () => { sphereTarget = 0; };
 
     window.addEventListener("mousemove",  onMouseMove);
     window.addEventListener("mouseleave", onMouseLeave);

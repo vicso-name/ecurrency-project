@@ -112,7 +112,7 @@ function BlockchainDesignedFirstTabPreview() {
           <div className="flex h-[45px] w-full items-center gap-4 rounded-[10px] bg-[rgba(252,98,98,0.10)] px-3 dark:bg-[rgba(236,0,0,0.14)]">
             <LockIcon />
             <span className="truncate text-[15px] leading-[135%] font-normal tracking-[-0.02em] text-[#F3A5A2]">
-              https://e-currency.neywork/docs
+              https://ecurrency.org/
             </span>
           </div>
         </div>
