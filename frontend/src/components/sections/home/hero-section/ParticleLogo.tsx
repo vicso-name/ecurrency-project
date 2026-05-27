@@ -7,8 +7,7 @@ const BASE_RX = 142 * Math.PI / 180;
 const BASE_RY = -152 * Math.PI / 180;
 const BASE_RZ = 163 * Math.PI / 180;
 
-const RETURN_SPEED = 0.025;
-const FRICTION      = 0.89;
+const FRICTION = 0.89;
 
 type Particle = {
   x: number; y: number; z: number;
@@ -39,6 +38,7 @@ function shuffleIndexes(length: number) {
 
 export function ParticleLogo({ className }: ParticleLogoProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isTouchOnlyRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -46,30 +46,30 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Use screen width for performance decisions (particle density).
-    // Do NOT use maxTouchPoints — touch-capable laptops report > 0 even with a mouse.
-    const isSmallScreen = window.innerWidth <= 768;
+    const isTouchOnly = !window.matchMedia("(pointer: fine)").matches;
+    isTouchOnlyRef.current = isTouchOnly;
+    const RETURN_SPEED = isTouchOnly ? 0.02 : 0.025;
 
     let W = 0, H = 0;
     let particles: Particle[] = [];
     let animationFrame = 0;
     let initialized = false;
     let sphereAngle = 0;
-    let sphereT = 0, sphereTarget = 0, sphereVel = 0;
+    let sphereT = 0, sphereVel = 0;
 
     const mouse = { x: -9999, y: -9999, radius: 160 };
     const RAW_POINTS = RAW_POINTS_JSON as [number, number, number][];
 
     const initParticles = () => {
       particles = [];
-      const skip = isSmallScreen ? 2 : 1;
+      const skip = isTouchOnly ? 2 : 1;
       const used: [number, number, number][] = [];
       for (let i = 0; i < RAW_POINTS.length; i += skip) used.push(RAW_POINTS[i]);
 
       const count = used.length;
       const modelScale = Math.min(W, H) * 0.32;
       const sphereR = modelScale * 0.95;
-      const mb = isSmallScreen ? 1.3 : 1;
+      const mb = isTouchOnly ? 1.3 : 1;
 
       const spherePos = Array.from({ length: count }, (_, i) => {
         const phi   = Math.acos(1 - (2 * (i + 0.5)) / count);
@@ -94,9 +94,9 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
         const phase2 = Math.random() * Math.PI * 2;
         const phase3 = Math.random() * Math.PI * 2;
         const floatAmp   = (2 + Math.random() * 4) * mb;
-        const floatSpeed = (0.001 + Math.random() * 0.002) * (isSmallScreen ? 1.3 : 1);
+        const floatSpeed = (0.001 + Math.random() * 0.002) * (isTouchOnly ? 1.3 : 1);
         const wild       = Math.random();
-        const wildFactor = wild > (isSmallScreen ? 0.7 : 0.82) ? 2.5 + Math.random() * 3.5 : 1;
+        const wildFactor = wild > (isTouchOnly ? 0.7 : 0.82) ? 2.5 + Math.random() * 3.5 : 1;
         const popFreq    = 0.0003 + Math.random() * 0.0007;
         const popPhase   = Math.random() * Math.PI * 2;
         const popAmp     = (wild > 0.6 ? 8 + Math.random() * 20 : 2 + Math.random() * 6) * mb;
@@ -107,7 +107,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
           logoX: lx, logoY: ly, logoZ: lz,
           originX: W / 2 + lx, originY: H / 2 + ly, originZ: lz,
           vx: 0, vy: 0, vz: 0,
-          size: isSmallScreen ? 0.6 + Math.random() * 0.7 : 1.2 + Math.random() * 1.4,
+          size: isTouchOnly ? 0.6 + Math.random() * 0.7 : 1.2 + Math.random() * 1.4,
           hue: 352 + Math.random() * 16,
           sat: 72  + Math.random() * 26,
           phase, phase2, phase3,
@@ -135,8 +135,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
 
       ctx.clearRect(0, 0, W, H);
 
-      // Sphere morph
-      sphereVel += (sphereTarget - sphereT) * 0.004;
+      sphereVel += -sphereT * 0.004;
       sphereVel *= 0.92;
       sphereT = Math.max(0, Math.min(1, sphereT + sphereVel));
       const t = sphereT;
@@ -157,7 +156,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       const cUz = Math.cos(tRz), sUz = Math.sin(tRz);
 
       const cx = W / 2, cy = H / 2;
-      const mouseActive = mouse.x > 0 && mouse.y > 0;
+      const mouseActive = !isTouchOnly && mouse.x > 0 && mouse.y > 0;
 
       for (const p of particles) {
         // --- Sphere rotation ---
@@ -271,14 +270,35 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       mouse.y = e.clientY - rect.top;
     };
     const onMouseLeave = () => { mouse.x = -9999; mouse.y = -9999; };
-    const onMouseDown  = () => { sphereTarget = 1; };
-    const onMouseUp    = () => { sphereTarget = 0; };
 
-    window.addEventListener("mousemove",  onMouseMove);
-    window.addEventListener("mouseleave", onMouseLeave);
-    canvas.addEventListener("mousedown",  onMouseDown);
-    window.addEventListener("mouseup",    onMouseUp);
-    window.addEventListener("resize",     resize);
+    if (!isTouchOnly) {
+      window.addEventListener("mousemove",  onMouseMove);
+      window.addEventListener("mouseleave", onMouseLeave);
+    }
+
+    const onTouchStart = (e: TouchEvent) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const tx = touch.clientX, ty = touch.clientY;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        const dx = p.x - tx, dy = p.y - ty;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 200) {
+          const f = (200 - dist) / 200;
+          const angle = Math.atan2(dy, dx);
+          p.vx += Math.cos(angle) * f * 8;
+          p.vy += Math.sin(angle) * f * 8;
+          p.vz += (Math.random() - 0.5) * f * 4;
+        }
+      }
+    };
+
+    if (isTouchOnly) {
+      canvas.addEventListener("touchstart", onTouchStart, { passive: false });
+    }
+
+    window.addEventListener("resize", resize);
 
     resize();
     animationFrame = requestAnimationFrame(animate);
@@ -287,11 +307,10 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       cancelAnimationFrame(animationFrame);
       window.removeEventListener("mousemove",  onMouseMove);
       window.removeEventListener("mouseleave", onMouseLeave);
-      canvas.removeEventListener("mousedown",  onMouseDown);
-      window.removeEventListener("mouseup",    onMouseUp);
+      canvas.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("resize",     resize);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className={className} />;
+  return <canvas ref={canvasRef} className={className} style={{ cursor: isTouchOnlyRef.current ? "auto" : "none" }} />;
 }
