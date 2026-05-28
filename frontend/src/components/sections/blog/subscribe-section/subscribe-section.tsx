@@ -39,7 +39,7 @@ export function SubscribeSection({ data }: SubscribeSectionProps) {
     setStatus('loading');
 
     try {
-      const res = await fetch('/api/subscribe', {
+      const res = await fetch('/newsletter/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
