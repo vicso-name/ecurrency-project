@@ -334,3 +334,9 @@ html.dark .article-content hr {
     margin-bottom: 140px;
   }
 }
+
+@media (max-width: 767px) {
+  .tools-infrastructure-buttons {
+    margin-bottom: 40px;
+  }
+}
