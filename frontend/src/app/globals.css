@@ -322,3 +322,15 @@ html.dark .article-content pre {
 html.dark .article-content hr {
   border-color: rgba(255, 255, 255, 0.10);
 }
+
+@media (max-width: 1200px) {
+  .tools-infrastructure-buttons {
+    margin-bottom: 100px;
+  }
+}
+
+@media (max-width: 992px) {
+  .tools-infrastructure-buttons {
+    margin-bottom: 140px;
+  }
+}

@@ -104,7 +104,7 @@ export function ToolsInfrastructureSection({
           </div>
 
           {activeButtons.length > 0 ? (
-            <div className="relative z-10 mt-10 mb-8 flex w-full max-w-[500px] flex-wrap justify-center gap-3 md:mt-0 md:mb-10">
+            <div className="tools-infrastructure-buttons relative z-10 mt-10 mb-8 flex w-full max-w-[500px] flex-wrap justify-center gap-3 md:mt-0 md:mb-10">
               {activeButtons.map((button) => {
                 const iconUrl = getStrapiMediaUrl(button.icon?.url);
                 const isPrimary = button.variant === 'primary';
