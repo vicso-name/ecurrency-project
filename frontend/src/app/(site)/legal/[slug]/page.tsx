@@ -32,7 +32,7 @@ export default async function LegalPage({ params }: LegalPageProps) {
   return (
     <main className="px-4 pb-24 pt-[100px] md:pt-[140px]">
       <div className="mx-auto max-w-[808px] text-center">
-        <h1 className="[font-family:var(--font-manrope)] text-[36px] font-semibold leading-[100%] tracking-[-1.5px] text-[#0F1324] md:text-[48px] md:tracking-[-2px] lg:text-[64px] lg:tracking-[-2.56px]">
+        <h1 className="legal-page-title [font-family:var(--font-manrope)] text-[36px] font-semibold leading-[100%] tracking-[-1.5px] text-[#0F1324] md:text-[48px] md:tracking-[-2px] lg:text-[64px] lg:tracking-[-2.56px]">
           {page.title}
         </h1>
       </div>

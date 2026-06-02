@@ -281,6 +281,11 @@ body {
   }
 }
 
+/* ── Legal Page Dark Mode ── */
+html.dark .legal-page-title {
+  color: rgba(255, 255, 255, 0.90);
+}
+
 /* ── Article Content Dark Mode ── */
 html.dark .article-content h1,
 html.dark .article-content h2,
