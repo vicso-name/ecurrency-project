@@ -51,6 +51,7 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
     const RETURN_SPEED = isTouchOnly ? 0.02 : 0.025;
 
     let W = 0, H = 0;
+    let prevW = 0, prevH = 0;
     let particles: Particle[] = [];
     let animationFrame = 0;
     let initialized = false;
@@ -123,7 +124,11 @@ export function ParticleLogo({ className }: ParticleLogoProps) {
       const rect = canvas.parentElement?.getBoundingClientRect();
       W = canvas.width  = Math.max(1, Math.floor(rect?.width  || window.innerWidth  || 800));
       H = canvas.height = Math.max(1, Math.floor(rect?.height || window.innerHeight || 600));
-      if (W > 10 && H > 10) { initParticles(); initialized = true; }
+      if (W > 10 && H > 10 && (Math.abs(W - prevW) > 50 || Math.abs(H - prevH) > 50 || !initialized)) {
+        prevW = W; prevH = H;
+        initParticles();
+        initialized = true;
+      }
     };
 
     const animate = (now: number) => {
